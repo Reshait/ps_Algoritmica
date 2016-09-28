@@ -35,7 +35,7 @@ class Matriz
 				_m[i] = new double[getTam()];
 			
 				for(int j = 0; j < getTam(); j++){
-					_m[i][j] = (rand() % 10) - 10;
+					_m[i][j] = (rand() % 20) - 10;
 				}
 			}
 		}
