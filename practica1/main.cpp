@@ -6,9 +6,9 @@
 //DNI ...1L --> opción del determinante.
 
 int main(){
-	stEntrada Entrada;
+	DatosEntrada Entrada;
 	cabecera(1);	
 
-	pideDatos(Entrada);
-	imprimeDatos(Entrada);
+	Entrada.pideDatos();
+	Entrada.imprimeDatos();
 }

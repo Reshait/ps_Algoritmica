@@ -13,65 +13,76 @@ using std::cin;
 using std::endl;
 
 /*! 
-  \brief Estructura creada para los datos de entrada a pedir por el teclado.
+  \brief Definición clase DatosEntrada creada para los datos de entrada a pedir por el teclado.
   \post Ninguna
-  \sa stEntrada()
 */
-struct stEntrada{
-	int min;
-	int max;
-	int inc;
-	/*! 
-  	\brief Constructor de inicialización de datos
-  	\post Ninguna
-  	\sa stEntrada()
-	*/
-	stEntrada(){
-		min = 0;
-		max = 0;
-		inc = 0;
-	}
-};
+class DatosEntrada{
+	private:
+        //! \name Atributos privados de la clase DatosEntrada
+		int _min;
+		int _max;
+		int _inc;
 
-/*! 
-  \brief Pide los datos necesarios para comenzar la práctica.
-  \post Ninguna
-  \sa pideDatos()
-  \param Entrada, tipo structura Entrada pasado por referencia.
-*/
-void pideDatos(stEntrada &Entrada){
-	cout << "Introduzca el valor mínimo.: ";
-	cin >> Entrada.min;
-
-	do{
-		cout << "Introduzca el valor máximo.: ";
-		cin >> Entrada.max;	
-		if(Entrada.max <= Entrada.min){
-			cout << "ERROR. El valor MÁXIMO no puede ser igual o menor que el valor MÍNIMO." << endl;
+    //! \name Métodos públicos de la clase DatosEntrada     	
+	public:
+		DatosEntrada(){
+			setMin(0);
+			setMax(0);
+			setInc(0);
 		}
-	}while(Entrada.max <= Entrada.min);
+		inline const int getMin(){ return _min; }
+		inline const int getMax(){ return _max; }
+		inline const int getInc(){ return _inc; }
+		void setMin(int min){ _min = min; }
+		void setMax(int max){ _max = max; }
+		void setInc(int inc){ _inc = inc; }
 
-	do{
-		cout << "Introduzca el valor incremental.: ";
-		cin >> Entrada.inc;
-		if(Entrada.inc < 1){
-			cout << "ERROR. El valor INCREMENTAL no puede ser menor que 1." << endl;
-		}		
-	}while(Entrada.inc < 1);
+		/*! 
+		  \brief Pide los datos necesarios para comenzar la práctica.
+		  \post Ninguna
+		  \sa pideDatos()
+		  \param niguno
+		*/
+		void pideDatos(){
+			int valor;
 
-}
+			cout << "Introduzca el valor mínimo.: ";
+			cin >> valor;
+			setMin(valor);
 
-/*! 
-  \brief Imprime los datos necesarios para comenzar la práctica.
-  \post Ninguna
-  \sa pideDatos()
-  \param Entrada, tipo structura Entrada pasado por referencia.
-*/
-void imprimeDatos(stEntrada &Entrada){
-	cout << "Los valores son:" << endl;
-	cout << "Valor min..: " << Entrada.min << endl;
-	cout << "Valor max..: " << Entrada.max << endl;
-	cout << "Valor inc..: " << Entrada.inc << endl;	
-}
+			do{
+				cout << "Introduzca el valor máximo.: ";
+				cin >> valor;
+				setMax(valor);
+
+				if(getMax() <= getMin()){
+					cout << "ERROR. El valor MÁXIMO no puede ser igual o menor que el valor MÍNIMO." << endl;
+				}
+			}while(getMax() <= getMin());
+
+			do{
+				cout << "Introduzca el valor incremental.: ";
+				cin >> valor;
+				setInc(valor);
+
+				if(getInc() < 1){
+					cout << "ERROR. El valor INCREMENTAL no puede ser menor que 1." << endl;
+				}		
+			}while(getInc() < 1);
+
+		}
+		/*! 
+		  \brief Imprime los datos necesarios para comenzar la práctica.
+		  \post Ninguna
+		  \sa pideDatos()
+		  \param ninguno
+		*/
+		const void imprimeDatos(){
+			cout << "Los valores son:" << endl;
+			cout << "Valor min..: " << getMin() << endl;
+			cout << "Valor max..: " << getMax() << endl;
+			cout << "Valor inc..: " << getInc() << endl;	
+		}
+};
 
 #endif
