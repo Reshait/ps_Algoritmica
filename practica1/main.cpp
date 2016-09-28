@@ -18,5 +18,9 @@ int main(){
 
 //	Matriz M=new Matriz(3); 
 	Matriz M(3);
+	Matriz M2(3);
+
 	M.imprimeMatriz();
+	M2.imprimeMatriz();
+
 }
