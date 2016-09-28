@@ -18,7 +18,7 @@ using std::endl;
 */
 
 // Sacado de:
-// http://www.sc.ehu.es/sbweb/fisica/cursoJava/numerico/matrices/matriz/matriz.htm
+// http://www.cplusplus.com/forum/general/97018/#msg524064
 class Matriz
 {
 	private:
