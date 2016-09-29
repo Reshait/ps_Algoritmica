@@ -1,3 +1,6 @@
+#ifndef __TIEMPO__
+#define __TIEMPO__
+
 /*!a pesar de que se puede trabajar con nanosegundos, se devuelven los tiempos en microsegundos*/
 
 // http://man7.org/linux/man-pages/man2/clock_gettime.2.html
@@ -42,7 +45,7 @@ Data Type: struct timespec
      */
     void start ()
     {      
-      assert (!isStarted());
+     // assert (!isStarted());
       clock_gettime (CLOCK_REALTIME, &_start);   
       _isStarted=true;
     }
@@ -82,24 +85,4 @@ Data Type: struct timespec
     }
   };
 
-int main()
-{
-	Clock time;
-	unsigned int a, b;
-	a = 0;
-	b = 0;
-	
-	time.start();
-	
-	for(unsigned int i = 0; i <= 1000000000; i++)
-	{
-		a++;
-		b++;
-	}
-	if (time.isStarted())
-	{
-		time.stop();
-		std::cout << "Han pasado " << time.elapsed() << "microsegundos \n";
-	}
-	return 0;
-}
+#endif
