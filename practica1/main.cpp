@@ -13,14 +13,11 @@ int main(){
 	DatosEntrada Entrada;
 	cabecera(1);	
 
-//	Entrada.pideDatos();
-//	Entrada.imprimeDatos();
+	Entrada.pideDatos();
+	Entrada.imprimeDatos();
 
-//	Matriz M=new Matriz(3); 
-	Matriz M(3);
-	Matriz M2(3);
-
-	M.imprimeMatriz();
-	M2.imprimeMatriz();
-
+	Matriz matrizMinima(Entrada.getMin());
+	matrizMinima.imprimeMatriz();
+	cout << "El determinante correspondiente es..: " << matrizMinima.calculaDeterminante() << endl;
+	
 }

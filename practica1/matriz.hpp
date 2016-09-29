@@ -1,3 +1,5 @@
+#include <cmath>
+
 /*! 
   \file     mamtriz.hpp
   \brief    Función y Estructura correspondiente para rellenar los datos de entrada.
@@ -5,8 +7,8 @@
   \date     28/09/2016
 */
 
-#ifndef __MATRIZ_HPP__
-#define __MATRIZ_HPP__
+#ifndef ___mHPP__
+#define ___mHPP__
 
 using std::cout;
 using std::cin;
@@ -35,7 +37,8 @@ class Matriz
 				_m[i] = new double[getTam()];
 			
 				for(int j = 0; j < getTam(); j++){
-					_m[i][j] = (rand() % 20) - 10;
+					_m[i][j] = (rand() % 20000) - 10000;
+					_m[i][j] /= 1000;
 				}
 			}
 		}
@@ -59,6 +62,36 @@ class Matriz
 				}
 			}
 		}
+
+
+		double calculaDeterminante(){
+		    double fRet = 0, fProduct = 0;
+
+		    if (getTam() == 2){
+		        fRet = _m[0][0] * _m[1][1] - _m[1][0] * _m[0][1];
+		    }
+		    
+		    else if (getTam() == 1)
+		    	fRet = _m[0][0];
+
+		    else {
+		        for (int i = 0; i < getTam(); i++){
+		            //  Multiplicacion de valores verticales de izquierda a derecha...
+		            fProduct = 1.0;
+		            for (int j = 0; j < getTam(); j++)
+		                fProduct *= _m[(i + j) % getTam()][j];
+		            fRet += fProduct;
+		     
+		            //  Multiplicacion de valores verticales de derecha a izquierda...
+		            fProduct = 1.0;
+		            for (int j = 0; j < getTam(); j++)
+		                fProduct *= _m[(getTam() - 1) - ((i + j) % getTam())][j];
+		            fRet -= fProduct;
+		        }
+		    }
+		     
+		    return fRet;
+		}		
 	
 };
 
