@@ -42,6 +42,9 @@ class Matriz
 				}
 			}
 		}
+		~Matriz(void){
+			//cout << "Destrucción completada" << endl;
+		};
 
 		inline const int getTam(){ return _tam; }
 		inline void setTam(int tam){ _tam = tam; }
@@ -49,10 +52,10 @@ class Matriz
 
 		void imprimeMatriz(){
 			int cuentaIntro = 0;
-
 			for(int i = 0; i < getTam(); i++){
+				cout << "\t" ;
 				for(int j = 0; j < getTam(); j++){
-					cout << _m[i][j] << "  ";
+					cout << _m[i][j] << "\t";
 					
 					cuentaIntro ++;					
 					if(cuentaIntro == getTam()){

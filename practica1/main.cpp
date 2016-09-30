@@ -19,10 +19,15 @@ int main(){
 	Entrada.pideDatos();
 	Entrada.imprimeDatos();
 
-	Cronometro.start();
-		Matriz matrizMinima(Entrada.getMin());
-		matrizMinima.imprimeMatriz();
-		cout << "El determinante correspondiente es..: " << matrizMinima.calculaDeterminante() << endl;
-	Cronometro.stop();
-		cout << "Han transcurrido..:\t" << Cronometro.elapsed() << "microsegundos" << endl; 
+	for(int i = Entrada.getMin(); i < Entrada.getMax(); i = i + Entrada.getInc()){
+		Cronometro.start();
+			Matriz matrizMinima(i);
+			cout << endl << "Su matriz aleatoria de tamaño " << matrizMinima.getTam() << "x" << matrizMinima.getTam() << " es:" << endl;
+			matrizMinima.imprimeMatriz();
+			cout << endl << "El determinante es..:\t" << matrizMinima.calculaDeterminante() << endl;
+		Cronometro.stop();
+			cout << "Han transcurrido..:\t" << Cronometro.elapsed() << " µs" << endl; 
+	}
+
+
 }
