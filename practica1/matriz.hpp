@@ -37,8 +37,9 @@ class Matriz
 				_m[i] = new double[getTam()];
 			
 				for(int j = 0; j < getTam(); j++){
-					_m[i][j] = (rand() % 20000) - 10000;
-					_m[i][j] /= 1000;
+					//_m[i][j] = (rand() % 20000) - 10000;
+					//_m[i][j] /= 1000;
+					_m[i][j] = -10+((double)rand() /RAND_MAX) * (20);
 				}
 			}
 		}
@@ -55,7 +56,7 @@ class Matriz
 			for(int i = 0; i < getTam(); i++){
 				cout << "\t" ;
 				for(int j = 0; j < getTam(); j++){
-					cout << _m[i][j] << "\t";
+					cout << _m[i][j] << " \t";
 					
 					cuentaIntro ++;					
 					if(cuentaIntro == getTam()){
