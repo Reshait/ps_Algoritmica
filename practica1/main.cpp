@@ -4,6 +4,7 @@
 #include "datosEntrada.hpp"
 #include "cabecera.hpp"
 #include "matriz.hpp"
+#include "fibonacci.hpp"
 #include "tiempo.hpp"
 
 //DNI ...1L --> opción del determinante.
@@ -17,7 +18,7 @@ int main(){
 	cabecera(1);	
 
 	Entrada.pideDatos();
-	Entrada.imprimeDatos();
+	// Entrada.imprimeDatos();
 
 	for(int i = Entrada.getMin(); i < Entrada.getMax(); i = i + Entrada.getInc()){
 		Cronometro.start();
@@ -28,6 +29,10 @@ int main(){
 		Cronometro.stop();
 			cout << "Han transcurrido..:\t" << Cronometro.elapsed() << " µs" << endl; 
 	}
+
+	cout << endl;
+	Entrada.pideFibonacci();
+	cout << "El valor resultante a Fibonacci es..: " << fibonacci(Entrada.getFib()) << endl;
 
 
 }

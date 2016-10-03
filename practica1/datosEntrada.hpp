@@ -22,6 +22,7 @@ class DatosEntrada{
 		int _min;
 		int _max;
 		int _inc;
+		int _fib;
 
     //! \name Métodos públicos de la clase DatosEntrada     	
 	public:
@@ -29,13 +30,18 @@ class DatosEntrada{
 			setMin(0);
 			setMax(0);
 			setInc(0);
+			setFib(0);
 		}
 		inline const int getMin(){ return _min; }
 		inline const int getMax(){ return _max; }
 		inline const int getInc(){ return _inc; }
+		inline const int getFib(){ return _fib; }
+
 		void setMin(int min){ _min = min; }
 		void setMax(int max){ _max = max; }
 		void setInc(int inc){ _inc = inc; }
+		void setFib(int fib){ _fib = fib; }
+
 
 		/*! 
 		  \brief Pide los datos necesarios para comenzar la práctica.
@@ -82,6 +88,23 @@ class DatosEntrada{
 			cout << "Valor min..: " << getMin() << endl;
 			cout << "Valor max..: " << getMax() << endl;
 			cout << "Valor inc..: " << getInc() << endl;	
+		}
+		/*! 
+		  \brief Pide el número de fibonacci comenzar la práctica.
+		  \post Ninguna
+		  \sa pideFibonacci()
+		  \param niguno
+		*/
+		void pideFibonacci(){
+			int fib;
+			do{
+				cout << "Introduzca el valor para calcular Fibonacci..: ";
+				cin >> fib;
+				if(fib < 0)
+					cout << "El número de para calcular Fibonacci no puede ser negativo." << endl;
+			}while(fib < 0);
+
+			setFib(fib);
 		}
 };
 
