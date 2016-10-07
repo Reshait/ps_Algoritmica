@@ -24,6 +24,8 @@ Data Type: struct timespec
 #include <cstring> //Para usar memset
 #include <iostream>
 #include <stdint.h> // Para usar uint64_t
+#include <vector>
+
 
  /*!\brief Models a clock to measure performace.*/
   class Clock
@@ -83,6 +85,14 @@ Data Type: struct timespec
       uint64_t stopT = (uint64_t)_stop.tv_sec * 1000000LL + (uint64_t)_stop.tv_nsec / 1000LL;
       return stopT-startT;
     }
+
   };
 
+    /*!\brief Imprime vector de tiempos
+    */
+    void imprimeVectorTiempos(const std::vector<double> &vectorTiempos){
+      for(unsigned int i = 0; i < vectorTiempos.size(); i++)
+        cout << vectorTiempos.at(i) << "\t";      
+    }
+    
 #endif

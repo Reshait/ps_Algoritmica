@@ -1,4 +1,5 @@
 #include <cmath>
+#include <numeric>
 
 /*! 
   \file     mamtriz.hpp
@@ -13,6 +14,7 @@
 using std::cout;
 using std::cin;
 using std::endl;
+using std::vector;
 
 /*! 
   \brief Definición clase Matriz creada para los datos de entrada a pedir por el teclado.
@@ -97,5 +99,29 @@ class Matriz
 		}		
 	
 };
+
+
+vector<double> operator*(const vector<double> &a, const vector<double> &b){
+	vector<double> total;
+	for(int i = 0; i < a.size(); i++)
+		total.at(i) = a.at(i) * b.at(i);
+
+	return total;
+}
+
+
+
+void Cramer(const vector<double> &vectorNi, const vector<double> &vectorTi){
+	double N = vectorNi.size();
+	double sumNi = std::accumulate(vectorNi.begin(), vectorNi.end(), 0);
+	double sumTi = std::accumulate(vectorTi.begin(), vectorTi.end(), 0);
+	double matriz[2][2] = {{N,sumNi},{sumNi,sumNi*sumNi}}, matrizAux[2][2]={{0,0},{0,0}};
+	vector<double> vectorNi_Ti = vectorNi * vectorTi;
+
+	matrizAux = matriz;
+
+}
+
+
 
 #endif
