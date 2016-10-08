@@ -39,10 +39,10 @@ int main(){
 	cout << endl;
 */
 	cout << endl;
-	Entrada.pideFibonacci();
+	Entrada.pideDatos();
 	cout << endl;
 
-	for(int i = 0; i <= Entrada.getFib(); i++){
+	for(int i = Entrada.getMin(); i <= Entrada.getMax(); i++){
 		Cronometro.start();
 		cout << "El valor resultante a Fibonacci " << i << " es..: " << fibonacci(i) << endl;		
 		Cronometro.stop();
@@ -66,4 +66,5 @@ int main(){
 	imprimeVectorTiempos(vectorAs);
 	cout << endl;	
 
+	cout << "El tiempo estimado para fibonacci " << Entrada.getMax() << " es..:\t" << vectorAs.at(0) + (vectorAs.at(1) * pow(2,Entrada.getMax())) << endl;
 }

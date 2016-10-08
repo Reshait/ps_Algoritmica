@@ -112,7 +112,7 @@ vector<double> operator*(const vector<double> &a, const vector<double> &b){
 double calculaDeterminante(double m[][2]){
     double fRet = 0, fProduct = 0;
 //    if (getTam() == 2){
-        fRet = m[0][0] * m[1][1] - m[1][0] * m[0][1];
+        fRet = (m[0][0] * m[1][1]) - (m[1][0] * m[0][1]);
 //    }
 		    
 //    else if (getTam() == 1)
@@ -161,8 +161,12 @@ void Cramer(const vector<double> &vectorNi, const vector<double> &vectorTi, vect
 	for(int i = 0; i < 2; i++){
 		copiaMatriz(matriz, matrizAux);
 		matrizAux[i][0] = sumTi;
-		matrizAux[i][1] = sumNi_Ti; 	
+		matrizAux[1][i] = sumNi_Ti; 	
 		
+		cout << "Determinante de la matriz es..: \t" << calculaDeterminante(matriz) << endl;
+		cout << "Determinante de la mAuxiliar es..: \t" << calculaDeterminante(matrizAux) << endl;
+
+
 		a.push_back(calculaDeterminante(matrizAux) / calculaDeterminante(matriz));	
 	}
 
