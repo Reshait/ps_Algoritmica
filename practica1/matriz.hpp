@@ -104,21 +104,67 @@ class Matriz
 vector<double> operator*(const vector<double> &a, const vector<double> &b){
 	vector<double> total;
 	for(int i = 0; i < a.size(); i++)
-		total.at(i) = a.at(i) * b.at(i);
+		total.push_back(a.at(i) * b.at(i));
 
 	return total;
 }
 
+double calculaDeterminante(double m[][2]){
+    double fRet = 0, fProduct = 0;
+//    if (getTam() == 2){
+        fRet = m[0][0] * m[1][1] - m[1][0] * m[0][1];
+//    }
+		    
+//    else if (getTam() == 1)
+//    	fRet = _m[0][0];
+/*
+    else {
+        for (int i = 0; i < getTam(); i++){
+            //  Multiplicacion de valores verticales de izquierda a derecha...
+            fProduct = 1.0;
+            for (int j = 0; j < getTam(); j++)
+                fProduct *= _m[(i + j) % getTam()][j];
+            fRet += fProduct;
+	     
+            //  Multiplicacion de valores verticales de derecha a izquierda...
+            fProduct = 1.0;
+            for (int j = 0; j < getTam(); j++)
+                fProduct *= _m[(getTam() - 1) - ((i + j) % getTam())][j];
+            fRet -= fProduct;
+        }
+    }
+*/	     
+    return fRet;
+}
 
+void copiaMatriz(double original[][2], double copia[][2]){
+	for(int i= 0; i < 2; i ++)
+		for(int j = 0; j < 2; j++)
+			copia[i][j] = original[i][j];
+}
 
-void Cramer(const vector<double> &vectorNi, const vector<double> &vectorTi){
+void Cramer(const vector<double> &vectorNi, const vector<double> &vectorTi, vector<double> &a ){
 	double N = vectorNi.size();
 	double sumNi = std::accumulate(vectorNi.begin(), vectorNi.end(), 0);
 	double sumTi = std::accumulate(vectorTi.begin(), vectorTi.end(), 0);
-	double matriz[2][2] = {{N,sumNi},{sumNi,sumNi*sumNi}}, matrizAux[2][2]={{0,0},{0,0}};
-	vector<double> vectorNi_Ti = vectorNi * vectorTi;
+	double sumNi_Ti;
+	double matriz[2][2], matrizAux[2][2];
 
-	matrizAux = matriz;
+	matriz[0][0] = N;
+	matriz[0][1] = sumNi;
+	matriz[1][0] = matriz[0][1];
+	matriz[1][1] = pow(matriz[1][0],2);
+
+	vector<double> vectorNi_Ti = vectorNi * vectorTi;
+	sumNi_Ti = std::accumulate(vectorNi_Ti.begin(), vectorNi_Ti.end(), 0);
+
+	for(int i = 0; i < 2; i++){
+		copiaMatriz(matriz, matrizAux);
+		matrizAux[i][0] = sumTi;
+		matrizAux[i][1] = sumNi_Ti; 	
+		
+		a.push_back(calculaDeterminante(matrizAux) / calculaDeterminante(matriz));	
+	}
 
 }
 

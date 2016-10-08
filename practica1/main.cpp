@@ -15,11 +15,11 @@ int main(){
 	Clock Cronometro;
     srand(time(NULL));
     
-	std::vector<double> tiemposEstimados, vectorTi, vectorNi, vectorNi_Ti;
+	std::vector<double> tiemposEstimados, vectorTi, vectorNi, vectorNi_Ti, vectorAs;
 	DatosEntrada Entrada;
 	cabecera(1);	
 
-	Entrada.pideDatos();
+//	Entrada.pideDatos();
 	// Entrada.imprimeDatos();
 
 /*
@@ -55,5 +55,15 @@ int main(){
 	cout << endl << "El vector de tiempos registrados es..:" << endl;
 	imprimeVectorTiempos(vectorTi);
 	cout << endl;
+
+	cout << endl << "El vector de nis es..:" << endl;
+	imprimeVectorTiempos(vectorNi);
+	cout << endl;
+
+	Cramer(vectorNi, vectorTi, vectorAs);
+
+	cout << endl << "El vector de As es..:" << endl;
+	imprimeVectorTiempos(vectorAs);
+	cout << endl;	
 
 }
