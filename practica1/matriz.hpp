@@ -1,6 +1,6 @@
 #include <cmath>
 #include <numeric>
-#include "tiempo.hpp"
+#include "tiempo.hpp"  //<-- Quitar antes de entregar
 /*! 
   \file     mamtriz.hpp
   \brief    Función y Estructura correspondiente para rellenar los datos de entrada.
@@ -124,18 +124,19 @@ void copiaMatriz(double original[][2], double copia[][2]){
 			copia[i][j] = original[i][j];
 }
 
-void Cramer(const vector<double> &vectorZi, const vector<double> &vectorTi, vector<double> &a ){
+void Cramer(const vector<double> &vectorZi, const vector<double> &vectorTi, vector<double> &a ){  //añadir bool esFibonacci
 	double N = vectorZi.size();
 	double sumZi = std::accumulate(vectorZi.begin(), vectorZi.end(), 0);
 	double sumTi = std::accumulate(vectorTi.begin(), vectorTi.end(), 0);
 	double sumZi_Ti, sumZi_Zi;
-	double matriz[2][2], matrizAux[2][2];
 
 	vector<double> vectorZi_Zi = vectorZi * vectorZi;
 	vector<double> vectorZi_Ti = vectorZi * vectorTi;
 	sumZi_Ti = std::accumulate(vectorZi_Ti.begin(), vectorZi_Ti.end(), 0);
 	sumZi_Zi = std::accumulate(vectorZi_Zi.begin(), vectorZi_Zi.end(), 0);
 
+////Resolucion Fibonacci
+	double matriz[2][2], matrizAux[2][2];
 	matriz[0][0] = N;
 	matriz[0][1] = sumZi;
 	matriz[1][0] = matriz[0][1];
@@ -176,11 +177,13 @@ void Cramer2(const vector<double> &vectorZi, const vector<double> &vectorTi, vec
 
 	vector<double> vectorZi_Zi = vectorZi * vectorZi;
 	vector<double> vectorZi_Ti = vectorZi * vectorTi;
-	vector<double> vAux;
 	sumZi_Ti = std::accumulate(vectorZi_Ti.begin(), vectorZi_Ti.end(), 0);
 	sumZi_Zi = std::accumulate(vectorZi_Zi.begin(), vectorZi_Zi.end(), 0);
 
-	double matriz[3][3];
+////Resolucion Matrices
+	vector<double> vAux;
+	double matriz[3][3], matrizAux[3][3];
+
 	for(int i=0; i < 3;i++){
 		for(int j=0; j < 3; j++){
 			if(i == 0 && j == 0)
@@ -208,7 +211,7 @@ void Cramer2(const vector<double> &vectorZi, const vector<double> &vectorTi, vec
 		}
 	}
 
-imprimeVectorTiempos(vectorTerminoIndependiente);
+	//imprimeVectorTiempos(vectorTerminoIndependiente);
 
 
 }
