@@ -20,7 +20,7 @@ int main(){
 	DatosEntrada Entrada;
 	int opcion;
 
-//	do{
+	do{
 
 		cabecera(1);
 		cout << "1.- Para realizar el apartado de las matrices." << endl;
@@ -120,7 +120,7 @@ int main(){
 				break;	
 		}
 
-//	}while(opcion != 0);	
+	}while(opcion != 0);	
 
 
 	return 0;
