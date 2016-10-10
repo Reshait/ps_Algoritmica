@@ -63,6 +63,10 @@ int main(){
 				cout << endl << "El vector de Nis registrados es..:" << endl;
 				imprimeVectorTiempos(vectorZi);
 				cout << endl;
+
+
+Cramer2(vectorZi, vectorTi, vectorAs);
+cout << endl;
 				
 				cout << "==========================================" << endl;
 				cout << "Presione la tecla 'Intro' para continuar..." << endl;

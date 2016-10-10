@@ -1,6 +1,6 @@
 #include <cmath>
 #include <numeric>
-
+#include "tiempo.hpp"
 /*! 
   \file     mamtriz.hpp
   \brief    Función y Estructura correspondiente para rellenar los datos de entrada.
@@ -154,19 +154,21 @@ void Cramer(const vector<double> &vectorZi, const vector<double> &vectorTi, vect
 
 }
 
-vector<double> elevarVectorAlValor(const vector<double> &vNi, const vector<double> &vTi, int valor){
+vector<double> elevarVectorAlValorPorSumTi(const vector<double> &vNi, const vector<double> &vTi, int valor){
 	vector<double> aux;
+	aux = vNi;
+
 	for(int i = 0; i < valor; i++)
 		if(i == valor-1)
-			aux = vNi * vNi * vTi;
+			aux = aux * vTi;
 		else
-			aux = vNi * vNi;
+			aux = aux * vNi;
 
 	return aux;
 }
 
 
-void Cramer2(const vector<double> &vectorZi, const vector<double> &vectorTi, vector<double> &a ){
+void Cramer2(const vector<double> &vectorZi, const vector<double> &vectorTi, vector<double> &a ){  //Cramer para las matrices
 	double N = vectorZi.size();
 	double sumZi = std::accumulate(vectorZi.begin(), vectorZi.end(), 0);
 	double sumTi = std::accumulate(vectorTi.begin(), vectorTi.end(), 0);
@@ -178,19 +180,36 @@ void Cramer2(const vector<double> &vectorZi, const vector<double> &vectorTi, vec
 	sumZi_Ti = std::accumulate(vectorZi_Ti.begin(), vectorZi_Ti.end(), 0);
 	sumZi_Zi = std::accumulate(vectorZi_Zi.begin(), vectorZi_Zi.end(), 0);
 
-	double** matriz;
+	double matriz[3][3];
 	for(int i=0; i < 3;i++){
 		for(int j=0; j < 3; j++){
 			if(i == 0 && j == 0)
 				matriz[i][j] = N;
 
 			else{
-				vAux = elevarVectorAlValor(vectorZi, vectorTi, i+j); // en matriz 0,1 se mete Zi¹, en matriz 0,2 se mete Zi², en matriz 0,3 se mete Zi³
+				vAux = elevarVectorAlValorPorSumTi(vectorZi, vectorTi, i+j); // en matriz 0,1 se mete Zi¹, en matriz 0,2 se mete Zi², en matriz 0,3 se mete Zi³
 				matriz[i][j] = std::accumulate(vAux.begin(), vAux.end(), 0);
 
 			}
 		}
 	}
+
+	vAux.clear();
+
+	vector<double> vectorTerminoIndependiente;
+	for(int i = 0; i < vectorZi.size(); i++){
+		if(i == 0)
+			vectorTerminoIndependiente.push_back(sumTi);
+
+		else{
+			vAux = elevarVectorAlValor(vectorZi, vectorTi, i);
+
+			vectorTerminoIndependiente.push_back(std::accumulate(vAux.begin(), vAux.end(), 0));
+		}
+	}
+
+imprimeVectorTiempos(vectorTerminoIndependiente);
+
 
 }
 
