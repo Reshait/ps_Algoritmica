@@ -143,29 +143,30 @@ void copiaMatriz(double original[][2], double copia[][2]){
 			copia[i][j] = original[i][j];
 }
 
-void Cramer(const vector<double> &vectorNi, const vector<double> &vectorTi, vector<double> &a ){
-	double N = vectorNi.size();
-	double sumNi = std::accumulate(vectorNi.begin(), vectorNi.end(), 0);
+void Cramer(const vector<double> &vectorZi, const vector<double> &vectorTi, vector<double> &a ){
+	double N = vectorZi.size();
+	double sumZi = std::accumulate(vectorZi.begin(), vectorZi.end(), 0);
 	double sumTi = std::accumulate(vectorTi.begin(), vectorTi.end(), 0);
-	double sumNi_Ti;
+	double sumZi_Ti, sumZi_Zi;
 	double matriz[2][2], matrizAux[2][2];
 
-	matriz[0][0] = N;
-	matriz[0][1] = sumNi;
-	matriz[1][0] = matriz[0][1];
-	matriz[1][1] = pow(matriz[1][0],2);
+	vector<double> vectorZi_Zi = vectorZi * vectorZi;
+	vector<double> vectorZi_Ti = vectorZi * vectorTi;
+	sumZi_Ti = std::accumulate(vectorZi_Ti.begin(), vectorZi_Ti.end(), 0);
+	sumZi_Zi = std::accumulate(vectorZi_Zi.begin(), vectorZi_Zi.end(), 0);
 
-	vector<double> vectorNi_Ti = vectorNi * vectorTi;
-	sumNi_Ti = std::accumulate(vectorNi_Ti.begin(), vectorNi_Ti.end(), 0);
+	matriz[0][0] = N;
+	matriz[0][1] = sumZi;
+	matriz[1][0] = matriz[0][1];
+	matriz[1][1] = sumZi_Zi;
 
 	for(int i = 0; i < 2; i++){
 		copiaMatriz(matriz, matrizAux);
 		matrizAux[i][0] = sumTi;
-		matrizAux[1][i] = sumNi_Ti; 	
+		matrizAux[1][i] = sumZi_Ti; 	
 		
 		cout << "Determinante de la matriz es..: \t" << calculaDeterminante(matriz) << endl;
 		cout << "Determinante de la mAuxiliar es..: \t" << calculaDeterminante(matrizAux) << endl;
-
 
 		a.push_back(calculaDeterminante(matrizAux) / calculaDeterminante(matriz));	
 	}
