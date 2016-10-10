@@ -16,7 +16,7 @@ int main(){
 	Clock Cronometro;
     srand(time(NULL));
     
-	std::vector<double> tiemposEstimados, vectorTi, vectorZi, vectorZi_Ti, vectorAs, vectorTe;
+	vector<double> vectorTi, vectorZi, vectorZi_Ti, vectorAs, vectorTe; //vectores usados en ambas opciones
 	DatosEntrada Entrada;
 	int opcion;
 
@@ -30,15 +30,19 @@ int main(){
 		cin >> opcion;
 		getchar();
 
+		vectorTi.clear();
+		vectorZi.clear();
+		vectorZi_Ti.clear();
+		vectorAs.clear();
+		vectorTe.clear();
+
 		switch(opcion){
 			
 			case 1:
 				cabecera(1);
-				cout << "hola Opción 1 escogida";
 				
 				Entrada.pideDatos();
 					// Entrada.imprimeDatos();
-
 				
 				for(int i = Entrada.getMin(); i < Entrada.getMax(); i = i + Entrada.getInc()){
 					Cronometro.start();
@@ -49,10 +53,15 @@ int main(){
 					Cronometro.stop();
 						cout << "Han transcurrido..:\t" << Cronometro.elapsed() << " µs" << endl; 
 					vectorTi.push_back(Cronometro.elapsed());
+					vectorZi.push_back(i);
 				}
 
 				cout << endl << "El vector de tiempos registrados es..:" << endl;
 				imprimeVectorTiempos(vectorTi);
+				cout << endl;
+
+				cout << endl << "El vector de Nis registrados es..:" << endl;
+				imprimeVectorTiempos(vectorZi);
 				cout << endl;
 				
 				cout << "==========================================" << endl;

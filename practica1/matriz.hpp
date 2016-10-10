@@ -112,29 +112,9 @@ vector<double> operator*(const vector<double> &a, const vector<double> &b){
 
 double calculaDeterminante(double m[][2]){
     double fRet = 0, fProduct = 0;
-//    if (getTam() == 2){
-        fRet = (m[0][0] * m[1][1]) - (m[1][0] * m[0][1]);
-//    }
-		    
-//    else if (getTam() == 1)
-//    	fRet = _m[0][0];
-/*
-    else {
-        for (int i = 0; i < getTam(); i++){
-            //  Multiplicacion de valores verticales de izquierda a derecha...
-            fProduct = 1.0;
-            for (int j = 0; j < getTam(); j++)
-                fProduct *= _m[(i + j) % getTam()][j];
-            fRet += fProduct;
-	     
-            //  Multiplicacion de valores verticales de derecha a izquierda...
-            fProduct = 1.0;
-            for (int j = 0; j < getTam(); j++)
-                fProduct *= _m[(getTam() - 1) - ((i + j) % getTam())][j];
-            fRet -= fProduct;
-        }
-    }
-*/	     
+
+    fRet = (m[0][0] * m[1][1]) - (m[1][0] * m[0][1]);
+ 
     return fRet;
 }
 
@@ -174,6 +154,45 @@ void Cramer(const vector<double> &vectorZi, const vector<double> &vectorTi, vect
 
 }
 
+vector<double> elevarVectorAlValor(const vector<double> &vNi, const vector<double> &vTi, int valor){
+	vector<double> aux;
+	for(int i = 0; i < valor; i++)
+		if(i == valor-1)
+			aux = vNi * vNi * vTi;
+		else
+			aux = vNi * vNi;
+
+	return aux;
+}
+
+
+void Cramer2(const vector<double> &vectorZi, const vector<double> &vectorTi, vector<double> &a ){
+	double N = vectorZi.size();
+	double sumZi = std::accumulate(vectorZi.begin(), vectorZi.end(), 0);
+	double sumTi = std::accumulate(vectorTi.begin(), vectorTi.end(), 0);
+	double sumZi_Ti, sumZi_Zi;
+
+	vector<double> vectorZi_Zi = vectorZi * vectorZi;
+	vector<double> vectorZi_Ti = vectorZi * vectorTi;
+	vector<double> vAux;
+	sumZi_Ti = std::accumulate(vectorZi_Ti.begin(), vectorZi_Ti.end(), 0);
+	sumZi_Zi = std::accumulate(vectorZi_Zi.begin(), vectorZi_Zi.end(), 0);
+
+	double** matriz;
+	for(int i=0; i < 3;i++){
+		for(int j=0; j < 3; j++){
+			if(i == 0 && j == 0)
+				matriz[i][j] = N;
+
+			else{
+				vAux = elevarVectorAlValor(vectorZi, vectorTi, i+j); // en matriz 0,1 se mete Zi¹, en matriz 0,2 se mete Zi², en matriz 0,3 se mete Zi³
+				matriz[i][j] = std::accumulate(vAux.begin(), vAux.end(), 0);
+
+			}
+		}
+	}
+
+}
 
 
 #endif
