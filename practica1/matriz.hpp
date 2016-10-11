@@ -118,9 +118,34 @@ double calculaDeterminante(double m[][2]){
     return fRet;
 }
 
+double calculaDeterminante(double m[][3]){
+    double fRet = 0, fProduct = 0;
+
+    for (int i = 0; i < 3; i++){
+    //  Multiplicacion de valores verticales de izquierda a derecha...
+        fProduct = 1.0;
+        for (int j = 0; j < 3; j++)
+            fProduct *= m[(i + j) % 3][j];
+ 	        fRet += fProduct;
+		     
+		            //  Multiplicacion de valores verticales de derecha a izquierda...
+		    fProduct = 1.0;
+		    for (int j = 0; j < 3; j++)
+		        fProduct *= m[(3 - 1) - ((i + j) % 3)][j];
+		    fRet -= fProduct;
+ 	}
+    return fRet;
+}
+
 void copiaMatriz(double original[][2], double copia[][2]){
 	for(int i= 0; i < 2; i ++)
 		for(int j = 0; j < 2; j++)
+			copia[i][j] = original[i][j];
+}
+
+void copiaMatriz(double original[][3], double copia[][3]){
+	for(int i= 0; i < 3; i ++)
+		for(int j = 3; j < 3; j++)
 			copia[i][j] = original[i][j];
 }
 
@@ -205,7 +230,7 @@ void Cramer2(const vector<double> &vectorZi, const vector<double> &vectorTi, vec
 			vectorTerminoIndependiente.push_back(sumTi);
 
 		else{
-			vAux = elevarVectorAlValor(vectorZi, vectorTi, i);
+			vAux = elevarVectorAlValorPorSumTi(vectorZi, vectorTi, i);
 
 			vectorTerminoIndependiente.push_back(std::accumulate(vAux.begin(), vAux.end(), 0));
 		}
@@ -213,7 +238,13 @@ void Cramer2(const vector<double> &vectorZi, const vector<double> &vectorTi, vec
 
 	//imprimeVectorTiempos(vectorTerminoIndependiente);
 
+	for(int i = 0; i < 3; i++){
+		copiaMatriz(matriz, matrizAux);
+		for(int k = 0; k < 3; k++)
+			matrizAux[k][0] = vectorTerminoIndependiente.at(k);
 
+		a.push_back(calculaDeterminante(matrizAux)/calculaDeterminante(matriz));
+	}
 }
 
 

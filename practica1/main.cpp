@@ -70,7 +70,7 @@ cout << endl;
 				
 				cout << "==========================================" << endl;
 				cout << "Presione la tecla 'Intro' para continuar..." << endl;
-				system("read");
+				cin.ignore().get();
 
 				break;
 
@@ -114,7 +114,7 @@ cout << endl;
 
 				cout << "==========================================" << endl;
 				cout << "Presione la tecla 'Intro' para continuar..." << endl;
-				system("read");
+				cin.ignore().get();
 
 				break;
 
@@ -129,7 +129,7 @@ cout << endl;
 				cabecera(1);
 				cout << "Opción introducida incorrecta." << endl;
 				cout << "Pulse intro para continuar..." << endl;
-				system("read");
+				cin.ignore().get();
 				break;	
 		}
 
