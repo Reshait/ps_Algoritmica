@@ -137,6 +137,35 @@ double calculaDeterminante(double m[][3]){
     return fRet;
 }
 
+double calculaDeterminante(vector<vector<double> > matriz){
+		    double fRet = 0, fProduct = 0;
+
+		    if ( matriz.size() == 2){
+		        fRet = matriz[0][0] * matriz[1][1] - matriz[1][0] * matriz[0][1];
+		    }
+		    
+		    else if (matriz.size() == 1)
+		    	fRet = matriz[0][0];
+
+		    else {
+		        for (int i = 0; i < matriz.size(); i++){
+		            //  Multiplicacion de valores verticales de izquierda a derecha...
+		            fProduct = 1.0;
+		            for (int j = 0; j < matriz.size(); j++)
+		                fProduct *= matriz[(i + j) % matriz.size()][j];
+		            fRet += fProduct;
+		     
+		            //  Multiplicacion de valores verticales de derecha a izquierda...
+		            fProduct = 1.0;
+		            for (int j = 0; j < matriz.size(); j++)
+		                fProduct *= matriz[(matriz.size() - 1) - ((i + j) % matriz.size())][j];
+		            fRet -= fProduct;
+		        }
+		    }
+		     
+		    return fRet;	
+}
+
 void copiaMatriz(double original[][2], double copia[][2]){
 	for(int i= 0; i < 2; i ++)
 		for(int j = 0; j < 2; j++)
@@ -149,6 +178,29 @@ void copiaMatriz(double original[][3], double copia[][3]){
 			copia[i][j] = original[i][j];
 }
 
+void copiaMatriz(vector<vector<double> > original, vector<vector<double> > copia){
+	for(int i= 0; i < original.size(); i ++)
+		for(int j = 0; j < original.size(); j++)
+			copia[i][j] = original[i][j];
+}
+
+void imprimeMatriz(vector<vector<double> > matriz){
+	int cuentaIntro = 0;
+	for(int i = 0; i < matriz.size(); i++){
+		cout << "\t" ;
+		for(int j = 0; j < matriz.size(); j++){
+			cout << matriz[i][j] << " \t";
+			
+			cuentaIntro ++;					
+			if(cuentaIntro == matriz.size()){
+				cout << endl;
+				cuentaIntro = 0;
+			}
+		}
+	}
+}
+
+/*
 void Cramer(const vector<double> &vectorZi, const vector<double> &vectorTi, vector<double> &a ){  //añadir bool esFibonacci
 	double N = vectorZi.size();
 	double sumZi = std::accumulate(vectorZi.begin(), vectorZi.end(), 0);
@@ -179,7 +231,7 @@ void Cramer(const vector<double> &vectorZi, const vector<double> &vectorTi, vect
 	}
 
 }
-
+*/
 vector<double> elevarVectorAlValorPorSumTi(const vector<double> &vNi, const vector<double> &vTi, int valor){
 	vector<double> aux;
 	aux = vNi;
@@ -248,4 +300,49 @@ void Cramer2(const vector<double> &vectorZi, const vector<double> &vectorTi, vec
 }
 
 
+void Cramer(const vector<double> &vectorZi, const vector<double> &vectorTi, vector<double> &a , bool esFibonacci){  //añadir bool esFibonacci
+	double N = vectorZi.size();
+	double sumZi = std::accumulate(vectorZi.begin(), vectorZi.end(), 0);
+	double sumTi = std::accumulate(vectorTi.begin(), vectorTi.end(), 0);
+	double sumZi_Ti, sumZi_Zi;
+
+	vector<double> vectorZi_Zi = vectorZi * vectorZi;
+	vector<double> vectorZi_Ti = vectorZi * vectorTi;
+	sumZi_Ti = std::accumulate(vectorZi_Ti.begin(), vectorZi_Ti.end(), 0);
+	sumZi_Zi = std::accumulate(vectorZi_Zi.begin(), vectorZi_Zi.end(), 0);
+
+////Resolucion Fibonacci
+	if(esFibonacci == 1){
+
+		vector<vector<double> > matriz (2, vector<double> (2));
+		vector<vector<double> > matrizAux (2, vector<double> (2));		
+		//double matriz[2][2], matrizAux[2][2];
+		matriz[0][0] = N;
+		matriz[0][1] = sumZi;
+		matriz[1][0] = matriz[0][1];
+		matriz[1][1] = sumZi_Zi;
+//quitar
+		cout<<"LA MATRIZ ORIGINAL ES:" <<endl;
+		imprimeMatriz(matriz);
+//
+		for(int i = 0; i < 2; i++){
+			copiaMatriz(matriz, matrizAux);
+//quitar
+		cout<<"LA MATRIZ AUXILIAR ANTES DEL TERMINO INDEPENDIENTE ES:" <<endl;
+		imprimeMatriz(matriz);			
+//
+			matrizAux[i][0] = sumTi;
+			matrizAux[1][i] = sumZi_Ti; 
+
+
+			cout << "Determinante de la matriz es..: \t" << calculaDeterminante(matriz) << endl;
+			cout << "Determinante de la mAuxiliar es..: \t" << calculaDeterminante(matrizAux) << endl;
+
+			imprimeMatriz(matrizAux);	
+
+			a.push_back(calculaDeterminante(matrizAux) / calculaDeterminante(matriz));	
+
+		}
+	}
+}
 #endif

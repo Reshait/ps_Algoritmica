@@ -19,6 +19,7 @@ int main(){
 	vector<double> vectorTi, vectorZi, vectorZi_Ti, vectorAs, vectorTe; //vectores usados en ambas opciones
 	DatosEntrada Entrada;
 	int opcion;
+	bool esFibonacci;
 
 	do{
 
@@ -40,7 +41,7 @@ int main(){
 			
 			case 1:
 				cabecera(1);
-				
+				esFibonacci = false;
 				Entrada.pideDatos();
 					// Entrada.imprimeDatos();
 				
@@ -65,7 +66,7 @@ int main(){
 				cout << endl;
 
 
-Cramer2(vectorZi, vectorTi, vectorAs);
+Cramer(vectorZi, vectorTi, vectorAs, esFibonacci);
 cout << endl;
 				
 				cout << "==========================================" << endl;
@@ -77,7 +78,7 @@ cout << endl;
 
 			case 2:
 				cabecera(1);
-
+				esFibonacci = true;
 				cout << endl;
 				Entrada.pideDatos();
 				cout << endl;
@@ -96,7 +97,7 @@ cout << endl;
 				imprimeVectorTiempos(vectorZi);
 				cout << endl;
 
-				Cramer(vectorZi, vectorTi, vectorAs);
+				Cramer(vectorZi, vectorTi, vectorAs, "fibonacci");
 
 				cout << endl << "El vector de As es..:" << endl;
 				imprimeVectorTiempos(vectorAs);
