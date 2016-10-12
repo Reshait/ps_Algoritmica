@@ -21,21 +21,29 @@ void cramer(const int &valorMin,const int &valorMax,const int &valorInc,const in
 			}
 		}
 	}
-	cout << "=============================" << endl;
-	imprimeVector(vTiemposObservados);
-	imprimeMatriz(matriz);
+
 	//Cálculo de los As correspondientes
 	vector<vector<double> > matrizAux (tam, vector<double> (tam));
-	for(int i = 0; i < tam; i++){			//Genera las matrices auxiliares correspondientes
+	for(int i = 0; i < tam; i++){			//Genera las matrices auxiliares correspondientes con el término indep insertado en cada una de sus columnas
 		copiaMatriz(matriz, matrizAux);
-// aquí está el problema
 		for(int j = 0; j < tam; j++){
 			matrizAux[j][i] = 0;
 			for(int k = 0; k < vTiemposObservados.size(); k ++)
 				matrizAux[j][i] += (vTiemposObservados[k] * pow(k, j));
 		}
-//
+
 		imprimeMatriz(matrizAux);
+		vAs.push_back(calculaDeterminante(matrizAux)/calculaDeterminante(matriz));
 	}
 }
+
+double tiempoEstimado(const vector<double> &vAs, const int &Ni){
+	double tiempoEstimado = 0.0;
+
+	for(int i = 0; i < vAs.size(); i++)
+		tiempoEstimado += vAs[i] * pow(Ni,i);
+
+	return tiempoEstimado;
+}
+
 #endif

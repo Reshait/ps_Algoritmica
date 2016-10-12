@@ -58,7 +58,14 @@ int main(){
 				imprimeVector(vTiemposObservados);
 				cout << endl;
 
-				cramer(valorMin, valorMax, valorInc, 3, vTiemposObservados, vAs);
+				cramer(valorMin, valorMax, valorInc, 4, vTiemposObservados, vAs);
+
+				cout << "Los tiempos estimados son..: " << endl;
+				for(int i = valorMin; i <= valorMax; i += valorInc)
+					cout << tiempoEstimado(vAs, i) << "\t";
+
+				cout << endl;
+
 
 				cout << "==========================================" << endl;
 				cout << "Presione la tecla 'Intro' para continuar..." << endl;
