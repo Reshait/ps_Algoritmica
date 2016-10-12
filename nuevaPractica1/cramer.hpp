@@ -32,7 +32,7 @@ void cramer(const int &valorMin,const int &valorMax,const int &valorInc,const in
 		for(int j = 0; j < tam; j++){
 			matrizAux[j][i] = 0;
 			for(int k = 0; k < vTiemposObservados.size(); k ++)
-				matrizAux[j][i] += (vTiemposObservados[k] * pow(k, i+j));
+				matrizAux[j][i] += (vTiemposObservados[k] * pow(k, j));
 		}
 //
 		imprimeMatriz(matrizAux);
