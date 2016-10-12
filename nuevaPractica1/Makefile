@@ -6,7 +6,7 @@ principal: $(OBJECTS)
 	g++ $(OBJECTS) -o ejecutable.out
 
 #main.o: main.cpp matriz.hpp funciones_cambio.hpp moneda.hpp
-main.o: main.cpp cabecera.hpp funcionesGenerales.hpp tiempo.hpp
+main.o: main.cpp cabecera.hpp funcionesGenerales.hpp tiempo.hpp cramer.hpp
 	g++ $(CPPFLAGS) main.cpp 
 
 #moneda.o: moneda.cpp

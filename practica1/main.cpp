@@ -20,6 +20,7 @@ int main(){
 	DatosEntrada Entrada;
 	int opcion;
 	bool esFibonacci;
+	double tiempo = 0;
 
 	do{
 
@@ -44,8 +45,7 @@ int main(){
 				esFibonacci = false;
 				Entrada.pideDatos();
 					// Entrada.imprimeDatos();
-				
-				for(int i = Entrada.getMin(); i < Entrada.getMax(); i = i + Entrada.getInc()){
+				for(int i = Entrada.getMin(); i <= Entrada.getMax(); i = i + Entrada.getInc()){
 					Cronometro.start();
 						Matriz matrizMinima(i);
 						cout << endl << "Su matriz aleatoria de tamaño " << matrizMinima.getTam() << "x" << matrizMinima.getTam() << " es:" << endl;
@@ -57,17 +57,30 @@ int main(){
 					vectorZi.push_back(i);
 				}
 
-				cout << endl << "El vector de tiempos registrados es..:" << endl;
-				imprimeVectorTiempos(vectorTi);
-				cout << endl;
-
 				cout << endl << "El vector de Nis registrados es..:" << endl;
 				imprimeVectorTiempos(vectorZi);
 				cout << endl;
 
+				Cramer(vectorZi, vectorTi, vectorAs, esFibonacci);
+				cout << endl;
 
-Cramer(vectorZi, vectorTi, vectorAs, esFibonacci);
-cout << endl;
+				cout << endl << "El vector de As..:" << endl;
+				imprimeVectorTiempos(vectorAs);
+				cout << endl;
+
+				cout << endl << "El vector de tiempos registrados es..:" << endl;
+				imprimeVectorTiempos(vectorTi);
+				cout << endl;
+
+				cout << endl << "El vector de tiempos estimados es..:" << endl;
+				for(int i = Entrada.getMin(); i <= Entrada.getMax(); i += Entrada.getInc()){
+					for(int j = 0; j < vectorAs.size(); j++)
+						tiempo += vectorAs.at(j)*pow(i,j);
+					vectorTe.push_back(tiempo);
+					tiempo = 0;
+				}
+				imprimeVectorTiempos(vectorTe);
+				cout << endl;								
 				
 				cout << "==========================================" << endl;
 				cout << "Presione la tecla 'Intro' para continuar..." << endl;

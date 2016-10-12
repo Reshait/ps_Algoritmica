@@ -4,6 +4,7 @@
 #include <vector>
 #include "cabecera.hpp"
 #include "funcionesGenerales.hpp"
+#include "cramer.hpp"
 #include "tiempo.hpp"
 
 
@@ -55,6 +56,7 @@ int main(){
 
 				cout << "El vector de tiempos observados es..: " << endl;
 				imprimeVector(vTiemposEstimados);
+				cout << endl;
 
 				cout << "==========================================" << endl;
 				cout << "Presione la tecla 'Intro' para continuar..." << endl;

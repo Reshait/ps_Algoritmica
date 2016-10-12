@@ -61,6 +61,36 @@ void imprimeMatriz(const vector<vector<double> > &matriz){
 	}
 }
 
+
+double calculaDeterminante(const vector<vector<double> > &matriz){
+	double determinante = 0, fProduct = 0;
+
+	if ( matriz.size() == 2){
+	    determinante = matriz[0][0] * matriz[1][1] - matriz[1][0] * matriz[0][1];
+	}
+		    
+	else if (matriz.size() == 1)
+		determinante = matriz[0][0];
+
+	else {
+	    for (int i = 0; i < matriz.size(); i++){
+	        //  Multiplicacion de valores verticales de izquierda a derecha...
+	        fProduct = 1.0;
+	        for (int j = 0; j < matriz.size(); j++)
+	            fProduct *= matriz[(i + j) % matriz.size()][j];
+	        determinante += fProduct;
+		     
+	        //  Multiplicacion de valores verticales de derecha a izquierda...
+	        fProduct = 1.0;
+	        for (int j = 0; j < matriz.size(); j++)
+	            fProduct *= matriz[(matriz.size() - 1) - ((i + j) % matriz.size())][j];
+	        determinante -= fProduct;
+	    }
+	}
+		     
+	return determinante;	
+}
+
 void generaMatrizValoresAleatorios(int tam){
 	vector<vector<double> > matriz (tam, vector<double> (tam));
 
@@ -70,8 +100,8 @@ void generaMatrizValoresAleatorios(int tam){
 
 	imprimeMatriz(matriz);
 
+	cout << "Determinante ..:\t" << calculaDeterminante(matriz) << endl;
+
 }
-
-
 
 #endif

@@ -1,3 +1,4 @@
 # Ignora los ficheros .out
 
 *.out
+*.o
