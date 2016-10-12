@@ -79,6 +79,31 @@ int main(){
 				cout << "\t┏━━━━━━━━━━━━━━━━━━━━━━━┓" << endl;
 				cout << "\t┃ APARTADO DE FIBONACCI ┃" << endl;	
 				cout << "\t┗━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;
+
+				pideDatos(valorMin, valorMax, valorInc);
+
+				for(int i = valorMin; i <= valorMax; i += valorInc){
+					Cronometro.start();
+					cout << "El valor resultante a Fibonacci " << i << " es..: " << fibonacci(i) << endl;		
+					Cronometro.stop();					
+					
+					cout << "Han transcurrido..:\t" << Cronometro.elapsed() << " µs" << endl;
+					
+					vTiemposObservados.push_back(Cronometro.elapsed());		
+					cout << endl;
+				}
+
+				cout << "El vector de tiempos observados es..: " << endl;
+				imprimeVector(vTiemposObservados);
+				cout << endl;
+
+				cramer(pow(2,valorMin), pow(2,valorMax), pow(2,valorInc), 2, vTiemposObservados, vAs);
+
+				cout << "Los tiempos estimados son..: " << endl;
+				for(int i = valorMin; i <= valorMax; i += valorInc)
+					cout << std::abs(vAs[0] + vAs[1] * pow(2,i)) << "\t";
+
+				cout << endl;
 				
 				cout << "==========================================" << endl;
 				cout << "Presione la tecla 'Intro' para continuar..." << endl;
