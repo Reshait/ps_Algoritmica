@@ -50,13 +50,15 @@ int main(){
 					
 					cout << "Han transcurrido..:\t" << Cronometro.elapsed() << " µs" << endl;
 					
-					vTiemposEstimados.push_back(Cronometro.elapsed());		
+					vTiemposObservados.push_back(Cronometro.elapsed());		
 					cout << endl;
 				}
 
 				cout << "El vector de tiempos observados es..: " << endl;
-				imprimeVector(vTiemposEstimados);
+				imprimeVector(vTiemposObservados);
 				cout << endl;
+
+				cramer(valorMin, valorMax, valorInc, 3, vTiemposObservados, vAs);
 
 				cout << "==========================================" << endl;
 				cout << "Presione la tecla 'Intro' para continuar..." << endl;
