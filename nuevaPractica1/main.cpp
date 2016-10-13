@@ -13,6 +13,7 @@
 using namespace std;
 
 int main(){
+	std::ofstream fo;
 	Clock Cronometro;
 	srand(time(NULL));
 	
@@ -63,11 +64,17 @@ int main(){
 				cramer(0, valorMin, valorMax, valorInc, 4, vTiemposObservados, vAs);
 
 				cout << "Los tiempos estimados son..: " << endl;
-				for(int i = valorMin; i <= valorMax; i += valorInc)
+				for(int i = valorMin; i <= valorMax; i += valorInc){
+					vTiemposEstimados.push_back(tiempoEstimado(vAs, i));
 					cout << tiempoEstimado(vAs, i) << "\t";
+				}
 
 				cout << endl;
 
+				fo.open("Datos.txt"); 
+				for(unsigned int i = 0, ni = valorMin; i < vTiemposObservados.size(); i++, ni += valorInc)
+					fo << ni << " " << vTiemposObservados[i] << " " << vTiemposEstimados[i] << "\n";
+				fo.close();
 
 				cout << "==========================================" << endl;
 				cout << "Presione la tecla 'Intro' para continuar..." << endl;
@@ -102,11 +109,18 @@ int main(){
 				cramer(1,  valorMin, valorMax, valorInc, 2, vTiemposObservados, vAs);
 
 				cout << "Los tiempos estimados son..: " << endl;
-				for(int i = valorMin; i <= valorMax; i += valorInc)
+				for(int i = valorMin, j = 0; i <= valorMax; i += valorInc, j++){
+					vTiemposEstimados.push_back( std::abs(vAs[0] + vAs[1] * pow(2,i)) );
 					cout << std::abs(vAs[0] + vAs[1] * pow(2,i)) << "\t";
+				}
 
 				cout << endl;
-				
+
+				fo.open("Datos.txt"); 
+				for(unsigned int i = 0, ni = valorMin; i < vTiemposObservados.size(); i++, ni += valorInc)
+					fo << ni << " " << vTiemposObservados[i] << " " << vTiemposEstimados[i] << "\n";
+				fo.close();
+
 				cout << "==========================================" << endl;
 				cout << "Presione la tecla 'Intro' para continuar..." << endl;
 				cin.ignore().get();
@@ -129,6 +143,8 @@ int main(){
 		}
 
 	}while(opcion != 0);	
+
+	system("./ejemplo_gnuplot.sh");
 
 	return 0;
 
