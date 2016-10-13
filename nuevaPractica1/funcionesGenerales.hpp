@@ -39,17 +39,17 @@ void imprimeVector(const std::vector<double> &vectorTiempos){
 
 
 void copiaMatriz(const vector<vector<double> > &original, vector<vector<double> > &copia){
-	for(int i= 0; i < original.size(); i ++)
-		for(int j = 0; j < original.size(); j++)
+	for(unsigned int i= 0; i < original.size(); i ++)
+		for(unsigned int j = 0; j < original.size(); j++)
 			copia[i][j] = original[i][j];
 }
 
 
 void imprimeMatriz(const vector<vector<double> > &matriz){
-	int cuentaIntro = 0;
-	for(int i = 0; i < matriz.size(); i++){
+	unsigned int cuentaIntro = 0;
+	for(unsigned int i = 0; i < matriz.size(); i++){
 		cout << "\t" ;
-		for(int j = 0; j < matriz.size(); j++){
+		for(unsigned int j = 0; j < matriz.size(); j++){
 			cout << matriz[i][j] << " \t";
 			
 			cuentaIntro ++;					
@@ -73,16 +73,16 @@ double calculaDeterminante(const vector<vector<double> > &matriz){
 		determinante = matriz[0][0];
 
 	else {
-	    for (int i = 0; i < matriz.size(); i++){
+	    for (unsigned int i = 0; i < matriz.size(); i++){
 	        //  Multiplicacion de valores verticales de izquierda a derecha...
 	        fProduct = 1.0;
-	        for (int j = 0; j < matriz.size(); j++)
+	        for (unsigned int j = 0; j < matriz.size(); j++)
 	            fProduct *= matriz[(i + j) % matriz.size()][j];
 	        determinante += fProduct;
 		     
 	        //  Multiplicacion de valores verticales de derecha a izquierda...
 	        fProduct = 1.0;
-	        for (int j = 0; j < matriz.size(); j++)
+	        for (unsigned int j = 0; j < matriz.size(); j++)
 	            fProduct *= matriz[(matriz.size() - 1) - ((i + j) % matriz.size())][j];
 	        determinante -= fProduct;
 	    }
@@ -98,7 +98,7 @@ void generaMatrizValoresAleatorios(int tam){
 		for(int j = 0; j < tam; j++)
 			matriz[i][j] = -10+((double)rand() /RAND_MAX) * (20);
 
-	imprimeMatriz(matriz);
+//	imprimeMatriz(matriz);
 
 	cout << "Determinante ..:\t" << calculaDeterminante(matriz) << endl;
 

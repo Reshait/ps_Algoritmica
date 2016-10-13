@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <time.h>
 #include <vector>
+#include <fstream>
 #include "cabecera.hpp"
 #include "funcionesGenerales.hpp"
 #include "cramer.hpp"
@@ -16,8 +17,8 @@ int main(){
 	srand(time(NULL));
 	
 	vector<double> vTiemposObservados, vTiemposEstimados, vAs;
-	int valorMin, valorMax, valorInc, tamCramer, opcion;
-    
+	int valorMin, valorMax, valorInc, opcion;
+
 	do{
 
 		cabecera(1);
@@ -32,10 +33,11 @@ int main(){
 		vTiemposEstimados.clear();
 		vAs.clear();
 
-
 		switch(opcion){
 			
 			case 1:
+
+
 				cabecera(1);
 				cout << "\t┏━━━━━━━━━━━━━━━━━━━━━━┓" << endl;
 				cout << "\t┃ APARTADO DE MATRICES ┃" << endl;	
@@ -58,7 +60,7 @@ int main(){
 				imprimeVector(vTiemposObservados);
 				cout << endl;
 
-				cramer(valorMin, valorMax, valorInc, 4, vTiemposObservados, vAs);
+				cramer(0, valorMin, valorMax, valorInc, 4, vTiemposObservados, vAs);
 
 				cout << "Los tiempos estimados son..: " << endl;
 				for(int i = valorMin; i <= valorMax; i += valorInc)
@@ -97,7 +99,7 @@ int main(){
 				imprimeVector(vTiemposObservados);
 				cout << endl;
 
-				cramer(pow(2,valorMin), pow(2,valorMax), pow(2,valorInc), 2, vTiemposObservados, vAs);
+				cramer(1,  valorMin, valorMax, valorInc, 2, vTiemposObservados, vAs);
 
 				cout << "Los tiempos estimados son..: " << endl;
 				for(int i = valorMin; i <= valorMax; i += valorInc)
@@ -127,7 +129,6 @@ int main(){
 		}
 
 	}while(opcion != 0);	
-
 
 	return 0;
 
