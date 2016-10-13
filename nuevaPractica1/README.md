@@ -1,9 +1,12 @@
 # Práctica 1 de la asignatura ALGORÍTMICA.
 
-para compilar:
-	make
+> **Nota:** Instrucciones de uso:
 
-para ejecutar:
-	./ejemplo.out
+> - Para **compilar**:
+> >make
 
-Tras cada ejecución, se genera automáticamente las gráficas de aproximación con gnuplot, buscarlas en el directorio propio.
+> - Para **ejecutar**:
+> >./ejemplo.out
+
+
+Tras cada ejecución, se genera automáticamente las gráficas de aproximación con gnuplot, se **generarán en la propia ruta**.
