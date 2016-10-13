@@ -76,6 +76,8 @@ int main(){
 					fo << ni << " " << vTiemposObservados[i] << " " << vTiemposEstimados[i] << "\n";
 				fo.close();
 
+				system("./ejemplo_gnuplot.sh");
+
 				cout << "==========================================" << endl;
 				cout << "Presione la tecla 'Intro' para continuar..." << endl;
 				cin.ignore().get();
@@ -121,6 +123,8 @@ int main(){
 					fo << ni << " " << vTiemposObservados[i] << " " << vTiemposEstimados[i] << "\n";
 				fo.close();
 
+				system("./ejemplo_gnuplot.sh");
+
 				cout << "==========================================" << endl;
 				cout << "Presione la tecla 'Intro' para continuar..." << endl;
 				cin.ignore().get();
@@ -143,8 +147,6 @@ int main(){
 		}
 
 	}while(opcion != 0);	
-
-	system("./ejemplo_gnuplot.sh");
 
 	return 0;
 
