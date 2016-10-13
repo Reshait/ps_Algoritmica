@@ -29,6 +29,8 @@ void cramer(bool esFibonacci, const int &valorMin,const int &valorMax,const int 
 
 	//Cálculo de los As correspondientes
 	vector<vector<double> > matrizAux (tam, vector<double> (tam));
+//cout << endl; imprimeMatriz(matriz); cout << endl; 
+//cout << "CUYO DETERMINANTE ES..:\t" << calculaDeterminante(matriz) << endl;
 
 	for(int i = 0; i < tam; i++){			//Genera las matrices auxiliares correspondientes con el término indep insertado en cada una de sus columnas
 		copiaMatriz(matriz, matrizAux);
@@ -41,7 +43,8 @@ void cramer(bool esFibonacci, const int &valorMin,const int &valorMax,const int 
 					matrizAux[j][i] += vTiemposObservados[k] * pow(pow(2, z), j);
 		}
 
-//		cout << endl; imprimeMatriz(matrizAux); cout << endl; 
+//cout << endl; imprimeMatriz(matrizAux); cout << endl; 
+//cout << "CUYO DETERMINANTE ES..:\t" << calculaDeterminante(matrizAux) << endl;
 
 		vAs.push_back(calculaDeterminante(matrizAux)/calculaDeterminante(matriz));
 	}
