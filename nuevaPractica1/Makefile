@@ -1,6 +1,8 @@
 OBJECTS = main.o 
 CPPFLAGS = -c -g -ansi -Wall
 
+all: principal clean
+
 principal: $(OBJECTS)
 	g++ $(OBJECTS) -o ejecutable.out
 
