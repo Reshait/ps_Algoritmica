@@ -8,6 +8,7 @@
 #include "cramer.hpp"
 #include "tiempo.hpp"
 #include "combinatorio.hpp"
+#include "hanoi.hpp"
 
 using namespace std;
 
@@ -15,10 +16,14 @@ int main(){
 	std::ofstream fo;
 	Clock Cronometro;
 	vector<stTabla> vEstructuras;
-	
+
 	vector<double> vTiemposObservados, vTiemposEstimados, vAs;
-	double valorN, valorK;
-	int opcion;
+	double valorN, sumatorio;
+	int opcion, desde = 0, hasta = 0;
+
+	//Hanoi
+	vector<int> vOrigen, vDestino, vAux;
+	unsigned int cuentaMovimientos = 0;
 
 	do{
 
@@ -46,9 +51,19 @@ int main(){
 				cout << "\t┃ COMBINATORIO - Recursividad Cnk = Cn-1,k-1 + Cn-1,k ┃" << endl;	
 				cout << "\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;	
 				
-				pideDatos(valorN, valorK);
+				pideDatos(desde, hasta);
 
-				cout << combinatorioRecursivo(valorN, valorK) << endl;
+				for(int i = desde; i < hasta; i++){
+					sumatorio = 0;
+					for(int j = 0; j <= i; j++){
+						sumatorio = combinatorioRecursivo(i,j);
+						cout << combinatorioRecursivo(i, j) << endl;
+					}	
+					vTiemposObservados.push_back(sumatorio = sumatorio/((desde-hasta)+2));
+				}
+
+				imprimeVector(vTiemposObservados);
+				
 //				system("./ejemplo_gnuplot.sh");
 
 				cout << "==========================================" << endl;
@@ -64,9 +79,8 @@ int main(){
 				cout << "\t┃ COMBINATORIO - Recursividad con tabla ┃" << endl;	
 				cout << "\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;	
 
-				pideDatos(valorN, valorK);
-
-				cout << combinatorioRecursivo(valorN, valorK, vEstructuras) << endl;
+				pideDatos(desde, hasta);
+//				cout << combinatorioRecursivo(valorN, valorK, vEstructuras) << endl;
 //				system("./ejemplo_gnuplot.sh");
 
 				cout << "==========================================" << endl;
@@ -81,8 +95,7 @@ int main(){
 				cout << "\t┃ COMBINATORIO - Algoritmo NO recursivo ┃" << endl;	
 				cout << "\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;	
 
-				pideDatos(valorN, valorK);
-
+				pideDatos(desde, hasta);
 //				system("./ejemplo_gnuplot.sh");
 
 				cout << "==========================================" << endl;
@@ -98,6 +111,10 @@ int main(){
 				cout << "\t┗━━━━━━━┛" << endl;	
 
 				pideDatos(valorN);
+
+				rellenaVectorOrigen(valorN, vOrigen);
+//				imprimeVector(vOrigen);
+				hanoi(vOrigen, vDestino, vAux, vOrigen.size());
 
 //				system("./ejemplo_gnuplot.sh");
 
