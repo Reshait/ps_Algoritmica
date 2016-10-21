@@ -82,7 +82,7 @@ int main(){
 				cout << "\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;	
 
 				pideDatos(valorN, valorK);
-
+				cout << combinatorioIterativo(valorN, valorK) << endl;
 //				system("./ejemplo_gnuplot.sh");
 
 				cout << "==========================================" << endl;

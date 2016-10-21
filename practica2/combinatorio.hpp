@@ -54,8 +54,8 @@ double factorial(int n){
     return n * factorial(n-1);
 }
 
-double combinatorioIterativo(){
-
+double combinatorioIterativo(double N, double K){
+	return factorial(N) /(factorial(N-K) * factorial(K));
 }
 
 #endif
