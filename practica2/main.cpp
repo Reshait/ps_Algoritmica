@@ -8,6 +8,7 @@
 #include "cramer.hpp"
 #include "tiempo.hpp"
 #include "combinatorio.hpp"
+#include "hanoi.hpp"
 
 using namespace std;
 
@@ -15,10 +16,14 @@ int main(){
 	std::ofstream fo;
 	Clock Cronometro;
 	vector<stTabla> vEstructuras;
-	
+
 	vector<double> vTiemposObservados, vTiemposEstimados, vAs;
-	double valorN, valorK;
-	int opcion;
+	double valorN, sumTiempo;
+	int opcion, desde = 0, hasta = 0;
+
+	//Hanoi
+	vector<int> vOrigen, vDestino, vAux;
+//	unsigned int cuentaMovimientos = 0;
 
 	do{
 
@@ -36,19 +41,53 @@ int main(){
 		vTiemposEstimados.clear();
 		vAs.clear();
 
+///1uitar
+double error;
+
 		switch(opcion){
 			
 			case 1:
-
 
 				cabecera(2);
 				cout << "\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓" << endl;
 				cout << "\t┃ COMBINATORIO - Recursividad Cnk = Cn-1,k-1 + Cn-1,k ┃" << endl;	
 				cout << "\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;	
 				
-				pideDatos(valorN, valorK);
+				pideDatos(desde, hasta);
 
-				cout << combinatorioRecursivo(valorN, valorK) << endl;
+				for(int i = desde; i <= hasta; i++){
+					sumTiempo = 0;
+
+					for(int j = 0; j <= i; j++){
+						Cronometro.start();
+						cout << combinatorioRecursivo(i, j) << endl;
+						Cronometro.stop();	
+						sumTiempo += Cronometro.elapsed();
+					}
+					vTiemposObservados.push_back(sumTiempo/(hasta-desde + 1));						
+//					vTiemposObservados.push_back(sumTiempo/(i + 1));						
+				}
+
+
+
+				cout << "El vector de tiempos observados es..: " << endl;
+				imprimeVector(vTiemposObservados);
+
+				cramer(1, desde, hasta, 1, 2, vTiemposObservados, vAs);
+
+				cout << "Los tiempos estimados son..: " << endl;
+				for(int i = desde; i <= hasta; i ++){
+					vTiemposEstimados.push_back( std::abs(vAs[0] + vAs[1] * pow(2,i)) );
+					cout << std::abs(vAs[0] + vAs[1] * pow(2,i)) << "\t";
+				}		
+				cout << endl;		
+//quitar				
+//for(unsigned int i = 0; i < vTiemposObservados.size(); i++)
+//	error += std::abs(vTiemposObservados[i] - vTiemposEstimados[i]);
+//error = error / vTiemposObservados.size();
+//cout << "EL error medio es..: " << error << endl;
+//hasta aquí
+
 //				system("./ejemplo_gnuplot.sh");
 
 				cout << "==========================================" << endl;
@@ -64,9 +103,8 @@ int main(){
 				cout << "\t┃ COMBINATORIO - Recursividad con tabla ┃" << endl;	
 				cout << "\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;	
 
-				pideDatos(valorN, valorK);
-
-				cout << combinatorioRecursivo(valorN, valorK, vEstructuras) << endl;
+				pideDatos(desde, hasta);
+//				cout << combinatorioRecursivo(valorN, valorK, vEstructuras) << endl;
 //				system("./ejemplo_gnuplot.sh");
 
 				cout << "==========================================" << endl;
@@ -81,8 +119,8 @@ int main(){
 				cout << "\t┃ COMBINATORIO - Algoritmo NO recursivo ┃" << endl;	
 				cout << "\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;	
 
-				pideDatos(valorN, valorK);
-				cout << combinatorioIterativo(valorN, valorK) << endl;
+
+				pideDatos(desde, hasta);
 //				system("./ejemplo_gnuplot.sh");
 
 				cout << "==========================================" << endl;
@@ -98,6 +136,10 @@ int main(){
 				cout << "\t┗━━━━━━━┛" << endl;	
 
 				pideDatos(valorN);
+
+				rellenaVectorOrigen(valorN, vOrigen);
+//				imprimeVector(vOrigen);
+				hanoi(vOrigen, vDestino, vAux, vOrigen.size());
 
 //				system("./ejemplo_gnuplot.sh");
 

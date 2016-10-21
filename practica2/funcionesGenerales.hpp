@@ -5,32 +5,32 @@ using std::cout;
 using std::cin;
 using std::vector;
 
-void pideDatos(double &valorN, double &valorK){
+void pideDatos(int &desde, int &hasta){
 
 	do{
-		cout << "Introduzca el valor N.: ";
-		cin >> valorN;
+		cout << "Introduzca el valor DESDE el que realizar iteraciones.: ";
+		cin >> desde;
 
-		if(valorN <= 0)
-			cout << "ERROR. El valor N no puede ser igual o menor que 0." << endl;
+		if(desde <= 0)
+			cout << "ERROR. El valor DESDE no puede ser igual o menor que 0." << endl;
 	
-	}while(valorN <= 0);
+	}while(desde <= 0);
 
 	do{
-		cout << "Introduzca el valor k.: ";
-		cin >> valorK;
+		cout << "Introduzca el valor HASTA el que realizar iteraciones.: ";
+		cin >> hasta;
 
-		if(valorK > valorN)
-			cout << "ERROR. El valor K no puede ser mayor que el valor de N." << endl;
-
-	}while(valorK > valorN);
+		if(hasta <= desde)
+			cout << "ERROR. El valor HASTA no puede ser igual o menor que el valor de DESDE." << endl;
+	
+	}while(hasta <= desde);	
 
 }
 
 void pideDatos(double &valorN){
 
 	do{
-		cout << "Introduzca el valor N.: ";
+		cout << "Introduzca el valor N (cantidad de discos).: ";
 		cin >> valorN;
 
 		if(valorN <= 0)
@@ -42,9 +42,11 @@ void pideDatos(double &valorN){
 
     /*!\brief Imprime vector de tiempos
     */
-void imprimeVector(const std::vector<double> &vectorTiempos){
+template <class T>
+void imprimeVector(const std::vector<T> &vectorTiempos){
 	for(unsigned int i = 0; i < vectorTiempos.size(); i++)
-		cout << vectorTiempos.at(i) << "\t";      
+		cout << vectorTiempos.at(i) << "\t"; 
+	cout << endl;     
 }
 
 
