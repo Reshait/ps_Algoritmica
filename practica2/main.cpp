@@ -81,12 +81,12 @@ double error;
 					cout << std::abs(vAs[0] + vAs[1] * pow(2,i)) << "\t";
 				}		
 				cout << endl;		
-//quitar				
-//for(unsigned int i = 0; i < vTiemposObservados.size(); i++)
-//	error += std::abs(vTiemposObservados[i] - vTiemposEstimados[i]);
-//error = error / vTiemposObservados.size();
-//cout << "EL error medio es..: " << error << endl;
-//hasta aquí
+//quitar	-->				
+	//for(unsigned int i = 0; i < vTiemposObservados.size(); i++)
+	//	error += std::abs(vTiemposObservados[i] - vTiemposEstimados[i]);
+	//error = error / vTiemposObservados.size();
+	//cout << "EL error abs. medio es..: " << error << endl;
+//hasta aquí <--
 
 //				system("./ejemplo_gnuplot.sh");
 
@@ -104,7 +104,30 @@ double error;
 				cout << "\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;	
 
 				pideDatos(desde, hasta);
-//				cout << combinatorioRecursivo(valorN, valorK, vEstructuras) << endl;
+
+				for(int i = desde; i <= hasta; i++){
+					sumTiempo = 0;
+
+					for(int j = 0; j <= i; j++){
+						Cronometro.start();
+						cout << combinatorioRecursivo(i, j, vEstructuras) << endl;
+						Cronometro.stop();	
+						sumTiempo += Cronometro.elapsed();
+					}
+					vTiemposObservados.push_back(sumTiempo/(hasta-desde + 1));						
+//					vTiemposObservados.push_back(sumTiempo/(i + 1));						
+				}		
+
+				cout << "El vector de tiempos observados es..: " << endl;
+				imprimeVector(vTiemposObservados);
+
+				cramer(0, desde, hasta, 1, 4, vTiemposObservados, vAs);
+
+				cout << "Los tiempos estimados son..: " << endl;
+				for(int i = desde; i <= hasta; i ++)
+					vTiemposEstimados.push_back(tiempoEstimado(vAs, i));
+				imprimeVector(vTiemposEstimados);		
+
 //				system("./ejemplo_gnuplot.sh");
 
 				cout << "==========================================" << endl;
@@ -115,12 +138,34 @@ double error;
 				
 			case 3:
 				cabecera(2);
-				cout << "\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓" << endl;
-				cout << "\t┃ COMBINATORIO - Algoritmo NO recursivo ┃" << endl;	
-				cout << "\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;	
-
+				cout << "\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓" << endl;
+				cout << "\t┃ COMBINATORIO - Algoritmo Iterativo ┃" << endl;	
+				cout << "\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛" << endl;	
 
 				pideDatos(desde, hasta);
+
+				for(int n = desde; n <= hasta; n++){
+					sumTiempo = 0;
+
+					for(int k = 0; k <= n; k++){
+						Cronometro.start();		
+						cout << combinatorioIterativo(n,k) << endl;
+						Cronometro.stop();	
+						sumTiempo += Cronometro.elapsed();						
+					}
+					vTiemposObservados.push_back(sumTiempo/(hasta-desde + 1));											
+				}
+
+				cout << "El vector de tiempos observados es..: " << endl;
+				imprimeVector(vTiemposObservados);
+
+				cramer(0, desde, hasta, 1, 4, vTiemposObservados, vAs);
+
+				cout << "Los tiempos estimados son..: " << endl;
+				for(int i = desde; i <= hasta; i ++)
+					vTiemposEstimados.push_back(tiempoEstimado(vAs, i));
+				imprimeVector(vTiemposEstimados);
+
 //				system("./ejemplo_gnuplot.sh");
 
 				cout << "==========================================" << endl;
