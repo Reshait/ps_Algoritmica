@@ -23,7 +23,7 @@ int main(){
 
 	//Hanoi
 	vector<int> vOrigen, vDestino, vAux;
-//	unsigned int cuentaMovimientos = 0;
+	//	unsigned int cuentaMovimientos = 0;
 
 	do{
 
@@ -40,6 +40,9 @@ int main(){
 		vTiemposObservados.clear();
 		vTiemposEstimados.clear();
 		vAs.clear();
+		vOrigen.clear();
+		vDestino.clear();
+		vAux.clear();
 
 ///1uitar
 double error;
@@ -184,8 +187,9 @@ double error;
 
 				rellenaVectorOrigen(valorN, vOrigen);
 //				imprimeVector(vOrigen);
+imprime(vOrigen,vAux,vDestino);
 				hanoi(vOrigen, vDestino, vAux, vOrigen.size());
-
+imprime(vOrigen,vAux,vDestino);
 //				system("./ejemplo_gnuplot.sh");
 
 				cout << "==========================================" << endl;

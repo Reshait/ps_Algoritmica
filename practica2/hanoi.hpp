@@ -5,6 +5,13 @@
 #include <string>
 #include <iterator>
 using std::vector;
+using std::string;
+
+struct Torre
+{
+    vector<int> v;
+    string nombre;
+};
 //#include "funcionesGenerales.hpp"
 
 /*
@@ -37,7 +44,7 @@ void mueveDisco(vector<int> &a, vector<int> &b) {
         std::cout << "\n";
     }
 
-    void imprime(vector<int> &a, vector<int> &b, vector<int> &c){
+    void imprime(const vector<int> &a, const vector<int> &b, const vector<int> &c){
         muestra("Orig:\t ", a);
         muestra("Auxi:\t ", b);
         muestra("Dest:\t ", c);
@@ -45,54 +52,67 @@ void mueveDisco(vector<int> &a, vector<int> &b) {
     }
 
 /*
-    void hanoi(vector<int> &a, vector<int> &b, vector<int> &c,int nDiscos) {
-        if (nDiscos == 0)
-            return;
-        //imprime(a,b,c);  
-        hanoi(a, b, c, nDiscos - 1);
-        mueveDisco(a, c);
-        imprime(a,b,c);
-        hanoi(c, a, b, nDiscos - 1);
-    }
-*/
-/*
+void hanoi(int n,int com, int aux, int fin){
 
-void hanoi(int n){
-	if(n==1)
-		cout << "origen..:" << "fin..:" << endl;
-	else{
-		hanoi(n-1,origen,fin,aux);
-		cout << origen << fin << endl;
-		hanoi(n-1,aux,origen,fin);
-	}
+if(n==1){
+printf(“%c->%c”,com,fin);
 }
-
+else{
+hanoi(n-1,com,fin,aux);
+printf(“\n%c->%c\n”,com,fin);
+hanoi(n-1,aux,com,fin);
+}
+}
 */
+
+/*
 void hanoi(vector<int> &vOrigen, vector<int> &vAux, vector<int> &vDestino,int nDiscos){
 
 	if(nDiscos == 1){
-//		mueveDisco(vOrigen, vDestino);
-	    imprime(vOrigen,vAux,vDestino);
+ //       imprime(vOrigen,vAux,vDestino);     
+        mueveDisco(vOrigen, vDestino);   
+ //       imprime(vOrigen,vAux,vDestino);     
+      
 
 	}
 
 	else{
 		hanoi(vOrigen, vDestino, vAux, nDiscos - 1);
-//		mueveDisco(vOrigen, vDestino);
+		mueveDisco(vOrigen, vDestino);
+        if(nDiscos % 2)
+            imprime(vOrigen,vAux,vDestino);             
+        else
+             imprime(vDestino,vAux,vOrigen);                      
 		hanoi(vAux, vOrigen, vDestino, nDiscos - 1);
 	}
 } 
-/*
-   Algorithm Hanoi(disk, source, dest, other)
-   if disk is smallest then
-     move disk from source to dest
-   else
-     Hanoi(next disk, source, other, dest)
-     move disk from source to dest
-     Hanoi(next disk, other, dest, source)
-   fi
 */
 
+void displayTowers() {
+    cout << "src: ";
+    for (vector<int >::const_iterator iter = source.begin(); iter != source.end(); iter++)
+        cout << *iter << " ";
+    cout << " | ";
+    cout << "dest: ";
+    for (vector<int >::const_iterator iter = destin.begin(); iter != destin.end(); iter++)
+        cout << *iter << " ";
+    cout << " | ";
+    cout << "temp: ";
+    for (vector<int >::const_iterator iter = tempo.begin(); iter != tempo.end(); iter++)
+        cout << *iter << " ";
+    cout << endl;
+}
+    
+void hanoi(vector<int> &vOrigen, vector<int> &vAux, vector<int> &vDestino,int nDiscos){
+
+    if (nDiscos > 0) {
+        hanoi(vOrigen, vAux, vDestino, size - 1);
+        vOrigen.push_back(vDestino.back());
+        vDestino.pop_back();
+        displayTowers();
+        hanoiTower(vAux, vDestino, vOrigen, size - 1);
+     }
+}
 /*
 void hanoi(vector<int> &vOrigen, vector<int> &vAux, vector<int> &vDestino, unsigned int &nMovimientos){
 	assert(vOrigen.size() >= 0);
