@@ -22,7 +22,7 @@ int main(){
 	int opcion, desde = 0, hasta = 0;
 
 	//Hanoi
-	vector<int> vOrigen, vDestino, vAux;
+	vector<string> vOrigen, vDestino, vAux;
 	//	unsigned int cuentaMovimientos = 0;
 
 	do{
@@ -43,6 +43,10 @@ int main(){
 		vOrigen.clear();
 		vDestino.clear();
 		vAux.clear();
+
+		vOrigen.push_back("Orig..:");
+		vDestino.push_back("Dest..:");
+		vAux.push_back("Auxi..:");
 
 ///1uitar
 double error;

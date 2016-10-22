@@ -3,9 +3,11 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <sstream>
 #include <iterator>
 using std::vector;
 using std::string;
+using std::stringstream;
 
 struct Torre
 {
@@ -35,6 +37,10 @@ void mueveDisco(vector<int> &a, vector<int> &b) {
 	a.pop_back();
 }
 
+void mueveDisco(vector<string> &a, vector<string> &b) {
+    b.push_back(a.back());
+    a.pop_back();
+}
 
 // sacado de http://codereview.stackexchange.com/questions/116312/towers-of-hanoi-redux
 
@@ -65,29 +71,108 @@ hanoi(n-1,aux,com,fin);
 }
 */
 
+void imprime(const vector<string> &a, const vector<string> &b, const vector<string> &c){
+    string origen = "Orig..:";
+    string auxiliar = "Auxi..:";
+
+    if (a[0].compare(origen) == 0){
+        imprimeVector(a);
+        
+        if (b[0].compare(auxiliar) == 0){
+            imprimeVector(b); 
+            imprimeVector(c);             
+        }
+        else{  
+            imprimeVector(c);  //Este me falla
+            imprimeVector(b); 
+        }
+    }
+
+    else if (b[0].compare(origen) == 0){
+        imprimeVector(b);
+        
+        if (c[0].compare(auxiliar) == 0){
+            imprimeVector(c); 
+            imprimeVector(a);             
+        }
+        else{      
+            imprimeVector(a); 
+            imprimeVector(c); 
+        }
+    } 
+
+    else if (c[0].compare(origen) == 0){
+        imprimeVector(c);
+        
+        if (b[0].compare(auxiliar) == 0){
+            imprimeVector(b); 
+            imprimeVector(a);             
+        }
+        else{      
+            imprimeVector(a); 
+            imprimeVector(b); 
+        }
+    } 
+/*
+    else if(b[0].compare(aux) == 0){
+        for(unsigned int i = 0; i < b.size(); i++)
+            cout << b[i] << "\t";
+        cout << endl;
+    }
+
+    else if(c[0].compare(aux) == 0){
+        for(unsigned int i = 0; i < c.size(); i++)
+            cout << c[i] << "\t";
+        cout << endl;        
+    } 
+
+*/
+    cout << endl;
+}   
+
+void hanoi(vector<string> &vOrigen, vector<string> &vAux, vector<string> &vDestino, int nDiscos){
+    if(nDiscos == 1){
+        mueveDisco(vOrigen, vDestino);   
+        imprime(vOrigen,vAux,vDestino);
+    }
+
+    else{
+        hanoi(vOrigen, vDestino, vAux, nDiscos - 1);
+        mueveDisco(vOrigen, vDestino);  //para nDiscos 2 está moviendo de origen a Auxiliar// Destino = auxiliar cuando nDiscos 2
+        imprime(vOrigen,vAux,vDestino);                         
+        hanoi(vAux, vOrigen, vDestino, nDiscos - 1);             
+    }
+}
+
 /*
 void hanoi(vector<int> &vOrigen, vector<int> &vAux, vector<int> &vDestino,int nDiscos){
 
 	if(nDiscos == 1){
  //       imprime(vOrigen,vAux,vDestino);     
         mueveDisco(vOrigen, vDestino);   
- //       imprime(vOrigen,vAux,vDestino);     
+        imprime(vOrigen,vAux,vDestino);  
+        //else imprime(vAux,vOrigen,vDestino);
       
 
 	}
 
 	else{
 		hanoi(vOrigen, vDestino, vAux, nDiscos - 1);
-		mueveDisco(vOrigen, vDestino);
-        if(nDiscos % 2)
-            imprime(vOrigen,vAux,vDestino);             
+		mueveDisco(vOrigen, vDestino);  //para nDiscos 2 está moviendo de origen a Auxiliar// Destino = auxiliar cuando nDiscos 2
+        if(nDiscos % 2 == 0)
+//            imprime(vOrigen,vAux,vDestino); 
+            imprime(vOrigen,vDestino,vAux);   //Me está imprimiendo destino auxi origen                    
+
         else
-             imprime(vDestino,vAux,vOrigen);                      
-		hanoi(vAux, vOrigen, vDestino, nDiscos - 1);
+//            imprime(vDestino,vAux,vOrigen);   
+            imprime(vOrigen,vAux,vDestino);                                
+		//hanoi(vAux, vOrigen, vDestino, nDiscos - 1);
+        hanoi(vAux, vOrigen, vDestino, nDiscos - 1);
 	}
 } 
 */
 
+/*
 void displayTowers() {
     cout << "src: ";
     for (vector<int >::const_iterator iter = source.begin(); iter != source.end(); iter++)
@@ -102,43 +187,20 @@ void displayTowers() {
         cout << *iter << " ";
     cout << endl;
 }
-    
-void hanoi(vector<int> &vOrigen, vector<int> &vAux, vector<int> &vDestino,int nDiscos){
 
-    if (nDiscos > 0) {
-        hanoi(vOrigen, vAux, vDestino, size - 1);
-        vOrigen.push_back(vDestino.back());
-        vDestino.pop_back();
-        displayTowers();
-        hanoiTower(vAux, vDestino, vOrigen, size - 1);
-     }
-}
-/*
-void hanoi(vector<int> &vOrigen, vector<int> &vAux, vector<int> &vDestino, unsigned int &nMovimientos){
-	assert(vOrigen.size() >= 0);
-	vector<int> vOrigenMenosUno;
-
-	nMovimientos++;
-
-	if(vOrigen.size() == 1){
-		vDestino.push_back(vOrigen[0]);
-		vOrigen.pop_back();
-	}
-	else{
-		vOrigenMenosUno = vOrigen;
-		vOrigenMenosUno.pop_back();
-		hanoi(vOrigenMenosUno, vAux, vDestino, nMovimientos);			
-	}
-	vDestino.push_back(vOrigen[vOrigen.size()-1]);
-	vOrigen.pop_back();
-
-	hanoi(vAux, vOrigen, vDestino, nMovimientos);
-
-}
 */
+
 void rellenaVectorOrigen(int num, vector<int> &vOrigen){
 	for(int i = num; i > 0; i--)
 		vOrigen.push_back(i);
 }
 
+void rellenaVectorOrigen(int num, vector<string> &vOrigen){
+    stringstream aux;
+    for(int i = num; i > 0; i--){
+        aux << i;
+        vOrigen.push_back(aux.str());
+        aux.str(std::string());
+    }
+}
 #endif
