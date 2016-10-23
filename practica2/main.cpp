@@ -190,11 +190,15 @@ double error;
 				pideDatos(valorN);
 
 				rellenaVectorOrigen(valorN, vOrigen);
-//				imprimeVector(vOrigen);
-imprime(vOrigen,vAux,vDestino);
-cout << "--------------------" << endl;
+
+				cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+				cout << endl;
+				cout << "Se parte de las siguientes Torres..:" << endl;
+				imprime(vOrigen,vAux,vDestino);
+				cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+
 				hanoi(vOrigen, vDestino, vAux, vOrigen.size());
-//imprime(vOrigen,vAux,vDestino);
+
 //				system("./ejemplo_gnuplot.sh");
 
 				cout << "==========================================" << endl;
