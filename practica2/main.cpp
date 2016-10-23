@@ -23,7 +23,6 @@ int main(){
 
 	//Hanoi
 	vector<string> vOrigen, vDestino, vAux;
-	int cuentaMovimientos = 0;
 
 	do{
 
@@ -100,7 +99,7 @@ int main(){
 				for(unsigned int i = 0, ni = desde; i < vTiemposObservados.size(); i++, ni ++)
 					fo << ni << " " << vTiemposObservados[i] << " " << vTiemposEstimados[i] << "\n";
 				fo.close();
-				system("./ejemplo_gnuplot.sh");
+				system("./gnuplot.sh");
 
 				//Fin de la opción
 				cout << "==========================================" << endl;
@@ -146,7 +145,7 @@ int main(){
 				for(unsigned int i = 0, ni = desde; i < vTiemposObservados.size(); i++, ni ++)
 					fo << ni << " " << vTiemposObservados[i] << " " << vTiemposEstimados[i] << "\n";
 				fo.close();
-				system("./ejemplo_gnuplot.sh");
+				system("./gnuplot.sh");
 
 				//Fin de la opción
 				cout << "==========================================" << endl;
@@ -190,7 +189,7 @@ int main(){
 				for(unsigned int i = 0, ni = desde; i < vTiemposObservados.size(); i++, ni ++)
 					fo << ni << " " << vTiemposObservados[i] << " " << vTiemposEstimados[i] << "\n";
 				fo.close();
-				system("./ejemplo_gnuplot.sh");
+				system("./gnuplot.sh");
 
 				//Fin de la opción
 				cout << "==========================================" << endl;
@@ -248,7 +247,7 @@ int main(){
 				for(unsigned int i = 0, ni = 3; i < vTiemposObservados.size(); i++, ni ++)
 					fo << ni << " " << vTiemposObservados[i] << " " << vTiemposEstimados[i] << "\n";
 				fo.close();
-				system("./ejemplo_gnuplot.sh");
+				system("./gnuplot.sh");
 
 				//Fin de la opción
 				cout << "==========================================" << endl;
