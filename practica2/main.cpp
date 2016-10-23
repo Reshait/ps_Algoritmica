@@ -48,8 +48,8 @@ int main(){
 		vDestino.push_back("Dest..:");
 		vAux.push_back("Auxi..:");
 
-///1uitar
-double error;
+///quitar
+//double error;
 
 		switch(opcion){
 			
@@ -95,8 +95,14 @@ double error;
 	//cout << "EL error abs. medio es..: " << error << endl;
 //hasta aquí <--
 
-//				system("./ejemplo_gnuplot.sh");
+				//Imprimiendo en Datos.txt los resultados
+				fo.open("Datos.txt"); 
+				for(unsigned int i = 0, ni = desde; i < vTiemposObservados.size(); i++, ni ++)
+					fo << ni << " " << vTiemposObservados[i] << " " << vTiemposEstimados[i] << "\n";
+				fo.close();
+				system("./ejemplo_gnuplot.sh");
 
+				//Fin de la opción
 				cout << "==========================================" << endl;
 				cout << "Presione la tecla 'Intro' para continuar..." << endl;
 				cin.ignore().get();
@@ -135,8 +141,14 @@ double error;
 					vTiemposEstimados.push_back(tiempoEstimado(vAs, i));
 				imprimeVector(vTiemposEstimados);		
 
-//				system("./ejemplo_gnuplot.sh");
+				//Imprimiendo en Datos.txt los resultados
+				fo.open("Datos.txt"); 
+				for(unsigned int i = 0, ni = desde; i < vTiemposObservados.size(); i++, ni ++)
+					fo << ni << " " << vTiemposObservados[i] << " " << vTiemposEstimados[i] << "\n";
+				fo.close();
+				system("./ejemplo_gnuplot.sh");
 
+				//Fin de la opción
 				cout << "==========================================" << endl;
 				cout << "Presione la tecla 'Intro' para continuar..." << endl;
 				cin.ignore().get();
@@ -173,8 +185,14 @@ double error;
 					vTiemposEstimados.push_back(tiempoEstimado(vAs, i));
 				imprimeVector(vTiemposEstimados);
 
-//				system("./ejemplo_gnuplot.sh");
+				//Imprimiendo en Datos.txt los resultados
+				fo.open("Datos.txt"); 
+				for(unsigned int i = 0, ni = desde; i < vTiemposObservados.size(); i++, ni ++)
+					fo << ni << " " << vTiemposObservados[i] << " " << vTiemposEstimados[i] << "\n";
+				fo.close();
+				system("./ejemplo_gnuplot.sh");
 
+				//Fin de la opción
 				cout << "==========================================" << endl;
 				cout << "Presione la tecla 'Intro' para continuar..." << endl;
 				cin.ignore().get();
@@ -189,18 +207,50 @@ double error;
 
 				pideDatos(valorN);
 
-				rellenaVectorOrigen(valorN, vOrigen);
+				for(int i = 3; i <= valorN; i++){
+					//Inicializando los vectores
+					vOrigen.clear();
+					vDestino.clear();
+					vAux.clear();
 
-				cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
-				cout << endl;
-				cout << "Se parte de las siguientes Torres..:" << endl;
-				imprime(vOrigen,vAux,vDestino);
-				cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+					vOrigen.push_back("Orig..:");
+					vDestino.push_back("Dest..:");
+					vAux.push_back("Auxi..:");	
+					//Terminada la inicialización
 
-				hanoi(vOrigen, vDestino, vAux, vOrigen.size());
+					rellenaVectorOrigen(i, vOrigen);
 
-//				system("./ejemplo_gnuplot.sh");
+					cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+					cout << endl;
+					cout << "Se parte de las siguientes Torres..:" << endl;
+					imprime(vOrigen,vAux,vDestino);
+					cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 
+					Cronometro.start();
+					hanoi(vOrigen, vDestino, vAux, vOrigen.size());
+					Cronometro.stop();
+					vTiemposObservados.push_back(Cronometro.elapsed());											
+				}
+
+				cout << "==========================================" << endl;
+				cout << "El vector de tiempos observados es..: " << endl;
+				imprimeVector(vTiemposObservados);
+
+				cramer(0, 3, valorN, 1, 4, vTiemposObservados, vAs);
+
+				cout << "Los tiempos estimados son..: " << endl;
+				for(int i = 3; i <= valorN; i ++)
+					vTiemposEstimados.push_back(tiempoEstimado(vAs, i));
+				imprimeVector(vTiemposEstimados);
+
+				//Imprimiendo en Datos.txt los resultados
+				fo.open("Datos.txt"); 
+				for(unsigned int i = 0, ni = 3; i < vTiemposObservados.size(); i++, ni ++)
+					fo << ni << " " << vTiemposObservados[i] << " " << vTiemposEstimados[i] << "\n";
+				fo.close();
+				system("./ejemplo_gnuplot.sh");
+
+				//Fin de la opción
 				cout << "==========================================" << endl;
 				cout << "Presione la tecla 'Intro' para continuar..." << endl;
 				cin.ignore().get();
