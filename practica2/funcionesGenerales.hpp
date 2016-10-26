@@ -1,6 +1,8 @@
 #ifndef __FUNCIONES_GENERALES__
 #define __FUNCIONES_GENERALES__
 
+#include <cmath>
+
 using std::cout;
 using std::cin;
 using std::vector;
@@ -97,5 +99,86 @@ double calculaDeterminante(vector<vector<double> > matriz){
         return determ;
 }
 
+double tiempoEstimado(const vector<double> &vAs, const int &Ni){
+	double tiempoEstimado = 0.0;
+
+	for(unsigned int i = 0; i < vAs.size(); i++)
+		tiempoEstimado += vAs[i] * pow(Ni,i);
+
+	return tiempoEstimado;
+}
+
+void microSegundosAanios(double microSegRecibidos){
+  
+//	double microsegundos = 0.0;
+	double segundos = 0.0;  
+	double minutos = 0.0;
+	double horas = 0.0;
+	double dias = 0.0;
+	double meses = 0.0;
+	double anios = 0.0;
+  
+	if(microSegRecibidos >= pow(10,6)){
+		segundos = microSegRecibidos/pow(10,6);     
+//		microsegundos = fmod(microSegRecibidos, pow(10,6)); 
+	  
+		if(segundos >= 60){
+	    	minutos = segundos/60;
+	    	segundos = fmod(segundos, 60);  
+
+	    	if(minutos >= 60){
+	    		horas = minutos/60;
+	      		minutos = fmod(minutos, 60);
+
+	      		if(horas >= 24){
+	        		dias = horas/24;
+	        		horas = fmod(horas, 24);
+	          
+	        		if(dias >= 30){
+	          			meses = dias/30;
+	          			dias = fmod(dias, 30);
+	    
+	          			if(meses >= 12){
+	            			anios = meses/12;
+	            			meses = fmod(meses, 12);
+	          			}
+	        
+	        		} 
+	      
+	      		}
+	    
+	    	}   
+	  
+	  	} 
+  
+	}
+
+	cout << "Los microsegundos " << microSegRecibidos << " equivalen a..:" << endl;
+	cout << (int)anios << " años, " << (int)meses << " meses, " <<  (int)dias << " días";
+ 	cout  << (int)horas << " horas, "  << (int)minutos << " minutos, " <<  (int)segundos << " segundos";
+ 	cout << endl;
+
+}
+
+void prediccion(vector<double> vAs){
+	bool quierePredecir = 0;
+	int nPredicho = 0;
+	
+	do{
+		cout << endl;
+		cout << "¿Desea realizar una predicción?" << endl;
+		cout << "0.- Para terminar" << endl;
+		cout << "1.- Si quiere realizar una predicción para un determinado N" << endl;
+		cout << "\tIntroduzca una opción >> ";
+		cin >> quierePredecir;
+	}while(quierePredecir > 1 && quierePredecir < 0);
+
+	if(quierePredecir){
+		cout << "Introduzca el valor de n a predecir..: " << endl;
+		cin >> nPredicho;
+//		tiempoEstimado(vAs, nPredicho);
+		microSegundosAanios(tiempoEstimado(vAs, nPredicho));
+	}	
+}
 
 #endif

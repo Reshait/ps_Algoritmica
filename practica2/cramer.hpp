@@ -50,7 +50,7 @@ void cramer(bool esFibonacci, const int &valorMin,const int &valorMax,const int 
 	}
 }
 
-
+/*
 double tiempoEstimado(const vector<double> &vAs, const int &Ni){
 	double tiempoEstimado = 0.0;
 
@@ -59,7 +59,7 @@ double tiempoEstimado(const vector<double> &vAs, const int &Ni){
 
 	return tiempoEstimado;
 }
-
+*/
 
 int fibonacci(int n){
     if(n == 0 || n == 1)

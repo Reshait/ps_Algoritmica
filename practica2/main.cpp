@@ -4,11 +4,11 @@
 #include <vector>
 #include <fstream>
 #include "cabecera.hpp"
-#include "funcionesGenerales.hpp"
 #include "cramer.hpp"
 #include "tiempo.hpp"
 #include "combinatorio.hpp"
 #include "hanoi.hpp"
+#include "funcionesGenerales.hpp"
 
 using namespace std;
 
@@ -23,6 +23,7 @@ int main(){
 
 	//Hanoi
 	vector<string> vOrigen, vDestino, vAux;
+	bool quiereImprimir = false;
 
 	do{
 
@@ -101,6 +102,8 @@ int main(){
 				fo.close();
 				system("./gnuplot.sh");
 
+				prediccion(vAs);
+
 				//Fin de la opción
 				cout << "==========================================" << endl;
 				cout << "Presione la tecla 'Intro' para continuar..." << endl;
@@ -147,6 +150,8 @@ int main(){
 				fo.close();
 				system("./gnuplot.sh");
 
+				prediccion(vAs);
+
 				//Fin de la opción
 				cout << "==========================================" << endl;
 				cout << "Presione la tecla 'Intro' para continuar..." << endl;
@@ -191,6 +196,8 @@ int main(){
 				fo.close();
 				system("./gnuplot.sh");
 
+				prediccion(vAs);
+
 				//Fin de la opción
 				cout << "==========================================" << endl;
 				cout << "Presione la tecla 'Intro' para continuar..." << endl;
@@ -206,6 +213,11 @@ int main(){
 
 				pideDatos(valorN);
 
+				cout << "¿Quiere observar la representación por pantalla? " << endl;
+				cout << "0.- NO" << endl;
+				cout << "1.- SI" << endl;
+				cin >> quiereImprimir;
+
 				for(int i = 3; i <= valorN; i++){
 					//Inicializando los vectores
 					vOrigen.clear();
@@ -219,14 +231,16 @@ int main(){
 
 					rellenaVectorOrigen(i, vOrigen);
 
-					cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
-					cout << endl;
-					cout << "Se parte de las siguientes Torres..:" << endl;
-					imprime(vOrigen,vAux,vDestino);
-					cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+					if(quiereImprimir){
+						cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+						cout << endl;
+						cout << "Se parte de las siguientes Torres..:" << endl;
+						imprime(vOrigen,vAux,vDestino);
+						cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+					}
 
 					Cronometro.start();
-					hanoi(vOrigen, vDestino, vAux, vOrigen.size());
+					hanoi(vOrigen, vDestino, vAux, vOrigen.size(), quiereImprimir);
 					Cronometro.stop();
 					vTiemposObservados.push_back(Cronometro.elapsed());											
 				}
@@ -248,6 +262,8 @@ int main(){
 					fo << ni << " " << vTiemposObservados[i] << " " << vTiemposEstimados[i] << "\n";
 				fo.close();
 				system("./gnuplot.sh");
+
+				prediccion(vAs);
 
 				//Fin de la opción
 				cout << "==========================================" << endl;

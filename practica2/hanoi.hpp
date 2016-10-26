@@ -74,18 +74,20 @@ void imprime(const vector<string> &a, const vector<string> &b, const vector<stri
 }   
 
 
-void hanoi(vector<string> &vOrigen, vector<string> &vAux, vector<string> &vDestino, int nDiscos){
+void hanoi(vector<string> &vOrigen, vector<string> &vAux, vector<string> &vDestino, int nDiscos, bool quiereImprimir){
     if(nDiscos == 1){
         mueveDisco(vOrigen, vDestino); 
-        imprime(vOrigen,vAux,vDestino);
+        if(quiereImprimir)
+            imprime(vOrigen,vAux,vDestino);
     }
 
     else{
-        hanoi(vOrigen, vDestino, vAux, nDiscos - 1);
+        hanoi(vOrigen, vDestino, vAux, nDiscos - 1, quiereImprimir);
         if(vOrigen.size() > 1){
             mueveDisco(vOrigen, vDestino);  //para nDiscos 2 está moviendo de origen a Auxiliar// Destino = auxiliar cuando nDiscos 2
-            imprime(vOrigen,vAux,vDestino);     
-            hanoi(vAux, vOrigen, vDestino, nDiscos - 1); 
+            if(quiereImprimir)
+                imprime(vOrigen,vAux,vDestino);     
+            hanoi(vAux, vOrigen, vDestino, nDiscos - 1, quiereImprimir); 
         }            
     }
 }
