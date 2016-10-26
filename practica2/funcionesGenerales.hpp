@@ -154,7 +154,12 @@ void microSegundosAanios(double microSegRecibidos){
 	}
 
 	cout << "Los microsegundos " << microSegRecibidos << " equivalen a..:" << endl;
-	cout << (int)anios << " años, " << (int)meses << " meses, " <<  (int)dias << " días";
+	if(anios > 0)
+		cout << (int)anios << " años, ";
+	if(meses > 0)
+		cout << (int)meses << " meses, ";
+	if(dias > 0)
+		cout << (int)dias << " días, ";
  	cout  << (int)horas << " horas, "  << (int)minutos << " minutos, " <<  (int)segundos << " segundos";
  	cout << endl;
 
@@ -171,7 +176,7 @@ void prediccion(vector<double> vAs){
 		cout << "1.- Si quiere realizar una predicción para un determinado N" << endl;
 		cout << "\tIntroduzca una opción >> ";
 		cin >> quierePredecir;
-	}while(quierePredecir > 1 && quierePredecir < 0);
+	}while(quierePredecir != 1 && quierePredecir != 0);
 
 	if(quierePredecir){
 		cout << "Introduzca el valor de n a predecir..: " << endl;
