@@ -166,7 +166,7 @@ void microSegundosAanios(double microSegRecibidos){
 }
 
 void prediccion(vector<double> vAs){
-	bool quierePredecir = 0;
+	int quierePredecir = 0;
 	int nPredicho = 0;
 	
 	do{
