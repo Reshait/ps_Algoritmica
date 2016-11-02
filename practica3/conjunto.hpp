@@ -93,6 +93,8 @@ T Conjunto<T>::ultimoElemento(){
 
 template <class T>
 void Conjunto<T>::imprime(){
+	cout << "Su conjunto de elementos es..:" << endl;
+	
 	for(int i = 0; i < this->tamanio(); i++)
 		cout << this->_v[i] << "\t"; 
 	cout << endl;     
