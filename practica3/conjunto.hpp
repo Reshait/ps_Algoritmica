@@ -49,6 +49,9 @@ class Conjunto{
 			if(posicion < 0)
 				cout << "Error: la posición a eliminar debe ser 0 o mayor" << endl;
 
+			else if(posicion > this->tamanio)
+				cout << "Error: la posición a eliminar debe ser menor que" << this->tamanio()-1 << endl;
+
 			else{
 				for(int i = posicion; i < this->tamanio(); i++){
 					_v[i-1] = _v[i];
@@ -85,7 +88,6 @@ T Conjunto<T>::ultimoElemento(){
 		cout << "ERROR. El conjunto de elementos está vacío" << endl;
 	else
 		return _v.back();
-
 }
 
 
@@ -97,26 +99,14 @@ void Conjunto<T>::imprime(){
 }
 
 
-/*! 
-	\fn    		void MaximoMinimo(const std::vector<int> &v, int n, int i, int j, int &maximo, int &minimo, int &llamadas_recursivas);
-	\brief     	Función que calcula el maximo y el minimo elemento de un vector v, implementado usando 'divide y vencerás'
-	\param     	v Vector de elementos
-	\param     	nElementos Elementos del vector
-	\param     	i indice inferior
-	\param     	j indice superior
-	\param     	minimo[ref] minimo elemento del vector v desde i hasta j
-	\param     	maximo[ref] maximo elemento del vector v desde i hasta j
-	\param		llamadas_recursivas[ref] numero de llamadas recursivas que genera la función recursiva
-
-*/
 template <class T>
 T Conjunto<T>::Minimo(const T a, const T b){
 	if(a < b)
 		return a;
 	else
 		return b;
-
 }
+
 
 template <class T>
 T Conjunto<T>::Maximo(const T a, const T b){
@@ -124,7 +114,6 @@ T Conjunto<T>::Maximo(const T a, const T b){
 		return a;
 	else
 		return b;
-
 }
 
 
@@ -153,7 +142,6 @@ void Conjunto<T>::MaximoMinimo(int i, int j, int &maximo, int &minimo, int &llam
 
 		else{
 			int mitad = (i+j)/2;
-//			cout << i << " y " << j << endl;
 
 			llamadas_recursivas++;
 			MaximoMinimo(i,mitad,maximo1,minimo1,llamadas_recursivas);
