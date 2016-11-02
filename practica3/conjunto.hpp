@@ -5,8 +5,9 @@
 #include <cstdlib>
 #include <iostream>
 
-template <class T> class Conjunto{
+class Conjunto{
 	private:
+		template <class T> 
 		vector<T> _v;
 		int _nEle;
 		
@@ -38,9 +39,6 @@ template <class T> class Conjunto{
 	\param		llamadas_recursivas[ref] numero de llamadas recursivas que genera la función recursiva
 
 */
-void MaximoMinimo(const std::vector<int> &v, int nElementos, int indiceInferior, int indiceSuperior, int &maximo, int &minimo, int &llamadas_recursivas);
 
-int Maximo (const int numero1, const int numero2);
-int Minimo (const int numero1, const int numero2);
 
 #endif
