@@ -46,8 +46,11 @@ int menu(){
         cout << "0.- Para Salir." << endl;
         
         if(primeraVez == false){
-          if(opcion != 1 && opcion != 0)
+          if(opcion != 1 && opcion != 0){
+              system("tput setaf 1");
               cout << "Error: Debe de introducir 0 o 1" << endl;
+              system("tput sgr0");
+          }
         }
         
         cout << "\tIntroduzca una opción >> ";
