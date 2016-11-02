@@ -7,30 +7,40 @@
 
 using namespace std;
 
-
-
 int main()
 {
-	int nLlamadas = 0, min = 0, max = 0, nElementos, i = 0, j = 0;
-	srand(time(NULL));
+	int nLlamadas = 0, min = 0, max = 0, nElementos, opcion;
 
-	cabecera(3);
-	
-	pideNumeroElementos(nElementos);
+	do{
 
-	Conjunto<int> ConjuntoEnteros(nElementos);
+		cabecera(3);
+		opcion = menu();
 
-	ConjuntoEnteros.imprime();
+		if(opcion){
+			cabecera(3);
 
-	ConjuntoEnteros.MaximoMinimo(i,j,max,min,nLlamadas);
-//	ConjuntoEnteros.eliminaPosicion(3);
+			pideNumeroElementos(nElementos);
 
-//	ConjuntoEnteros.imprime();
+			Conjunto<int> ConjuntoEnteros(nElementos);
 
-//	MaximoMinimo(v, nElementos, 0, nElementos-1, max, min, nLlamadas); 
+			ConjuntoEnteros.imprime();
 
-	cout << "El maximo es " << max << " y el minimo " << min << endl;
-	cout << "Se han realiado " << nLlamadas << " llamadas recursivas" << endl;
-	
+			ConjuntoEnteros.MaximoMinimo(0, nElementos-1, max, min, nLlamadas);
+
+			cout << "El Maximo es..:\t" << max << endl;
+			cout << "El Mínimo es..:\t" << min << endl;
+			cout << "Llamadas R ..:\t" << nLlamadas << endl;
+				
+			introParaContinuar();
+
+		}
+
+		else{	
+			system("clear");
+			cabecera(3);
+			cout << "Saliendo ..." << endl;
+		}
+
+	}while(opcion != 0);
 
 }

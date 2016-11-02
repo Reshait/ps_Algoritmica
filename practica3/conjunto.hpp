@@ -153,7 +153,7 @@ void Conjunto<T>::MaximoMinimo(int i, int j, int &maximo, int &minimo, int &llam
 
 		else{
 			int mitad = (i+j)/2;
-			cout << i << " y " << j << endl;
+//			cout << i << " y " << j << endl;
 
 			llamadas_recursivas++;
 			MaximoMinimo(i,mitad,maximo1,minimo1,llamadas_recursivas);
