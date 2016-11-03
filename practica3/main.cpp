@@ -30,7 +30,29 @@ int main()
 			cout << "El Maximo es..:\t" << max << endl;
 			cout << "El Mínimo es..:\t" << min << endl;
 			cout << "Llamadas R ..:\t" << nLlamadas << endl;
-				
+
+			if(ConjuntoEnteros.compruebaMaximoEsMaximo(max)){
+				system("tput setaf 2");	
+				cout << "Se confirma que el máximo escogido es el máximo del conjunto" << endl;
+				system("tput sgr0");
+			}
+			else{
+            	system("tput setaf 1");				
+				cout << "El máximo escogido NO es el máximo del conjunto" << endl;
+				system("tput sgr0");
+			}
+
+
+			if(ConjuntoEnteros.compruebaMinimoEsMinimo(min)){
+				system("tput setaf 2");	
+				cout << "Se confirma que el minimo escogido es el minimo del conjunto" << endl;
+				system("tput sgr0");
+			}
+			else{
+				system("tput setaf 1");
+				cout << "El mínimo escogido NO es el mínimo del conjunto" << endl;
+				system("tput sgr0");
+			}							
 			introParaContinuar();
 
 		}

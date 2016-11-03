@@ -66,6 +66,20 @@ class Conjunto{
 
 		void MaximoMinimo(int i, int j, int &maximo, int &minimo, int &llamadas_recursivas);
 
+		bool compruebaMaximoEsMaximo(T const &maximo){
+			for(int i = 0; i < this->tamanio(); i++){
+				if(maximo < _v[i])
+					return false;					
+			}
+			return true;
+		}
+		bool compruebaMinimoEsMinimo(T const &minimo){
+			for(int i = 0; i < this->tamanio(); i++){
+				if(minimo > _v[i])
+					return false;					
+			}
+			return true;
+		}		
 };
 
 
