@@ -23,12 +23,8 @@ int main(){
 	do{
 
 		cabecera(1);
-		cout << "1.- Para realizar el apartado de las matrices." << endl;
-		cout << "2.- Para realizar el apartado de fibonacci." << endl;
-		cout << "0.- Para Salir." << endl;
-		cout << "\tIntroduzca una opción >> ";
-		cin >> opcion;
-		getchar();
+
+		opcion = menu();
 
 		vTiemposObservados.clear();
 		vTiemposEstimados.clear();
@@ -38,7 +34,6 @@ int main(){
 			
 			case 1:
 
-
 				cabecera(1);
 				cout << "\t┏━━━━━━━━━━━━━━━━━━━━━━┓" << endl;
 				cout << "\t┃ APARTADO DE MATRICES ┃" << endl;	
@@ -46,16 +41,7 @@ int main(){
 				
 				pideDatos(valorMin, valorMax, valorInc);
 
-				for(int i = valorMin; i <= valorMax; i += valorInc){
-					Cronometro.start();
-					generaMatrizValoresAleatorios(i);
-					Cronometro.stop();					
-					
-					cout << "Han transcurrido..:\t" << Cronometro.elapsed() << " µs" << endl;
-					
-					vTiemposObservados.push_back(Cronometro.elapsed());		
-					cout << endl;
-				}
+				rellenaTiemposObservados(valorMin,valorMax,valorInc,vTiemposObservados);
 
 				cout << "El vector de tiempos observados es..: " << endl;
 				imprimeVector(vTiemposObservados);
@@ -78,9 +64,7 @@ int main(){
 
 				system("./ejemplo_gnuplot.sh");
 
-				cout << "==========================================" << endl;
-				cout << "Presione la tecla 'Intro' para continuar..." << endl;
-				cin.ignore().get();
+				introParaContinuar();
 
 				break;
 
@@ -125,9 +109,7 @@ int main(){
 
 				system("./ejemplo_gnuplot.sh");
 
-				cout << "==========================================" << endl;
-				cout << "Presione la tecla 'Intro' para continuar..." << endl;
-				cin.ignore().get();
+				introParaContinuar();
 
 				break;
 
@@ -141,8 +123,7 @@ int main(){
 			default:
 				cabecera(1);
 				cout << "Opción introducida incorrecta." << endl;
-				cout << "Pulse intro para continuar..." << endl;
-				cin.ignore().get();
+				introParaContinuar();
 				break;	
 		}
 

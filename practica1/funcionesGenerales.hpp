@@ -1,6 +1,8 @@
 #ifndef __FUNCIONES_GENERALES__
 #define __FUNCIONES_GENERALES__
 
+#include "tiempo.hpp"
+
 using std::cout;
 using std::cin;
 using std::vector;
@@ -63,53 +65,25 @@ void imprimeMatriz(const vector<vector<double> > &matriz){
 
 
 double calculaDeterminante(vector<vector<double> > matriz){
-/*	double determinante = 0, fProduct = 0;
 
-	if ( matriz.size() == 2){
-	    determinante = matriz[0][0] * matriz[1][1] - matriz[1][0] * matriz[0][1];
-	}
-		    
-	else if (matriz.size() == 1)
-		determinante = matriz[0][0];
+    double factor, determ;
+    int i,j,k,n = matriz.size();
 
-	else {
-	    for (unsigned int i = 0; i < matriz.size(); i++){
-	        //  Multiplicacion de valores verticales de izquierda a derecha...
-	        fProduct = 1.0;
-	        for (unsigned int j = 0; j < matriz.size(); j++)
-	            fProduct *= matriz[(i + j) % matriz.size()][j];
-	        determinante += fProduct;
-		     
-	        //  Multiplicacion de valores verticales de derecha a izquierda...
-	        fProduct = 1.0;
-	        for (unsigned int j = 0; j < matriz.size(); j++)
-	            fProduct *= matriz[(matriz.size() - 1) - ((i + j) % matriz.size())][j];
-	        determinante -= fProduct;
-	    }
-	}
-		     
-	return determinante;	
-*/
-        double factor, determ;
-        int i,j,k,n = matriz.size();
-
-        for (k = 0; k < n - 1; k++) {   
-            for (i = k+1; i < n;  i++) {
-                factor = matriz[i][k]/matriz[k][k];
-                for (j = k+1; j < n ; j++) {
-                    matriz[i][j] = matriz[i][j] - factor * matriz[k][j];
-                }
-       
+    for (k = 0; k < n - 1; k++) {   
+        for (i = k+1; i < n;  i++) {
+            factor = matriz[i][k]/matriz[k][k];
+            for (j = k+1; j < n ; j++) {
+                matriz[i][j] = matriz[i][j] - factor * matriz[k][j];
             }
-
         }
+    }
 
-        determ = 1.;
+    determ = 1.;
 
-        for (i = 0; i < n; i++) 
-            determ = determ * matriz[i][i];
+    for (i = 0; i < n; i++) 
+        determ = determ * matriz[i][i];
 
-        return determ;
+    return determ;
 }
 
 void generaMatrizValoresAleatorios(int tam){
@@ -119,10 +93,24 @@ void generaMatrizValoresAleatorios(int tam){
 		for(int j = 0; j < tam; j++)
 			matriz[i][j] = -10+((double)rand() /RAND_MAX) * (20);
 
-//	imprimeMatriz(matriz);
-
 	cout << "Determinante ..:\t" << calculaDeterminante(matriz) << endl;
-
 }
+
+
+void rellenaTiemposObservados(const int &valorMin,const int &valorMax,const int &valorInc,vector<double> &vTiemposObservados){
+	Clock Cronometro;
+
+	for(int i = valorMin; i <= valorMax; i += valorInc){
+		Cronometro.start();
+		generaMatrizValoresAleatorios(i);
+		Cronometro.stop();					
+				
+		cout << "Han transcurrido..:\t" << Cronometro.elapsed() << " µs" << endl;
+					
+		vTiemposObservados.push_back(Cronometro.elapsed());		
+		cout << endl;
+	}	
+}
+
 
 #endif
