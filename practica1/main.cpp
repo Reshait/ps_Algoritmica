@@ -13,7 +13,7 @@
 using namespace std;
 
 int main(){
-	std::ofstream fo;
+//	std::ofstream fo;
 	Clock Cronometro;
 	srand(time(NULL));
 	
@@ -41,28 +41,21 @@ int main(){
 				
 				pideDatos(valorMin, valorMax, valorInc);
 
-				rellenaTiemposObservados(valorMin,valorMax,valorInc,vTiemposObservados);
+				rellenaTiemposObservados(1, valorMin,valorMax,valorInc,vTiemposObservados);
 
 				cout << "El vector de tiempos observados es..: " << endl;
 				imprimeVector(vTiemposObservados);
-				cout << endl;
 
 				cramer(0, valorMin, valorMax, valorInc, 4, vTiemposObservados, vAs);
 
-				cout << "Los tiempos estimados son..: " << endl;
-				for(int i = valorMin; i <= valorMax; i += valorInc){
-					vTiemposEstimados.push_back(tiempoEstimado(vAs, i));
-					cout << tiempoEstimado(vAs, i) << "\t";
-				}
+				calculaTiemposEstimados(valorMin, valorMax, valorInc, vTiemposEstimados, vAs);
 
-				cout << endl;
+				cout << "El vector de tiempos estimados es..: " << endl;
+				imprimeVector(vTiemposEstimados);
 
-				fo.open("Datos.txt"); 
-				for(unsigned int i = 0, ni = valorMin; i < vTiemposObservados.size(); i++, ni += valorInc)
-					fo << ni << " " << vTiemposObservados[i] << " " << vTiemposEstimados[i] << "\n";
-				fo.close();
+				imprimeResultadosEnFichero(valorMin, valorInc, vTiemposObservados, vTiemposEstimados);
 
-				system("./ejemplo_gnuplot.sh");
+				system("./gnuplot.sh");
 
 				introParaContinuar();
 
@@ -77,44 +70,31 @@ int main(){
 
 				pideDatos(valorMin, valorMax, valorInc);
 
-				for(int i = valorMin; i <= valorMax; i += valorInc){
-					Cronometro.start();
-					cout << "El valor resultante a Fibonacci " << i << " es..: " << fibonacci(i) << endl;		
-					Cronometro.stop();					
-					
-					cout << "Han transcurrido..:\t" << Cronometro.elapsed() << " µs" << endl;
-					
-					vTiemposObservados.push_back(Cronometro.elapsed());		
-					cout << endl;
-				}
+				rellenaTiemposObservados(2, valorMin,valorMax,valorInc,vTiemposObservados);
 
 				cout << "El vector de tiempos observados es..: " << endl;
 				imprimeVector(vTiemposObservados);
-				cout << endl;
 
 				cramer(1,  valorMin, valorMax, valorInc, 2, vTiemposObservados, vAs);
 
 				cout << "Los tiempos estimados son..: " << endl;
-				for(int i = valorMin, j = 0; i <= valorMax; i += valorInc, j++){
-					vTiemposEstimados.push_back( std::abs(vAs[0] + vAs[1] * pow(2,i)) );
-					cout << std::abs(vAs[0] + vAs[1] * pow(2,i)) << "\t";
+				for(int i = valorMin; i <= valorMax; i += valorInc){
+					vTiemposEstimados.push_back( vAs[0] + vAs[1] * pow(2,i) );
 				}
 
-				cout << endl;
+//				calculaTiemposEstimados(pow(2,valorMin), pow(2,valorMax), valorInc, vTiemposEstimados, vAs);
 
-				fo.open("Datos.txt"); 
-				for(unsigned int i = 0, ni = valorMin; i < vTiemposObservados.size(); i++, ni += valorInc)
-					fo << ni << " " << vTiemposObservados[i] << " " << vTiemposEstimados[i] << "\n";
-				fo.close();
+				imprimeVector(vTiemposEstimados);
 
-				system("./ejemplo_gnuplot.sh");
+				imprimeResultadosEnFichero(valorMin, valorInc, vTiemposObservados, vTiemposEstimados);
+
+				system("./gnuplot.sh");
 
 				introParaContinuar();
 
 				break;
 
 			case 0:
-				system("clear");
 				cabecera(1);
 
 				cout << "Saliendo ..." << endl;

@@ -1,6 +1,7 @@
 #ifndef __FUNCIONES_GENERALES__
 #define __FUNCIONES_GENERALES__
 
+#include <cmath>
 #include "tiempo.hpp"
 
 using std::cout;
@@ -36,7 +37,9 @@ void pideDatos(int &valorMin, int &valorMax, int &valorInc){
     */
 void imprimeVector(const std::vector<double> &vectorTiempos){
 	for(unsigned int i = 0; i < vectorTiempos.size(); i++)
-		cout << vectorTiempos.at(i) << "\t";      
+		cout << vectorTiempos.at(i) << "\t";
+
+	cout << endl;      
 }
 
 
@@ -44,6 +47,14 @@ void copiaMatriz(const vector<vector<double> > &original, vector<vector<double> 
 	for(unsigned int i= 0; i < original.size(); i ++)
 		for(unsigned int j = 0; j < original.size(); j++)
 			copia[i][j] = original[i][j];
+}
+
+
+int fibonacci(int n){
+    if(n == 0 || n == 1)
+       return n;
+    else
+       return fibonacci(n - 2) + fibonacci(n - 1);
 }
 
 
@@ -97,13 +108,20 @@ void generaMatrizValoresAleatorios(int tam){
 }
 
 
-void rellenaTiemposObservados(const int &valorMin,const int &valorMax,const int &valorInc,vector<double> &vTiemposObservados){
+void rellenaTiemposObservados(const int apartado, const int &valorMin,const int &valorMax,const int &valorInc,vector<double> &vTiemposObservados){
 	Clock Cronometro;
 
 	for(int i = valorMin; i <= valorMax; i += valorInc){
-		Cronometro.start();
-		generaMatrizValoresAleatorios(i);
-		Cronometro.stop();					
+		if(apartado == 1){
+			Cronometro.start();
+			generaMatrizValoresAleatorios(i);
+			Cronometro.stop();					
+		}
+		else{
+			Cronometro.start();
+			cout << "El valor resultante a Fibonacci " << i << " es..: " << fibonacci(i) << endl;		
+			Cronometro.stop();					
+		}
 				
 		cout << "Han transcurrido..:\t" << Cronometro.elapsed() << " µs" << endl;
 					
@@ -113,4 +131,31 @@ void rellenaTiemposObservados(const int &valorMin,const int &valorMax,const int 
 }
 
 
+double tiempoEstimado(const vector<double> &vAs, const int &Ni){
+	double tiempoEstimado = 0.0;
+
+	for(unsigned int i = 0; i < vAs.size(); i++)
+		tiempoEstimado += vAs[i] * pow(Ni,i);
+
+	return tiempoEstimado;
+}
+
+
+void calculaTiemposEstimados(const int &valorMin, const int &valorMax, const int &valorInc, vector<double> &vTiemposEstimados, vector<double> &vAs){
+	for(int i = valorMin; i <= valorMax; i += valorInc){
+		vTiemposEstimados.push_back(tiempoEstimado(vAs, i));
+	}
+}
+
+
+void imprimeResultadosEnFichero(const int &valorMin, const int &valorInc, const vector<double> &vTiemposObservados, const vector<double> &vTiemposEstimados){
+	std::ofstream fo;
+
+	fo.open("Datos.txt"); 
+	
+	for(unsigned int i = 0, ni = valorMin; i < vTiemposObservados.size(); i++, ni += valorInc)
+		fo << ni << " " << vTiemposObservados[i] << " " << vTiemposEstimados[i] << "\n";
+	
+	fo.close();	
+}
 #endif
