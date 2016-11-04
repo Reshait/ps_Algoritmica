@@ -6,7 +6,7 @@ all: principal clean
 principal: $(OBJECTS)
 	g++ $(OBJECTS) -o ejecutable.out
 
-main.o: main.cpp cabecera.hpp funcionesGenerales.hpp tiempo.hpp cramer.hpp
+main.o: main.cpp cabecera.hpp funcionesGenerales.hpp tiempo.hpp cramer.hpp estadisticos.hpp
 	g++ $(CPPFLAGS) main.cpp 
 
 clean:

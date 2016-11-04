@@ -32,6 +32,13 @@ void pideDatos(int &valorMin, int &valorMax, int &valorInc){
 
 }
 
+void pideDatoParaPredecir(int &prediccion){
+	do{
+		cout << "Introduzca el valor para el que quiere predecir..:\t";
+		cin >> prediccion;
+	}while(prediccion <= 0);	
+}
+
 
     /*!\brief Imprime vector de tiempos
     */
@@ -131,15 +138,32 @@ void rellenaTiemposObservados(const int apartado, const int &valorMin,const int 
 }
 
 
+
 double tiempoEstimado(const vector<double> &vAs, const int &Ni){
 	double tiempoEstimado = 0.0;
 
 	for(unsigned int i = 0; i < vAs.size(); i++)
-		tiempoEstimado += vAs[i] * pow(Ni,i);
+		tiempoEstimado += std::abs(vAs[i] * pow(Ni,i));
 
 	return tiempoEstimado;
 }
 
+/*
+double tiempoEstimado(const int apartado, const vector<double> &vAs, const int &Ni){
+	double tiempoEstimado = 0.0;
+
+	if(apartado == 1){ // Matrices
+		for(unsigned int i = 0; i < vAs.size(); i++)
+			tiempoEstimado += std::abs(vAs[i] * pow(Ni,i));
+	}
+
+	else{ 			// Fionacci
+		for(int i = valorMin; i <= valorMax; i += valorInc)
+			vTiemposEstimados.push_back( vAs[0] + vAs[1] * pow(2,i) );
+	}
+	return tiempoEstimado;
+}
+*/
 
 void calculaTiemposEstimados(const int &valorMin, const int &valorMax, const int &valorInc, vector<double> &vTiemposEstimados, vector<double> &vAs){
 	for(int i = valorMin; i <= valorMax; i += valorInc){
@@ -158,4 +182,86 @@ void imprimeResultadosEnFichero(const int &valorMin, const int &valorInc, const 
 	
 	fo.close();	
 }
+
+
+bool quierePredecir(){
+	int predicciones;
+
+	do{
+		cout << "¿Desea realizar predicciones?" << endl;
+		cout << "0.- No" << endl;
+		cout << "1.- Si" << endl;            
+        cin >> predicciones;
+		
+		if(predicciones != 0 && predicciones != 1){
+           	system("tput setaf 1");
+           	cout << "Error: Debe de introducir 0 ó 1" << endl;
+           	system("tput sgr0");
+        }
+
+	}while(predicciones != 0 && predicciones != 1);
+
+	if(predicciones)
+		return true;
+	else
+		return false;
+}
+
+
+void microSegundosAanios(double microSegRecibidos){
+  
+	double segundos = 0.0;  
+	double minutos = 0.0;
+	double horas = 0.0;
+	double dias = 0.0;
+	double meses = 0.0;
+	double anios = 0.0;
+  
+	if(microSegRecibidos >= pow(10,6)){
+		segundos = microSegRecibidos/pow(10,6);     
+	  
+		if(segundos >= 60){
+	    	minutos = segundos/60;
+	    	segundos = fmod(segundos, 60);  
+
+	    	if(minutos >= 60){
+	    		horas = minutos/60;
+	      		minutos = fmod(minutos, 60);
+
+	      		if(horas >= 24){
+	        		dias = horas/24;
+	        		horas = fmod(horas, 24);
+	          
+	        		if(dias >= 30){
+	          			meses = dias/30;
+	          			dias = fmod(dias, 30);
+	    
+	          			if(meses >= 12){
+	            			anios = meses/12;
+	            			meses = fmod(meses, 12);
+	          			}
+	        
+	        		} 
+	      
+	      		}
+	    
+	    	}   
+	  
+	  	} 
+  
+	}
+
+	cout << "Los microsegundos " << microSegRecibidos << " equivalen a..:" << endl;
+	if(anios > 0)
+		cout << (int)anios << " años, ";
+	if(meses > 0)
+		cout << (int)meses << " meses, ";
+	if(dias > 0)
+		cout << (int)dias << " días, ";
+ 	cout  << (int)horas << " horas, "  << (int)minutos << " minutos, " <<  (int)segundos << " segundos";
+ 	cout << endl;
+
+}
+
+
 #endif
