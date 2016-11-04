@@ -40,13 +40,11 @@ void pideDatoParaPredecir(int &prediccion){
 }
 
 
-    /*!\brief Imprime vector de tiempos
-    */
-void imprimeVector(const std::vector<double> &vectorTiempos){
-	for(unsigned int i = 0; i < vectorTiempos.size(); i++)
-		cout << vectorTiempos.at(i) << "\t";
-
-	cout << endl;      
+template <class T>
+void imprimeVector(const std::vector<T> &vector){
+	for(unsigned int i = 0; i < vector.size(); i++)
+		cout << vector[i] << "\t"; 
+	cout << endl;     
 }
 
 
@@ -150,13 +148,12 @@ double tiempoEstimado(const vector<double> &vAs, const int &Ni){
 
 double tiempoEstimado(const int apartado, const vector<double> &vAs, const int &Ni){
 	double tiempoEstimado = 0.0;
-	if(apartado == 1){ // Matrices
-		for(unsigned int i = 0; i < vAs.size(); i++){
-			if(apartado == 1)  // Matrices
-				tiempoEstimado += vAs[i] * pow(Ni,i);
-			else 				// Fibonacci
-				tiempoEstimado += vAs[i] * pow(2,i*Ni);
-		}
+
+	for(unsigned int i = 0; i < vAs.size(); i++){
+		if(apartado == 1)  // Matrices
+			tiempoEstimado += vAs[i] * pow(Ni,i);
+		else if(apartado == 2)				// Fibonacci
+			tiempoEstimado += vAs[i] * pow(2,i*Ni);
 	}
 
 	return tiempoEstimado;
@@ -238,7 +235,7 @@ void microSegundosAanios(double microSegRecibidos){
 
 
 
-void prediccion(vector<double> vAs){
+void prediccion(const int apartado, vector<double> vAs){
 	int quierePredecir = 0;
 	int nPredicho = 0;
 	
@@ -257,7 +254,7 @@ void prediccion(vector<double> vAs){
         if(quierePredecir == 1){
 			cout << "Introduzca el valor de n a predecir..: " << endl;
 			cin >> nPredicho;
-			microSegundosAanios(std::abs(tiempoEstimado(1, vAs, nPredicho)));
+			microSegundosAanios(std::abs(tiempoEstimado(apartado, vAs, nPredicho)));
 		}
 
 	}while(quierePredecir != 1 && quierePredecir != 0);

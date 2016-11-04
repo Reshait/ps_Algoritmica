@@ -64,7 +64,7 @@ int main(){
 
 				system("./gnuplot.sh");
 
-				prediccion(vAs);
+				prediccion(1, vAs);
 
 				introParaContinuar();
 
@@ -87,10 +87,11 @@ int main(){
 				cramer(1,  valorMin, valorMax, valorInc, 2, vTiemposObservados, vAs);
 
 				cout << "Los tiempos estimados son..: " << endl;
-				for(int i = valorMin; i <= valorMax; i += valorInc){
+/*				for(int i = valorMin; i <= valorMax; i += valorInc){
 					vTiemposEstimados.push_back( vAs[0] + vAs[1] * pow(2,i) );
 				}
-//				calculaTiemposEstimados(2, valorMin, valorMax, valorInc, vTiemposEstimados, vAs);				
+*/
+				calculaTiemposEstimados(2, valorMin, valorMax, valorInc, vTiemposEstimados, vAs);				
 //				calculaTiemposEstimados(pow(2,valorMin), pow(2,valorMax), valorInc, vTiemposEstimados, vAs);
 				imprimeVector(vTiemposEstimados);
 
@@ -112,6 +113,9 @@ int main(){
 				else
 					cout << "Terminando sin predecir." << endl;
 */
+
+				prediccion(2, vAs);
+
 				introParaContinuar();
 
 				break;
