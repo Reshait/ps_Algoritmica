@@ -138,12 +138,11 @@ void rellenaTiemposObservados(const int apartado, const int &valorMin,const int 
 }
 
 
-
 double tiempoEstimado(const vector<double> &vAs, const int &Ni){
 	double tiempoEstimado = 0.0;
 
 	for(unsigned int i = 0; i < vAs.size(); i++)
-		tiempoEstimado += std::abs(vAs[i] * pow(Ni,i));
+		tiempoEstimado += vAs[i] * pow(Ni,i);
 
 	return tiempoEstimado;
 }
@@ -151,12 +150,10 @@ double tiempoEstimado(const vector<double> &vAs, const int &Ni){
 /*
 double tiempoEstimado(const int apartado, const vector<double> &vAs, const int &Ni){
 	double tiempoEstimado = 0.0;
-
 	if(apartado == 1){ // Matrices
 		for(unsigned int i = 0; i < vAs.size(); i++)
 			tiempoEstimado += std::abs(vAs[i] * pow(Ni,i));
 	}
-
 	else{ 			// Fionacci
 		for(int i = valorMin; i <= valorMax; i += valorInc)
 			vTiemposEstimados.push_back( vAs[0] + vAs[1] * pow(2,i) );
@@ -171,7 +168,6 @@ void calculaTiemposEstimados(const int &valorMin, const int &valorMax, const int
 	}
 }
 
-
 void imprimeResultadosEnFichero(const int &valorMin, const int &valorInc, const vector<double> &vTiemposObservados, const vector<double> &vTiemposEstimados){
 	std::ofstream fo;
 
@@ -181,30 +177,6 @@ void imprimeResultadosEnFichero(const int &valorMin, const int &valorInc, const 
 		fo << ni << " " << vTiemposObservados[i] << " " << vTiemposEstimados[i] << "\n";
 	
 	fo.close();	
-}
-
-
-bool quierePredecir(){
-	int predicciones;
-
-	do{
-		cout << "¿Desea realizar predicciones?" << endl;
-		cout << "0.- No" << endl;
-		cout << "1.- Si" << endl;            
-        cin >> predicciones;
-		
-		if(predicciones != 0 && predicciones != 1){
-           	system("tput setaf 1");
-           	cout << "Error: Debe de introducir 0 ó 1" << endl;
-           	system("tput sgr0");
-        }
-
-	}while(predicciones != 0 && predicciones != 1);
-
-	if(predicciones)
-		return true;
-	else
-		return false;
 }
 
 
@@ -263,5 +235,32 @@ void microSegundosAanios(double microSegRecibidos){
 
 }
 
+
+
+void prediccion(vector<double> vAs){
+	int quierePredecir = 0;
+	int nPredicho = 0;
+	
+	do{
+		cout << "¿Desea realizar una predicción?" << endl;
+		cout << "0.- No" << endl;
+		cout << "1.- Si" << endl;            
+        cin >> quierePredecir;
+		
+		if(	quierePredecir != 0 && quierePredecir != 1){
+           	system("tput setaf 1");
+           	cout << "Error: Debe de introducir 0 ó 1" << endl;
+           	system("tput sgr0");
+        }
+
+        if(quierePredecir == 1){
+			cout << "Introduzca el valor de n a predecir..: " << endl;
+			cin >> nPredicho;
+			microSegundosAanios(std::abs(tiempoEstimado(vAs, nPredicho)));
+		}
+
+	}while(quierePredecir != 1 && quierePredecir != 0);
+
+}
 
 #endif

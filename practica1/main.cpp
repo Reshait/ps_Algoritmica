@@ -19,7 +19,7 @@ int main(){
 	srand(time(NULL));
 	
 	vector<double> vTiemposObservados, vTiemposEstimados, vAs;
-	int valorMin, valorMax, valorInc, opcion, prediccion = 0;
+	int valorMin, valorMax, valorInc, opcion, predicciones = 0;
 
 	do{
 
@@ -50,6 +50,7 @@ int main(){
 				cramer(0, valorMin, valorMax, valorInc, 4, vTiemposObservados, vAs);
 
 				calculaTiemposEstimados(valorMin, valorMax, valorInc, vTiemposEstimados, vAs);
+//				calculaTiemposEstimados(1, valorMin, valorMax, valorInc, vTiemposEstimados, vAs);				
 
 				cout << "El vector de tiempos estimados es..: " << endl;
 				imprimeVector(vTiemposEstimados);
@@ -63,13 +64,7 @@ int main(){
 
 				system("./gnuplot.sh");
 
-				if(quierePredecir()){
-					pideDatoParaPredecir(prediccion);
-					cout << "El valor de tiempo estimado es..: " << endl;
-					microSegundosAanios(tiempoEstimado(vAs, prediccion));
-				}
-				else
-					cout << "Terminando sin predecir." << endl;
+				prediccion(vAs);
 
 				introParaContinuar();
 
@@ -95,6 +90,7 @@ int main(){
 				for(int i = valorMin; i <= valorMax; i += valorInc){
 					vTiemposEstimados.push_back( vAs[0] + vAs[1] * pow(2,i) );
 				}
+//				calculaTiemposEstimados(2, valorMin, valorMax, valorInc, vTiemposEstimados, vAs);				
 //				calculaTiemposEstimados(pow(2,valorMin), pow(2,valorMax), valorInc, vTiemposEstimados, vAs);
 				imprimeVector(vTiemposEstimados);
 
@@ -106,15 +102,16 @@ int main(){
 				imprimeResultadosEnFichero(valorMin, valorInc, vTiemposObservados, vTiemposEstimados);
 
 				system("./gnuplot.sh");
-
+/*
 				if(quierePredecir()){
-					pideDatoParaPredecir(prediccion);
+					pideDatoParaPredecir(predicciones);
 					cout << "El valor de tiempo estimado es..: " << endl;
-					microSegundosAanios(tiempoEstimado(vAs, pow(2,prediccion)));
+//					microSegundosAanios(tiempoEstimado(2, vAs, pow(2,predicciones)));
+					microSegundosAanios(tiempoEstimado(vAs, pow(2,predicciones)));
 				}
 				else
 					cout << "Terminando sin predecir." << endl;
-
+*/
 				introParaContinuar();
 
 				break;
