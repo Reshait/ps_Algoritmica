@@ -135,17 +135,6 @@ void rellenaTiemposObservados(const int apartado, const int &valorMin,const int 
 	}	
 }
 
-/*
-double tiempoEstimado(const vector<double> &vAs, const int &Ni){
-	double tiempoEstimado = 0.0;
-
-	for(unsigned int i = 0; i < vAs.size(); i++)
-		tiempoEstimado += vAs[i] * pow(Ni,i);
-
-	return tiempoEstimado;
-}
-*/
-
 double tiempoEstimado(const int apartado, const vector<double> &vAs, const int &Ni){
 	double tiempoEstimado = 0.0;
 
