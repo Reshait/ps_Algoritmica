@@ -137,7 +137,7 @@ void rellenaTiemposObservados(const int apartado, const int &valorMin,const int 
 	}	
 }
 
-
+/*
 double tiempoEstimado(const vector<double> &vAs, const int &Ni){
 	double tiempoEstimado = 0.0;
 
@@ -146,25 +146,26 @@ double tiempoEstimado(const vector<double> &vAs, const int &Ni){
 
 	return tiempoEstimado;
 }
+*/
 
-/*
 double tiempoEstimado(const int apartado, const vector<double> &vAs, const int &Ni){
 	double tiempoEstimado = 0.0;
 	if(apartado == 1){ // Matrices
-		for(unsigned int i = 0; i < vAs.size(); i++)
-			tiempoEstimado += std::abs(vAs[i] * pow(Ni,i));
+		for(unsigned int i = 0; i < vAs.size(); i++){
+			if(apartado == 1)  // Matrices
+				tiempoEstimado += vAs[i] * pow(Ni,i);
+			else 				// Fibonacci
+				tiempoEstimado += vAs[i] * pow(2,i*Ni);
+		}
 	}
-	else{ 			// Fionacci
-		for(int i = valorMin; i <= valorMax; i += valorInc)
-			vTiemposEstimados.push_back( vAs[0] + vAs[1] * pow(2,i) );
-	}
+
 	return tiempoEstimado;
 }
-*/
 
-void calculaTiemposEstimados(const int &valorMin, const int &valorMax, const int &valorInc, vector<double> &vTiemposEstimados, vector<double> &vAs){
+
+void calculaTiemposEstimados(const int apartado, const int &valorMin, const int &valorMax, const int &valorInc, vector<double> &vTiemposEstimados, vector<double> &vAs){
 	for(int i = valorMin; i <= valorMax; i += valorInc){
-		vTiemposEstimados.push_back(tiempoEstimado(vAs, i));
+		vTiemposEstimados.push_back(tiempoEstimado(apartado, vAs, i));
 	}
 }
 
@@ -256,7 +257,7 @@ void prediccion(vector<double> vAs){
         if(quierePredecir == 1){
 			cout << "Introduzca el valor de n a predecir..: " << endl;
 			cin >> nPredicho;
-			microSegundosAanios(std::abs(tiempoEstimado(vAs, nPredicho)));
+			microSegundosAanios(std::abs(tiempoEstimado(1, vAs, nPredicho)));
 		}
 
 	}while(quierePredecir != 1 && quierePredecir != 0);

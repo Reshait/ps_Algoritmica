@@ -49,8 +49,8 @@ int main(){
 
 				cramer(0, valorMin, valorMax, valorInc, 4, vTiemposObservados, vAs);
 
-				calculaTiemposEstimados(valorMin, valorMax, valorInc, vTiemposEstimados, vAs);
-//				calculaTiemposEstimados(1, valorMin, valorMax, valorInc, vTiemposEstimados, vAs);				
+//				calculaTiemposEstimados(valorMin, valorMax, valorInc, vTiemposEstimados, vAs);
+				calculaTiemposEstimados(1, valorMin, valorMax, valorInc, vTiemposEstimados, vAs);				
 
 				cout << "El vector de tiempos estimados es..: " << endl;
 				imprimeVector(vTiemposEstimados);
