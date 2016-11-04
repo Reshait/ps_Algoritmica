@@ -19,7 +19,7 @@ int main(){
 	srand(time(NULL));
 	
 	vector<double> vTiemposObservados, vTiemposEstimados, vAs;
-	int valorMin, valorMax, valorInc, opcion, predicciones = 0;
+	int valorMin, valorMax, valorInc, opcion, apartado;
 
 	do{
 
@@ -34,7 +34,7 @@ int main(){
 		switch(opcion){
 			
 			case 1:
-
+				apartado = 1;
 				cabecera(1);
 				cout << "\t┏━━━━━━━━━━━━━━━━━━━━━━┓" << endl;
 				cout << "\t┃ APARTADO DE MATRICES ┃" << endl;	
@@ -42,15 +42,14 @@ int main(){
 				
 				pideDatos(valorMin, valorMax, valorInc);
 
-				rellenaTiemposObservados(1, valorMin,valorMax,valorInc,vTiemposObservados);
+				rellenaTiemposObservados(apartado, valorMin,valorMax,valorInc,vTiemposObservados);
 
 				cout << "El vector de tiempos observados es..: " << endl;
 				imprimeVector(vTiemposObservados);
 
-				cramer(0, valorMin, valorMax, valorInc, 4, vTiemposObservados, vAs);
+				cramer(apartado, valorMin, valorMax, valorInc, 4, vTiemposObservados, vAs);
 
-//				calculaTiemposEstimados(valorMin, valorMax, valorInc, vTiemposEstimados, vAs);
-				calculaTiemposEstimados(1, valorMin, valorMax, valorInc, vTiemposEstimados, vAs);				
+				calculaTiemposEstimados(apartado, valorMin, valorMax, valorInc, vTiemposEstimados, vAs);				
 
 				cout << "El vector de tiempos estimados es..: " << endl;
 				imprimeVector(vTiemposEstimados);
@@ -64,7 +63,7 @@ int main(){
 
 				system("./gnuplot.sh");
 
-				prediccion(1, vAs);
+				prediccion(apartado, vAs);
 
 				introParaContinuar();
 
@@ -72,6 +71,7 @@ int main(){
 
 
 			case 2:
+				apartado = 2;
 				cabecera(1);
 				cout << "\t┏━━━━━━━━━━━━━━━━━━━━━━━┓" << endl;
 				cout << "\t┃ APARTADO DE FIBONACCI ┃" << endl;	
@@ -79,14 +79,14 @@ int main(){
 
 				pideDatos(valorMin, valorMax, valorInc);
 
-				rellenaTiemposObservados(2, valorMin,valorMax,valorInc,vTiemposObservados);
+				rellenaTiemposObservados(apartado, valorMin,valorMax,valorInc,vTiemposObservados);
 
 				cout << "El vector de tiempos observados es..: " << endl;
 				imprimeVector(vTiemposObservados);
 
-				cramer(1,  valorMin, valorMax, valorInc, 2, vTiemposObservados, vAs);
+				cramer(apartado,  valorMin, valorMax, valorInc, 2, vTiemposObservados, vAs);
 
-				calculaTiemposEstimados(2, valorMin, valorMax, valorInc, vTiemposEstimados, vAs);				
+				calculaTiemposEstimados(apartado, valorMin, valorMax, valorInc, vTiemposEstimados, vAs);				
 				cout << "Los tiempos estimados son..: " << endl;
 				imprimeVector(vTiemposEstimados);
 
@@ -99,7 +99,7 @@ int main(){
 
 				system("./gnuplot.sh");
 
-				prediccion(2, vAs);
+				prediccion(apartado, vAs);
 
 				introParaContinuar();
 
