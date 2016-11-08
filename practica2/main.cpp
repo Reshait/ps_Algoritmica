@@ -14,24 +14,14 @@
 using namespace std;
 
 int main(){
-//Eliminar al final
-	std::ofstream fo;
-	Clock Cronometro;
-	vector<stTabla> vEstructuras;
-//
 	vector<double> vTiemposObservados, vTiemposEstimados, vAs;
 	int opcion, desde = 0, hasta = 0, apartado;
-
-	//Hanoi
-//	vector<string> vOrigen, vDestino, vAux;
-//	bool quiereImprimir = false;
 
 	do{
 
 		opcion = menu();
 
 		inicializaVectores(vTiemposObservados, vTiemposEstimados, vAs);
-//		inicializaTorres(vOrigen, vDestino, vAux);
 
 		switch(opcion){
 			
@@ -86,9 +76,9 @@ int main(){
 				cout << "El vector de tiempos observados es..: " << endl;
 				imprimeVector(vTiemposObservados);
 
-				cramer(1, desde, hasta, 1, 4, vTiemposObservados, vAs);
+				cramer(2, desde, hasta, 1, 4, vTiemposObservados, vAs);
 
-				calculaTiemposEstimados(1, desde, hasta, vTiemposEstimados, vAs);	//1 para polinómico
+				calculaTiemposEstimados(2, desde, hasta, vTiemposEstimados, vAs);	//1 para polinómico
 				cout << "Los tiempos estimados son..: " << endl;
 				imprimeVector(vTiemposEstimados);		
 
@@ -101,7 +91,7 @@ int main(){
 
 				system("./gnuplot.sh");
 
-				prediccion(1, vAs);													//1 para ajuste polinómico
+				prediccion(2, vAs);													//1 para ajuste polinómico
 
 				introParaContinuar();
 
