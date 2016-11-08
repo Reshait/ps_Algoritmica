@@ -29,7 +29,8 @@ int main(){
 
 		opcion = menu();
 
-		inicializaVectoresYTorres(vTiemposObservados, vTiemposEstimados, vAs, vOrigen, vDestino, vAux);
+		inicializaVectoresYTorres(vTiemposObservados, vTiemposEstimados, vAs);
+		inicializaTorres(vOrigen, vDestino, vAux);
 
 		switch(opcion){
 			
@@ -75,44 +76,28 @@ int main(){
 				pideDatos(desde, hasta);
 
 				rellenaTiemposObservados(apartado, desde, hasta, vTiemposObservados);
-/*
-				for(int i = desde; i <= hasta; i++){
-					sumTiempo = 0;
 
-					for(int j = 0; j <= i; j++){
-						Cronometro.start();
-						cout << combinatorioRecursivo(i, j, vEstructuras) << endl;
-						Cronometro.stop();	
-						sumTiempo += Cronometro.elapsed();
-					}
-					vTiemposObservados.push_back(sumTiempo/(hasta-desde + 1));						
-//					vTiemposObservados.push_back(sumTiempo/(i + 1));						
-				}		
-*/
 				cout << "El vector de tiempos observados es..: " << endl;
 				imprimeVector(vTiemposObservados);
 
 				cramer(0, desde, hasta, 1, 4, vTiemposObservados, vAs);
 
+				calculaTiemposEstimados(1, desde, hasta, vTiemposEstimados, vAs);	//1 para polinómico
 				cout << "Los tiempos estimados son..: " << endl;
-				for(int i = desde; i <= hasta; i ++)
-					vTiemposEstimados.push_back(tiempoEstimado(vAs, i));
 				imprimeVector(vTiemposEstimados);		
 
-				//Imprimiendo en Datos.txt los resultados
-				fo.open("Datos.txt"); 
-				for(unsigned int i = 0, ni = desde; i < vTiemposObservados.size(); i++, ni ++)
-					fo << ni << " " << vTiemposObservados[i] << " " << vTiemposEstimados[i] << "\n";
-				fo.close();
+				imprimeResultadosEnFichero(desde, vTiemposObservados, vTiemposEstimados);
+
 				system("./gnuplot.sh");
 
-				prediccion(1, vAs);												//1 para ajuste polinómico
+				prediccion(1, vAs);													//1 para ajuste polinómico
 
 				introParaContinuar();
 
 				break;
 				
 			case 3:
+				apartado = 3;
 				cabecera(2);
 				cout << "\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓" << endl;
 				cout << "\t┃ COMBINATORIO - Algoritmo Iterativo ┃" << endl;	
@@ -120,42 +105,29 @@ int main(){
 
 				pideDatos(desde, hasta);
 
-				for(int n = desde; n <= hasta; n++){
-					sumTiempo = 0;
-
-					for(int k = 0; k <= n; k++){
-						Cronometro.start();		
-						cout << combinatorioIterativo(n,k) << endl;
-						Cronometro.stop();	
-						sumTiempo += Cronometro.elapsed();						
-					}
-					vTiemposObservados.push_back(sumTiempo/(hasta-desde + 1));											
-				}
+				rellenaTiemposObservados(apartado, desde, hasta, vTiemposObservados);
 
 				cout << "El vector de tiempos observados es..: " << endl;
 				imprimeVector(vTiemposObservados);
 
-				cramer(0, desde, hasta, 1, 4, vTiemposObservados, vAs);
+				cramer(0, desde, hasta, 1, 4, vTiemposObservados, vAs);	
 
+				calculaTiemposEstimados(1, desde, hasta, vTiemposEstimados, vAs);	//1 para polinómico
 				cout << "Los tiempos estimados son..: " << endl;
-				for(int i = desde; i <= hasta; i ++)
-					vTiemposEstimados.push_back(tiempoEstimado(vAs, i));
 				imprimeVector(vTiemposEstimados);
 
-				//Imprimiendo en Datos.txt los resultados
-				fo.open("Datos.txt"); 
-				for(unsigned int i = 0, ni = desde; i < vTiemposObservados.size(); i++, ni ++)
-					fo << ni << " " << vTiemposObservados[i] << " " << vTiemposEstimados[i] << "\n";
-				fo.close();
+				imprimeResultadosEnFichero(desde, vTiemposObservados, vTiemposEstimados);
+
 				system("./gnuplot.sh");
 
-				prediccion(vAs);
+				prediccion(1, vAs);													//1 para ajuste polinómico
 
 				introParaContinuar();
 
 				break;				
 
 			case 4:
+				apartado = 4;
 				cabecera(2);
 				cout << "\t┏━━━━━━━┓" << endl;
 				cout << "\t┃ HANOI ┃" << endl;	
@@ -170,13 +142,16 @@ int main(){
 
 				for(int i = 3; i <= valorN; i++){
 					//Inicializando los vectores
-					vOrigen.clear();
+/*					vOrigen.clear();
 					vDestino.clear();
 					vAux.clear();
 
 					vOrigen.push_back("Orig..:");
 					vDestino.push_back("Dest..:");
 					vAux.push_back("Auxi..:");	
+*/
+					inicializaTorres(vOrigen, vDestino, vAux);
+
 					//Terminada la inicialización
 
 					rellenaVectorOrigen(i, vOrigen);

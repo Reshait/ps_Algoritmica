@@ -140,9 +140,13 @@ void rellenaTiemposObservados(const int apartado, const int &valorMin,const int 
 		}
 
 		else if(apartado == 3){			// apartado combinatorio - Algoritmo NO recursivo.
-			Cronometro.start();
-//			cout << "El valor resultante a Fibonacci " << i << " es..: " << fibonacci(i) << endl;		
-			Cronometro.stop();					
+			for(int j = 0; j <= i; j++){
+				Cronometro.start();		
+				cout << combinatorioIterativo(i,j) << endl;
+				Cronometro.stop();	
+				sumTiempo += Cronometro.elapsed();						
+			}	
+			
 		}
 
 		else{							// apartado Hanoi
@@ -154,7 +158,7 @@ void rellenaTiemposObservados(const int apartado, const int &valorMin,const int 
 
 		cout << "Han transcurrido..:\t" << Cronometro.elapsed() << " µs" << endl;
 		
-		if(apartado == 2)
+		if(apartado == 2 || apartado == 3)
 			sumTiempo = sumTiempo/(i + 1);
 
 		vTiemposObservados.push_back(sumTiempo);
@@ -310,10 +314,14 @@ void prediccion(vector<double> vAs){
 }
 
 template <class T>
-void inicializaVectoresYTorres(vector<T> &vTiemposObservados, vector<T> &vTiemposEstimados, vector<T> &vAs, vector<string> &vOrigen, vector<string> &vDestino, vector<string> &vAux){
+void inicializaVectores(vector<T> &vTiemposObservados, vector<T> &vTiemposEstimados, vector<T> &vAs){
 		vTiemposObservados.clear();
 		vTiemposEstimados.clear();
 		vAs.clear();
+}
+
+
+void inicializaTorres(vector<string> &vOrigen, vector<string> &vDestino, vector<string> &vAux){
 		vOrigen.clear();
 		vDestino.clear();
 		vAux.clear();
