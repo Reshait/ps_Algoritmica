@@ -1,15 +1,18 @@
 #ifndef __FUNCIONES_GENERALES__
 #define __FUNCIONES_GENERALES__
 
+#include <sstream>
 #include <cmath>
 #include <cstring>
 #include "tiempo.hpp"
 #include "combinatorio.hpp"
+#include "hanoi.hpp"
 
 using std::cout;
 using std::cin;
 using std::vector;
 using std::string;
+using std::stringstream;
 
 void pideDatos(int &desde, int &hasta){
 
@@ -33,7 +36,7 @@ void pideDatos(int &desde, int &hasta){
 
 }
 
-void pideDatos(double &valorN){
+void pideDatos(int &valorN){
 
 	do{
 		cout << "Introduzca el valor N (cantidad de discos).: ";
@@ -48,13 +51,13 @@ void pideDatos(double &valorN){
 
     /*!\brief Imprime vector de tiempos
     */
-template <class T>
+/*template <class T>
 void imprimeVector(const std::vector<T> &vectorTiempos){
 	for(unsigned int i = 0; i < vectorTiempos.size(); i++)
 		cout << vectorTiempos.at(i) << "\t"; 
 	cout << endl;     
 }
-
+*/
 
 void copiaMatriz(const vector<vector<double> > &original, vector<vector<double> > &copia){
 	for(unsigned int i= 0; i < original.size(); i ++)
@@ -112,10 +115,52 @@ double calculaDeterminante(vector<vector<double> > matriz){
 }
 
 
+void inicializaTorres(vector<string> &vOrigen, vector<string> &vDestino, vector<string> &vAux){
+		vOrigen.clear();
+		vDestino.clear();
+		vAux.clear();
+
+		vOrigen.push_back("Orig..:");
+		vDestino.push_back("Dest..:");
+		vAux.push_back("Auxi..:");
+}
+
+
+int preguntaPorImpresion(){
+	int quiereImprimir; 
+	do{
+		cout << "¿Quiere observar la representación por pantalla? " << endl;
+		cout << "0.- NO" << endl;
+		cout << "1.- SI" << endl;
+		cin >> quiereImprimir;	
+
+	}while(quiereImprimir != 0 && quiereImprimir !=1);
+
+
+	return quiereImprimir;
+}
+
+
+void rellenaVectorOrigen(int num, vector<string> &vOrigen){
+    stringstream aux;
+    for(int i = num; i > 0; i--){
+        aux << i;
+        vOrigen.push_back(aux.str());
+        aux.str(std::string());
+    }
+}
+
+
 void rellenaTiemposObservados(const int apartado, const int &valorMin,const int &valorMax, vector<double> &vTiemposObservados){
 	Clock Cronometro;
 	double sumTiempo;
 	vector<stTabla> vEstructuras;
+	vector<string> vOrigen, vDestino, vAux;
+	int quiereImprimir;
+
+	if(apartado == 4)
+		quiereImprimir = preguntaPorImpresion();
+
 
 	for(int i = valorMin; i <= valorMax; i ++){
 		sumTiempo = 0;
@@ -150,12 +195,25 @@ void rellenaTiemposObservados(const int apartado, const int &valorMin,const int 
 		}
 
 		else{							// apartado Hanoi
+
+			inicializaTorres(vOrigen, vDestino, vAux);
+
+			rellenaVectorOrigen(i, vOrigen);
+
+			if(quiereImprimir){
+				cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+				cout << endl;
+				cout << "Se parte de las siguientes Torres..:" << endl;
+				imprime(vOrigen,vAux,vDestino);
+				cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+			}
+
 			Cronometro.start();
-//			cout << "El valor resultante a Fibonacci " << i << " es..: " << fibonacci(i) << endl;		
-			Cronometro.stop();					
+			hanoi(vOrigen, vDestino, vAux, vOrigen.size(), quiereImprimir);
+			Cronometro.stop();
+			sumTiempo = Cronometro.elapsed();					
 		}				
 		
-
 		cout << "Han transcurrido..:\t" << Cronometro.elapsed() << " µs" << endl;
 		
 		if(apartado == 2 || apartado == 3)
@@ -166,7 +224,7 @@ void rellenaTiemposObservados(const int apartado, const int &valorMin,const int 
 	}	
 }
 
-
+//esta función realiza el ajuste a polinómico o exponencial
 double tiempoEstimado(const int apartado, const vector<double> &vAs, const int &Ni){
 	double tiempoEstimado = 0.0;
 
@@ -293,26 +351,6 @@ void prediccion(const int apartado, vector<double> vAs){
 }
 
 
-void prediccion(vector<double> vAs){
-	int quierePredecir = 0;
-	int nPredicho = 0;
-	
-	do{
-		cout << endl;
-		cout << "¿Desea realizar una predicción?" << endl;
-		cout << "0.- Para terminar" << endl;
-		cout << "1.- Si quiere realizar una predicción para un determinado N" << endl;
-		cout << "\tIntroduzca una opción >> ";
-		cin >> quierePredecir;
-	}while(quierePredecir != 1 && quierePredecir != 0);
-
-	if(quierePredecir){
-		cout << "Introduzca el valor de n a predecir..: " << endl;
-		cin >> nPredicho;
-		microSegundosAanios(std::abs(tiempoEstimado(vAs, nPredicho)));
-	}	
-}
-
 template <class T>
 void inicializaVectores(vector<T> &vTiemposObservados, vector<T> &vTiemposEstimados, vector<T> &vAs){
 		vTiemposObservados.clear();
@@ -320,15 +358,5 @@ void inicializaVectores(vector<T> &vTiemposObservados, vector<T> &vTiemposEstima
 		vAs.clear();
 }
 
-
-void inicializaTorres(vector<string> &vOrigen, vector<string> &vDestino, vector<string> &vAux){
-		vOrigen.clear();
-		vDestino.clear();
-		vAux.clear();
-
-		vOrigen.push_back("Orig..:");
-		vDestino.push_back("Dest..:");
-		vAux.push_back("Auxi..:");
-}
 
 #endif

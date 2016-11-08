@@ -3,11 +3,10 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <sstream>
 #include <iterator>
+#include "funcionesGenerales.hpp"
 using std::vector;
 using std::string;
-using std::stringstream;
 
 struct Torre
 {
@@ -20,6 +19,13 @@ template <class T>
 void mueveDisco(vector<T> &a, vector<T> &b) {
 	b.push_back(a.back());
 	a.pop_back();
+}
+
+template <class T>
+void imprimeVector(const std::vector<T> &vectorTiempos){
+    for(unsigned int i = 0; i < vectorTiempos.size(); i++)
+        cout << vectorTiempos.at(i) << "\t"; 
+    cout << endl;     
 }
 
 
@@ -92,13 +98,4 @@ void hanoi(vector<string> &vOrigen, vector<string> &vAux, vector<string> &vDesti
     }
 }
 
-
-void rellenaVectorOrigen(int num, vector<string> &vOrigen){
-    stringstream aux;
-    for(int i = num; i > 0; i--){
-        aux << i;
-        vOrigen.push_back(aux.str());
-        aux.str(std::string());
-    }
-}
 #endif
