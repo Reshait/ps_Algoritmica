@@ -5,8 +5,7 @@
 #include <fstream>
 #include "cabecera.hpp"
 #include "cramer.hpp"
-#include "tiempo.hpp"
-#include "combinatorio.hpp"
+//#include "combinatorio.hpp"
 #include "hanoi.hpp"
 #include "funcionesGenerales.hpp"
 
@@ -19,7 +18,7 @@ int main(){
 
 	vector<double> vTiemposObservados, vTiemposEstimados, vAs;
 	double valorN, sumTiempo;
-	int opcion, desde = 0, hasta = 0;
+	int opcion, desde = 0, hasta = 0, apartado;
 
 	//Hanoi
 	vector<string> vOrigen, vDestino, vAux;
@@ -27,34 +26,14 @@ int main(){
 
 	do{
 
-		cabecera(2);
-		cout << "1.- Para realizar COMBINATORIO - Recursividad Cnk = Cn-1,k-1 + Cn-1,k." << endl;
-		cout << "2.- Para realizar COMBINATORIO - Recursividad con tabla." << endl;
-		cout << "3.- Para realizar COMBINATORIO - Algoritmo NO recursivo." << endl;
-		cout << "4.- Para realizar HANOI." << endl;
-		cout << "0.- Para Salir." << endl;
-		cout << "\tIntroduzca una opción >> ";
-		cin >> opcion;
-		getchar();
+		opcion = menu();
 
-		vTiemposObservados.clear();
-		vTiemposEstimados.clear();
-		vAs.clear();
-		vOrigen.clear();
-		vDestino.clear();
-		vAux.clear();
-
-		vOrigen.push_back("Orig..:");
-		vDestino.push_back("Dest..:");
-		vAux.push_back("Auxi..:");
-
-///quitar
-//double error;
+		inicializaVectoresYTorres(vTiemposObservados, vTiemposEstimados, vAs, vOrigen, vDestino, vAux);
 
 		switch(opcion){
 			
 			case 1:
-
+				apartado = 1;
 				cabecera(2);
 				cout << "\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓" << endl;
 				cout << "\t┃ COMBINATORIO - Recursividad Cnk = Cn-1,k-1 + Cn-1,k ┃" << endl;	
@@ -62,6 +41,9 @@ int main(){
 				
 				pideDatos(desde, hasta);
 
+				rellenaTiemposObservados(apartado, desde, hasta, vTiemposObservados);
+
+/*
 				for(int i = desde; i <= hasta; i++){
 					sumTiempo = 0;
 
@@ -74,7 +56,7 @@ int main(){
 					vTiemposObservados.push_back(sumTiempo/(hasta-desde + 1));						
 //					vTiemposObservados.push_back(sumTiempo/(i + 1));						
 				}
-
+*/
 
 
 				cout << "El vector de tiempos observados es..: " << endl;
@@ -88,12 +70,7 @@ int main(){
 					cout << std::abs(vAs[0] + vAs[1] * pow(2,i)) << "\t";
 				}		
 				cout << endl;		
-//quitar	-->				
-	//for(unsigned int i = 0; i < vTiemposObservados.size(); i++)
-	//	error += std::abs(vTiemposObservados[i] - vTiemposEstimados[i]);
-	//error = error / vTiemposObservados.size();
-	//cout << "EL error abs. medio es..: " << error << endl;
-//hasta aquí <--
+
 
 				//Imprimiendo en Datos.txt los resultados
 				fo.open("Datos.txt"); 

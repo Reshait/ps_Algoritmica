@@ -61,11 +61,5 @@ double tiempoEstimado(const vector<double> &vAs, const int &Ni){
 }
 */
 
-int fibonacci(int n){
-    if(n == 0 || n == 1)
-       return n;
-    else
-       return fibonacci(n - 2) + fibonacci(n - 1);
-}
 
 #endif

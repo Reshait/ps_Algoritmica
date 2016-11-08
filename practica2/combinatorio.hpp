@@ -1,6 +1,10 @@
 #ifndef __COMBINATORIO__
 #define __COMBINATORIO__
 
+#include <vector>
+
+using std::vector;
+
 struct stTabla{
 	double n,k, resultado;
 };

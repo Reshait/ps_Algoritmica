@@ -2,10 +2,14 @@
 #define __FUNCIONES_GENERALES__
 
 #include <cmath>
+#include <cstring>
+#include "tiempo.hpp"
+#include "combinatorio.hpp"
 
 using std::cout;
 using std::cin;
 using std::vector;
+using std::string;
 
 void pideDatos(int &desde, int &hasta){
 
@@ -59,6 +63,14 @@ void copiaMatriz(const vector<vector<double> > &original, vector<vector<double> 
 }
 
 
+int fibonacci(int n){
+    if(n == 0 || n == 1)
+       return n;
+    else
+       return fibonacci(n - 2) + fibonacci(n - 1);
+}
+
+
 void imprimeMatriz(const vector<vector<double> > &matriz){
 	unsigned int cuentaIntro = 0;
 	for(unsigned int i = 0; i < matriz.size(); i++){
@@ -99,6 +111,49 @@ double calculaDeterminante(vector<vector<double> > matriz){
         return determ;
 }
 
+
+void rellenaTiemposObservados(const int apartado, const int &valorMin,const int &valorMax, vector<double> &vTiemposObservados){
+	Clock Cronometro;
+	double sumTiempo;
+
+	for(int i = valorMin; i <= valorMax; i ++){
+		if(apartado == 1){  			// apartado combinatorio - Recursividad Cnk = Cn-1,k-1 + Cn-1,k.
+			sumTiempo = 0;
+
+			for(int j = 0; j <= i; j++){
+				Cronometro.start();
+				cout << combinatorioRecursivo(i, j) << endl;
+				Cronometro.stop();	
+				sumTiempo += Cronometro.elapsed();
+			}
+
+		}
+		else if(apartado == 2){			// apartado combinatorio - Recursividad con tabla.
+			Cronometro.start();
+//			cout << "El valor resultante a Fibonacci " << i << " es..: " << fibonacci(i) << endl;		
+			Cronometro.stop();					
+		}
+
+		else if(apartado == 3){			// apartado combinatorio - Algoritmo NO recursivo.
+			Cronometro.start();
+//			cout << "El valor resultante a Fibonacci " << i << " es..: " << fibonacci(i) << endl;		
+			Cronometro.stop();					
+		}
+
+		else{							// apartado Hanoi
+			Cronometro.start();
+//			cout << "El valor resultante a Fibonacci " << i << " es..: " << fibonacci(i) << endl;		
+			Cronometro.stop();					
+		}				
+				
+		cout << "Han transcurrido..:\t" << Cronometro.elapsed() << " µs" << endl;
+					
+		vTiemposObservados.push_back(Cronometro.elapsed());		
+		cout << endl;
+	}	
+}
+
+
 double tiempoEstimado(const vector<double> &vAs, const int &Ni){
 	double tiempoEstimado = 0.0;
 
@@ -110,7 +165,6 @@ double tiempoEstimado(const vector<double> &vAs, const int &Ni){
 
 void microSegundosAanios(double microSegRecibidos){
   
-//	double microsegundos = 0.0;
 	double segundos = 0.0;  
 	double minutos = 0.0;
 	double horas = 0.0;
@@ -120,7 +174,6 @@ void microSegundosAanios(double microSegRecibidos){
   
 	if(microSegRecibidos >= pow(10,6)){
 		segundos = microSegRecibidos/pow(10,6);     
-//		microsegundos = fmod(microSegRecibidos, pow(10,6)); 
 	  
 		if(segundos >= 60){
 	    	minutos = segundos/60;
@@ -165,6 +218,35 @@ void microSegundosAanios(double microSegRecibidos){
 
 }
 
+
+/*
+void prediccion(const int apartado, vector<double> vAs){
+	int quierePredecir = 0;
+	int nPredicho = 0;
+	
+	do{
+		cout << "¿Desea realizar una predicción?" << endl;
+		cout << "0.- No" << endl;
+		cout << "1.- Si" << endl;            
+        cin >> quierePredecir;
+		
+		if(	quierePredecir != 0 && quierePredecir != 1){
+           	system("tput setaf 1");
+           	cout << "Error: Debe de introducir 0 ó 1" << endl;
+           	system("tput sgr0");
+        }
+
+        if(quierePredecir == 1){
+			cout << "Introduzca el valor de n a predecir..: " << endl;
+			cin >> nPredicho;
+			microSegundosAanios(std::abs(tiempoEstimado(apartado, vAs, nPredicho)));
+		}
+
+	}while(quierePredecir != 1 && quierePredecir != 0);
+
+}
+*/
+
 void prediccion(vector<double> vAs){
 	int quierePredecir = 0;
 	int nPredicho = 0;
@@ -181,9 +263,22 @@ void prediccion(vector<double> vAs){
 	if(quierePredecir){
 		cout << "Introduzca el valor de n a predecir..: " << endl;
 		cin >> nPredicho;
-//		tiempoEstimado(vAs, nPredicho);
-		microSegundosAanios(tiempoEstimado(vAs, nPredicho));
+		microSegundosAanios(std::abs(tiempoEstimado(vAs, nPredicho)));
 	}	
+}
+
+template <class T>
+void inicializaVectoresYTorres(vector<T> &vTiemposObservados, vector<T> &vTiemposEstimados, vector<T> &vAs, vector<string> &vOrigen, vector<string> &vDestino, vector<string> &vAux){
+		vTiemposObservados.clear();
+		vTiemposEstimados.clear();
+		vAs.clear();
+		vOrigen.clear();
+		vDestino.clear();
+		vAux.clear();
+
+		vOrigen.push_back("Orig..:");
+		vDestino.push_back("Dest..:");
+		vAux.push_back("Auxi..:");
 }
 
 #endif
