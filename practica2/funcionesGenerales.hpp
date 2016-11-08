@@ -115,10 +115,12 @@ double calculaDeterminante(vector<vector<double> > matriz){
 void rellenaTiemposObservados(const int apartado, const int &valorMin,const int &valorMax, vector<double> &vTiemposObservados){
 	Clock Cronometro;
 	double sumTiempo;
+	vector<stTabla> vEstructuras;
 
 	for(int i = valorMin; i <= valorMax; i ++){
+		sumTiempo = 0;
+
 		if(apartado == 1){  			// apartado combinatorio - Recursividad Cnk = Cn-1,k-1 + Cn-1,k.
-			sumTiempo = 0;
 
 			for(int j = 0; j <= i; j++){
 				Cronometro.start();
@@ -129,9 +131,12 @@ void rellenaTiemposObservados(const int apartado, const int &valorMin,const int 
 
 		}
 		else if(apartado == 2){			// apartado combinatorio - Recursividad con tabla.
-			Cronometro.start();
-//			cout << "El valor resultante a Fibonacci " << i << " es..: " << fibonacci(i) << endl;		
-			Cronometro.stop();					
+			for(int j = 0; j <= i; j++){
+				Cronometro.start();
+				cout << combinatorioRecursivo(i, j, vEstructuras) << endl;
+				Cronometro.stop();	
+				sumTiempo += Cronometro.elapsed();
+			}
 		}
 
 		else if(apartado == 3){			// apartado combinatorio - Algoritmo NO recursivo.
@@ -145,12 +150,49 @@ void rellenaTiemposObservados(const int apartado, const int &valorMin,const int 
 //			cout << "El valor resultante a Fibonacci " << i << " es..: " << fibonacci(i) << endl;		
 			Cronometro.stop();					
 		}				
-				
+		
+
 		cout << "Han transcurrido..:\t" << Cronometro.elapsed() << " µs" << endl;
-					
-		vTiemposObservados.push_back(Cronometro.elapsed());		
+		
+		if(apartado == 2)
+			sumTiempo = sumTiempo/(i + 1);
+
+		vTiemposObservados.push_back(sumTiempo);
 		cout << endl;
 	}	
+}
+
+
+double tiempoEstimado(const int apartado, const vector<double> &vAs, const int &Ni){
+	double tiempoEstimado = 0.0;
+
+	for(unsigned int i = 0; i < vAs.size(); i++){
+		if(apartado == 1)  					// Ajuste tipo Polinómico
+			tiempoEstimado += vAs[i] * pow(Ni,i);
+		else if(apartado == 2)				// Ajuste tipo Exponencial
+			tiempoEstimado += vAs[i] * pow(2,i*Ni);
+	}
+
+	return tiempoEstimado;
+}
+
+
+void calculaTiemposEstimados(const int apartado, const int &valorMin, const int &valorMax, vector<double> &vTiemposEstimados, vector<double> &vAs){
+	for(int i = valorMin; i <= valorMax; i ++){
+		vTiemposEstimados.push_back(tiempoEstimado(apartado, vAs, i));
+	}
+}
+
+
+void imprimeResultadosEnFichero(const int &valorMin, const vector<double> &vTiemposObservados, const vector<double> &vTiemposEstimados){
+	std::ofstream fo;
+
+	fo.open("Datos.txt"); 
+	
+	for(unsigned int i = 0, ni = valorMin; i < vTiemposObservados.size(); i++, ni ++)
+		fo << ni << " " << vTiemposObservados[i] << " " << vTiemposEstimados[i] << "\n";
+	
+	fo.close();	
 }
 
 
@@ -219,7 +261,7 @@ void microSegundosAanios(double microSegRecibidos){
 }
 
 
-/*
+//apartado 1 = polinómico, 2 = exponencial
 void prediccion(const int apartado, vector<double> vAs){
 	int quierePredecir = 0;
 	int nPredicho = 0;
@@ -245,7 +287,7 @@ void prediccion(const int apartado, vector<double> vAs){
 	}while(quierePredecir != 1 && quierePredecir != 0);
 
 }
-*/
+
 
 void prediccion(vector<double> vAs){
 	int quierePredecir = 0;

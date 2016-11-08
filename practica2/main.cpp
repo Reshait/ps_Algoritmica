@@ -12,10 +12,11 @@
 using namespace std;
 
 int main(){
+//Eliminar al final
 	std::ofstream fo;
 	Clock Cronometro;
 	vector<stTabla> vEstructuras;
-
+//
 	vector<double> vTiemposObservados, vTiemposEstimados, vAs;
 	double valorN, sumTiempo;
 	int opcion, desde = 0, hasta = 0, apartado;
@@ -43,53 +44,29 @@ int main(){
 
 				rellenaTiemposObservados(apartado, desde, hasta, vTiemposObservados);
 
-/*
-				for(int i = desde; i <= hasta; i++){
-					sumTiempo = 0;
-
-					for(int j = 0; j <= i; j++){
-						Cronometro.start();
-						cout << combinatorioRecursivo(i, j) << endl;
-						Cronometro.stop();	
-						sumTiempo += Cronometro.elapsed();
-					}
-					vTiemposObservados.push_back(sumTiempo/(hasta-desde + 1));						
-//					vTiemposObservados.push_back(sumTiempo/(i + 1));						
-				}
-*/
-
-
 				cout << "El vector de tiempos observados es..: " << endl;
 				imprimeVector(vTiemposObservados);
 
 				cramer(1, desde, hasta, 1, 2, vTiemposObservados, vAs);
 
+				calculaTiemposEstimados(2, desde, hasta, vTiemposEstimados, vAs);	//2 para exponencial
 				cout << "Los tiempos estimados son..: " << endl;
-				for(int i = desde; i <= hasta; i ++){
-					vTiemposEstimados.push_back( std::abs(vAs[0] + vAs[1] * pow(2,i)) );
-					cout << std::abs(vAs[0] + vAs[1] * pow(2,i)) << "\t";
-				}		
-				cout << endl;		
 
+				imprimeVector(vTiemposEstimados);
 
-				//Imprimiendo en Datos.txt los resultados
-				fo.open("Datos.txt"); 
-				for(unsigned int i = 0, ni = desde; i < vTiemposObservados.size(); i++, ni ++)
-					fo << ni << " " << vTiemposObservados[i] << " " << vTiemposEstimados[i] << "\n";
-				fo.close();
+				imprimeResultadosEnFichero(desde, vTiemposObservados, vTiemposEstimados);
+
 				system("./gnuplot.sh");
 
-				prediccion(vAs);
+				prediccion(2, vAs);													//2 para exponencial
 
-				//Fin de la opción
-				cout << "==========================================" << endl;
-				cout << "Presione la tecla 'Intro' para continuar..." << endl;
-				cin.ignore().get();
+				introParaContinuar();
 
 				break;
 
 
 			case 2:
+				apartado = 2;			
 				cabecera(2);
 				cout << "\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓" << endl;
 				cout << "\t┃ COMBINATORIO - Recursividad con tabla ┃" << endl;	
@@ -97,6 +74,8 @@ int main(){
 
 				pideDatos(desde, hasta);
 
+				rellenaTiemposObservados(apartado, desde, hasta, vTiemposObservados);
+/*
 				for(int i = desde; i <= hasta; i++){
 					sumTiempo = 0;
 
@@ -109,7 +88,7 @@ int main(){
 					vTiemposObservados.push_back(sumTiempo/(hasta-desde + 1));						
 //					vTiemposObservados.push_back(sumTiempo/(i + 1));						
 				}		
-
+*/
 				cout << "El vector de tiempos observados es..: " << endl;
 				imprimeVector(vTiemposObservados);
 
@@ -127,12 +106,9 @@ int main(){
 				fo.close();
 				system("./gnuplot.sh");
 
-				prediccion(vAs);
+				prediccion(1, vAs);												//1 para ajuste polinómico
 
-				//Fin de la opción
-				cout << "==========================================" << endl;
-				cout << "Presione la tecla 'Intro' para continuar..." << endl;
-				cin.ignore().get();
+				introParaContinuar();
 
 				break;
 				
@@ -175,10 +151,7 @@ int main(){
 
 				prediccion(vAs);
 
-				//Fin de la opción
-				cout << "==========================================" << endl;
-				cout << "Presione la tecla 'Intro' para continuar..." << endl;
-				cin.ignore().get();
+				introParaContinuar();
 
 				break;				
 
@@ -242,15 +215,11 @@ int main(){
 
 				prediccion(vAs);
 
-				//Fin de la opción
-				cout << "==========================================" << endl;
-				cout << "Presione la tecla 'Intro' para continuar..." << endl;
-				cin.ignore().get();
+				introParaContinuar();
 
 				break;	
 
 			case 0:
-				system("clear");
 				cabecera(2);
 
 				cout << "Saliendo ..." << endl;
@@ -259,8 +228,7 @@ int main(){
 			default:
 				cabecera(2);
 				cout << "Opción introducida incorrecta." << endl;
-				cout << "Pulse intro para continuar..." << endl;
-				cin.ignore().get();
+				introParaContinuar();
 				break;	
 		}
 
