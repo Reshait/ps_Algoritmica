@@ -35,7 +35,7 @@ void cramer(int apartado, const int &valorMin,const int &valorMax,const int &val
 	for(int i = 0; i < tam; i++){			//Genera las matrices auxiliares correspondientes con el término indep insertado en cada una de sus columnas
 		copiaMatriz(matriz, matrizAux);
 		for(int j = 0; j < tam; j++){
-			matrizAux[j][i] = 0;  //<-- El fallo está aquí joder!!
+			matrizAux[j][i] = 0;  
 			for(unsigned int k = 0, z = valorMin; k < vTiemposObservados.size(); k ++, z += valorInc)
 				if(apartado == 1)
 					matrizAux[j][i] += (vTiemposObservados[k] * pow(z, j));

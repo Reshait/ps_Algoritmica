@@ -76,9 +76,9 @@ int main(){
 				cout << "El vector de tiempos observados es..: " << endl;
 				imprimeVector(vTiemposObservados);
 
-				cramer(2, desde, hasta, 1, 4, vTiemposObservados, vAs);
+				cramer(1, desde, hasta, 1, 3, vTiemposObservados, vAs);				//1 sin cambio de variable
 
-				calculaTiemposEstimados(2, desde, hasta, vTiemposEstimados, vAs);	//1 para polinómico
+				calculaTiemposEstimados(1, desde, hasta, vTiemposEstimados, vAs);	//1 sin cambio de variable
 				cout << "Los tiempos estimados son..: " << endl;
 				imprimeVector(vTiemposEstimados);		
 
@@ -91,7 +91,7 @@ int main(){
 
 				system("./gnuplot.sh");
 
-				prediccion(2, vAs);													//1 para ajuste polinómico
+				prediccion(1, vAs);													//1 sin cambio de variable
 
 				introParaContinuar();
 
@@ -111,9 +111,9 @@ int main(){
 				cout << "El vector de tiempos observados es..: " << endl;
 				imprimeVector(vTiemposObservados);
 
-				cramer(1, desde, hasta, 1, 4, vTiemposObservados, vAs);	
+				cramer(1, desde, hasta, 1, 3, vTiemposObservados, vAs);				//1 sin cambio de variable
 
-				calculaTiemposEstimados(1, desde, hasta, vTiemposEstimados, vAs);	//1 para polinómico
+				calculaTiemposEstimados(1, desde, hasta, vTiemposEstimados, vAs);	//1 sin cambio de variable
 				cout << "Los tiempos estimados son..: " << endl;
 				imprimeVector(vTiemposEstimados);
 
@@ -126,7 +126,7 @@ int main(){
 
 				system("./gnuplot.sh");
 
-				prediccion(1, vAs);													//1 para ajuste polinómico
+				prediccion(1, vAs);													//1 sin cambio de variable
 
 				introParaContinuar();
 
