@@ -8,24 +8,26 @@
 using std::vector;
 using std::string;
 
-struct Torre
-{
-    vector<int> v;
-    string nombre;
-};
+
+template <class T>
+void imprimeVector(const std::vector<T> &vectorTiempos);
+
+
+void inicializaTorres(vector<string> &vOrigen, vector<string> &vDestino, vector<string> &vAux){
+        vOrigen.clear();
+        vDestino.clear();
+        vAux.clear();
+
+        vOrigen.push_back("Orig..:");
+        vDestino.push_back("Dest..:");
+        vAux.push_back("Auxi..:");
+}
 
 
 template <class T>
 void mueveDisco(vector<T> &a, vector<T> &b) {
 	b.push_back(a.back());
 	a.pop_back();
-}
-
-template <class T>
-void imprimeVector(const std::vector<T> &vectorTiempos){
-    for(unsigned int i = 0; i < vectorTiempos.size(); i++)
-        cout << vectorTiempos.at(i) << "\t"; 
-    cout << endl;     
 }
 
 

@@ -14,6 +14,7 @@ using std::vector;
 using std::string;
 using std::stringstream;
 
+
 void pideDatos(int &desde, int &hasta){
 
 	do{
@@ -36,6 +37,7 @@ void pideDatos(int &desde, int &hasta){
 
 }
 
+
 void pideDatos(int &valorN){
 
 	do{
@@ -49,15 +51,6 @@ void pideDatos(int &valorN){
 
 }
 
-    /*!\brief Imprime vector de tiempos
-    */
-/*template <class T>
-void imprimeVector(const std::vector<T> &vectorTiempos){
-	for(unsigned int i = 0; i < vectorTiempos.size(); i++)
-		cout << vectorTiempos.at(i) << "\t"; 
-	cout << endl;     
-}
-*/
 
 void copiaMatriz(const vector<vector<double> > &original, vector<vector<double> > &copia){
 	for(unsigned int i= 0; i < original.size(); i ++)
@@ -66,28 +59,11 @@ void copiaMatriz(const vector<vector<double> > &original, vector<vector<double> 
 }
 
 
-int fibonacci(int n){
-    if(n == 0 || n == 1)
-       return n;
-    else
-       return fibonacci(n - 2) + fibonacci(n - 1);
-}
-
-
-void imprimeMatriz(const vector<vector<double> > &matriz){
-	unsigned int cuentaIntro = 0;
-	for(unsigned int i = 0; i < matriz.size(); i++){
-		cout << "\t" ;
-		for(unsigned int j = 0; j < matriz.size(); j++){
-			cout << matriz[i][j] << " \t";
-			
-			cuentaIntro ++;					
-			if(cuentaIntro == matriz.size()){
-				cout << endl;
-				cuentaIntro = 0;
-			}
-		}
-	}
+template <class T>
+void imprimeVector(const std::vector<T> &vectorTiempos){
+    for(unsigned int i = 0; i < vectorTiempos.size(); i++)
+        cout << vectorTiempos.at(i) << "\t"; 
+    cout << endl;     
 }
 
 
@@ -112,17 +88,6 @@ double calculaDeterminante(vector<vector<double> > matriz){
             determ = determ * matriz[i][i];
 
         return determ;
-}
-
-
-void inicializaTorres(vector<string> &vOrigen, vector<string> &vDestino, vector<string> &vAux){
-		vOrigen.clear();
-		vDestino.clear();
-		vAux.clear();
-
-		vOrigen.push_back("Orig..:");
-		vDestino.push_back("Dest..:");
-		vAux.push_back("Auxi..:");
 }
 
 
@@ -267,14 +232,10 @@ double tiempoEstimado(const vector<double> &vAs, const int &Ni){
 	return tiempoEstimado;
 }
 
+
 void microSegundosAanios(double microSegRecibidos){
   
-	double segundos = 0.0;  
-	double minutos = 0.0;
-	double horas = 0.0;
-	double dias = 0.0;
-	double meses = 0.0;
-	double anios = 0.0;
+	double segundos = 0, minutos = 0, horas = 0, dias = 0, meses = 0, anios = 0;  
   
 	if(microSegRecibidos >= pow(10,6)){
 		segundos = microSegRecibidos/pow(10,6);     
