@@ -39,7 +39,7 @@ int main(){
 				cout << "El vector de tiempos observados es..: " << endl;
 				imprimeVector(vTiemposObservados);
 
-				cramer(2, desde, hasta, 1, 2, vTiemposObservados, vAs);
+				matrizParaCramer(2, desde, hasta, 1, 2, vTiemposObservados, vAs);
 
 				calculaTiemposEstimados(2, desde, hasta, vTiemposEstimados, vAs);	//2 para exponencial
 				cout << "Los tiempos estimados son..: " << endl;
@@ -76,7 +76,7 @@ int main(){
 				cout << "El vector de tiempos observados es..: " << endl;
 				imprimeVector(vTiemposObservados);
 
-				cramer(1, desde, hasta, 1, 3, vTiemposObservados, vAs);				//1 sin cambio de variable
+				matrizParaCramer(1, desde, hasta, 1, 3, vTiemposObservados, vAs);	//1 sin cambio de variable
 
 				calculaTiemposEstimados(1, desde, hasta, vTiemposEstimados, vAs);	//1 sin cambio de variable
 				cout << "Los tiempos estimados son..: " << endl;
@@ -111,7 +111,7 @@ int main(){
 				cout << "El vector de tiempos observados es..: " << endl;
 				imprimeVector(vTiemposObservados);
 
-				cramer(1, desde, hasta, 1, 3, vTiemposObservados, vAs);				//1 sin cambio de variable
+				matrizParaCramer(1, desde, hasta, 1, 3, vTiemposObservados, vAs);	//1 sin cambio de variable
 
 				calculaTiemposEstimados(1, desde, hasta, vTiemposEstimados, vAs);	//1 sin cambio de variable
 				cout << "Los tiempos estimados son..: " << endl;
@@ -148,7 +148,7 @@ int main(){
 				cout << "El vector de tiempos observados es..: " << endl;
 				imprimeVector(vTiemposObservados);
 
-				cramer(2, desde, hasta, 1, 4, vTiemposObservados, vAs);
+				matrizParaCramer(2, desde, hasta, 1, 4, vTiemposObservados, vAs);
 
 				calculaTiemposEstimados(2, desde, hasta, vTiemposEstimados, vAs);	
 				cout << "Los tiempos estimados son..: " << endl;
