@@ -148,9 +148,9 @@ int main(){
 				cout << "El vector de tiempos observados es..: " << endl;
 				imprimeVector(vTiemposObservados);
 
-				matrizParaCramer(2, desde, hasta, 1, 4, vTiemposObservados, vAs);
+				matrizParaCramer(2, desde, hasta, 1, 4, vTiemposObservados, vAs);	//2 para ajuste exponencial
 
-				calculaTiemposEstimados(2, desde, hasta, vTiemposEstimados, vAs);	
+				calculaTiemposEstimados(2, desde, hasta, vTiemposEstimados, vAs);	//2 para ajuste exponencial
 				cout << "Los tiempos estimados son..: " << endl;
 				imprimeVector(vTiemposEstimados);
 
