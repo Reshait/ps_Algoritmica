@@ -53,6 +53,11 @@ int main(){
 
 				imprimeResultadosEnFichero(desde, vTiemposObservados, vTiemposEstimados);
 
+				cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+				cout << "La ecuación de ajuste utilizada es..:" << endl;
+				imprimeEcuacionAjuste(apartado, vAs);
+				cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+
 				system("./gnuplot.sh");
 
 				prediccion(2, vAs);													//2 para exponencial
@@ -89,6 +94,11 @@ int main(){
 
 				imprimeResultadosEnFichero(desde, vTiemposObservados, vTiemposEstimados);
 
+				cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+				cout << "La ecuación de ajuste utilizada es..:" << endl;
+				imprimeEcuacionAjuste(apartado, vAs);
+				cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+
 				system("./gnuplot.sh");
 
 				prediccion(1, vAs);													//1 sin cambio de variable
@@ -122,6 +132,11 @@ int main(){
 				cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 				cout << "El coeficiente de determinación es..:" << endl;
 				cout << coeficienteDeterminacion(vTiemposEstimados, vTiemposObservados) << endl;
+				cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+
+				cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+				cout << "La ecuación de ajuste utilizada es..:" << endl;
+				imprimeEcuacionAjuste(apartado, vAs);
 				cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 
 				system("./gnuplot.sh");
@@ -160,6 +175,11 @@ int main(){
 				cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 
 				imprimeResultadosEnFichero(desde, vTiemposObservados, vTiemposEstimados);
+
+				cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+				cout << "La ecuación de ajuste utilizada es..:" << endl;
+				imprimeEcuacionAjuste(apartado, vAs);
+				cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 
 				system("./gnuplot.sh");
 

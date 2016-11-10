@@ -319,5 +319,30 @@ void inicializaVectores(vector<T> &vTiemposObservados, vector<T> &vTiemposEstima
 		vAs.clear();
 }
 
+template <class T>
+void imprimeEcuacionAjuste(int apartado, vector<T> &vAs){
+	cout << "t = ";
+	if(apartado == 1 || apartado == 4){
+		for(unsigned int i = 0; i < vAs.size(); i++){
+			if(i == 0)
+				cout << vAs[i] << " + ";
+			else if(i == vAs.size()-1)
+				cout << vAs[i] << "*2^n";
+			else
+				cout << vAs[i] << "n^" << i << " + ";		
+		}		
+	}
+	else{
+		for(unsigned int i = 0; i < vAs.size(); i++){
+			if(i == 0)
+				cout << vAs[i] << " + ";
+			else if(i == vAs.size()-1)
+				cout << vAs[i] << "n^" << i;
+			else
+				cout << vAs[i] << "n^" << i << " + ";		
+		}			
+	}
+	cout << endl;
+}
 
 #endif
