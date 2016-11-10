@@ -64,7 +64,7 @@ class Conjunto{
 			return _v[posicion];
 		}
 
-		void MaximoMinimo(int i, int j, int &maximo, int &minimo, int &llamadas_recursivas);
+		void MaximoMinimo(int i, int j, int &maximo, int &minimo, int &comparaciones);
 
 		bool compruebaMaximoEsMaximo(T const &maximo){
 			for(int i = 0; i < this->tamanio(); i++){
@@ -134,7 +134,7 @@ T Conjunto<T>::Maximo(const T a, const T b){
 
 
 template <class T>
-void Conjunto<T>::MaximoMinimo(int i, int j, int &maximo, int &minimo, int &llamadas_recursivas){
+void Conjunto<T>::MaximoMinimo(int i, int j, int &maximo, int &minimo, int &comparaciones){
 	
 	int maximo1,maximo2,minimo1,minimo2;
 
@@ -154,15 +154,16 @@ void Conjunto<T>::MaximoMinimo(int i, int j, int &maximo, int &minimo, int &llam
 				maximo = this->posicion(i);
 				minimo = this->posicion(j);
 			}
+			comparaciones++;
 		}
 
 		else{
 			int mitad = (i+j)/2;
 
-			llamadas_recursivas++;
-			MaximoMinimo(i,mitad,maximo1,minimo1,llamadas_recursivas);
-			llamadas_recursivas++;
-			MaximoMinimo(mitad+1,j,maximo2,minimo2,llamadas_recursivas);
+			comparaciones++;
+			MaximoMinimo(i,mitad,maximo1,minimo1,comparaciones);
+			comparaciones++;
+			MaximoMinimo(mitad+1,j,maximo2,minimo2,comparaciones);
 
 			maximo = Maximo(maximo1,maximo2);
 			minimo = Minimo(minimo1,minimo2);

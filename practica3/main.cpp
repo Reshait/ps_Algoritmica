@@ -9,7 +9,7 @@ using namespace std;
 
 int main()
 {
-	int nLlamadas = 0, min = 0, max = 0, nElementos, opcion;
+	int nComparaciones = 0, min = 0, max = 0, nElementos, opcion;
 
 	do{
 
@@ -25,11 +25,11 @@ int main()
 
 			ConjuntoEnteros.imprime();
 
-			ConjuntoEnteros.MaximoMinimo(0, nElementos-1, max, min, nLlamadas);
+			ConjuntoEnteros.MaximoMinimo(0, nElementos-1, max, min, nComparaciones);
 
 			cout << "El Maximo es..:\t" << max << endl;
 			cout << "El Mínimo es..:\t" << min << endl;
-			cout << "Llamadas R ..:\t" << nLlamadas << endl;
+			cout << "Comparacions..:\t" << nComparaciones << endl;
 
 			if(ConjuntoEnteros.compruebaMaximoEsMaximo(max)){
 				system("tput setaf 2");	
