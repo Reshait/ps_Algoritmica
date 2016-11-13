@@ -22,12 +22,12 @@ void Moneda::setTipo(const string &tipo){
 	//tipo_.assign(tipo);
 }
 
-/*
-ostream & operator<<(ostream &salida, Moneda &M){
+
+ostream &operator<< (ostream &salida, const Moneda &M){
 	salida << M.tipo_ << "\t" << M.valor_ << endl;
 	return salida;
 }
-*/
+
 istream & operator>>(istream &stream, Moneda &M){
 	int valor;
 	string tipo;
