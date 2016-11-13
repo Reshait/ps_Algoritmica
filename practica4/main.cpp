@@ -7,7 +7,7 @@ using namespace std;
 int main(){
 	int opcion;
 	cabecera(4);
-	Moneda M("hola", 3);
+	Moneda M("hola", 5);
 
 	do{
 		opcion = menu();
@@ -21,11 +21,11 @@ int main(){
 				cout << "\t┃ Cambio de Monedas ┃" << endl;
 				cout << "\t┗━━━━━━━━━━━━━━━━━━━┛" << endl;	
 
+				cout << M;
+
+//				cin >> M;
+
 //				cout << M;
-
-	//			cin >> M;
-
-	//			cout << M;
 
 				introParaContinuar();
 			break;

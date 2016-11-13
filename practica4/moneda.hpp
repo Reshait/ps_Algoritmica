@@ -17,6 +17,7 @@ class Moneda{
 		int valor_;
 
 	public:
+		//Moneda();
 		Moneda(string tipo, int valor);
 
 		const int getValor();

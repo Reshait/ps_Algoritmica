@@ -1,5 +1,6 @@
 #include "moneda.hpp"
 
+
 Moneda::Moneda(string tipo, int valor){
 	setTipo(tipo);
 	setValor(valor);
@@ -18,8 +19,9 @@ void Moneda::setValor(const int &valor){
 }
 
 void Moneda::setTipo(const string &tipo){
-	tipo_ = tipo;
+	//tipo_.assign(tipo);
 }
+
 
 ostream & operator<<(ostream &salida, Moneda &M){
 	salida << M.getTipo() << "\t" << M.getValor() << endl;
@@ -40,3 +42,4 @@ istream & operator>>(istream &stream, Moneda &M){
 
 	return stream;
 }
+
