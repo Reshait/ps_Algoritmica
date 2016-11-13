@@ -12,7 +12,7 @@ main.o: main.cpp cabecera.hpp funcionesGenerales.hpp
 cabecera.o: cabecera.cpp cabecera.hpp
 	g++ $(CPPFLAGS) cabecera.cpp 
 
-funcionesGenerales.o: funcionesGenerales.cpp funcionesGenerales.hpp
+funcionesGenerales.o: funcionesGenerales.cpp funcionesGenerales.hpp moneda.hpp
 	g++ $(CPPFLAGS) funcionesGenerales.cpp 
 
 moneda.o: moneda.cpp moneda.hpp

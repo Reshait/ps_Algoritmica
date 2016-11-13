@@ -19,7 +19,7 @@ void Moneda::setValor(const int &valor){
 }
 
 void Moneda::setTipo(const string &tipo){
-	//tipo_.assign(tipo);
+	tipo_.assign(tipo);
 }
 
 
