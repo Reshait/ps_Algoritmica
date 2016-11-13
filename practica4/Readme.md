@@ -19,7 +19,7 @@ Tras cada ejecución, se genera automáticamente las gráficas de aproximación 
 Con esta práctica se pretende que el alumno implemente un algoritmo basado en la técnica de los algoritmos
 voraces. Deberá seleccionar una de las opciones que se reflejan a continuación. 
 
-**Opción a[^footnote]:**
+**Opción a<sup>1</sup>:**
 Implementad el algoritmo de obtención del cambio con número mínimo de monedas o billetes para una cantidad entera de euros introducida por el usuario. Los valores de las monedas y billetes se introducirán en céntimos y se almacenarán en un fichero de texto que será leído por el programa. Para su implementación se han de definir las clases necesarias con todos sus elementos (constructores, sobrecargas, observadores, modificadores, etc.) y en la solución ha de figurar el número de monedas o billetes de cada tipo, usados para obtener el cambio. **(Nota máxima: 8)**
 
 **Opción b:**
@@ -34,8 +34,8 @@ Implementad el algoritmo voraz que obtiene una solución aproximada al problema 
 **Fecha de comienzo: 10 de Noviembre.** 
 **Fecha máxima de entrega: 24 de Noviembre.**
 
-
-  [^footnote]: Yo voy a desarrollar la **Opción A**.
+----------
+  <sup>1</sup>: Yo voy a desarrollar la **Opción A**.
 
 
 
