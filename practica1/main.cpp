@@ -61,6 +61,10 @@ int main(){
 
 				imprimeResultadosEnFichero(valorMin, valorInc, vTiemposObservados, vTiemposEstimados);
 
+				cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+				cout << "La ecuación de ajuste utilizada es..:" << endl;
+				imprimeEcuacionAjuste(apartado, vAs);
+				cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 				system("./gnuplot.sh");
 
 				prediccion(apartado, vAs);
@@ -97,6 +101,11 @@ int main(){
 
 				imprimeResultadosEnFichero(valorMin, valorInc, vTiemposObservados, vTiemposEstimados);
 
+				cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+				cout << "La ecuación de ajuste utilizada es..:" << endl;
+				imprimeEcuacionAjuste(apartado, vAs);
+				cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+				
 				system("./gnuplot.sh");
 
 				prediccion(apartado, vAs);
