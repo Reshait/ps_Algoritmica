@@ -6,11 +6,11 @@ Moneda::Moneda(string tipo, int valor){
 	setValor(valor);
 }
 
-const int Moneda::getValor(){
+int Moneda::getValor(){
 	return valor_;
 }
 
-const string Moneda::getTipo(){
+string Moneda::getTipo(){
 	return tipo_;
 }
 
@@ -22,12 +22,12 @@ void Moneda::setTipo(const string &tipo){
 	//tipo_.assign(tipo);
 }
 
-
+/*
 ostream & operator<<(ostream &salida, Moneda &M){
-	salida << M.getTipo() << "\t" << M.getValor() << endl;
+	salida << M.tipo_ << "\t" << M.valor_ << endl;
 	return salida;
 }
-
+*/
 istream & operator>>(istream &stream, Moneda &M){
 	int valor;
 	string tipo;

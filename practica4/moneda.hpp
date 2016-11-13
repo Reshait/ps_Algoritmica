@@ -20,14 +20,18 @@ class Moneda{
 		//Moneda();
 		Moneda(string tipo, int valor);
 
-		const int getValor();
-		const string getTipo();
+		int getValor();
+		string getTipo();
 
 		void setValor(const int &valor);
 		void setTipo(const string &tipo);
 
-		friend ostream & operator<<(ostream &stream, const Moneda &m);
-		friend istream & operator>>(istream &stream, Moneda &m);
+		friend ostream &operator<< (ostream &salida, const Moneda &M){
+			//salida << M.tipo_ << "\t" << M.valor_ << endl;
+			salida << M.valor_;
+			return salida;			
+		}
+		//friend istream & operator>>(istream &stream, Moneda &M);
 
 };
 
