@@ -1,5 +1,5 @@
 
-# Práctica 1 de la asignatura ALGORÍTMICA.
+# Práctica 4 de la asignatura ALGORÍTMICA.
 
 > **Nota:** Instrucciones de uso:
 
@@ -34,7 +34,7 @@ Implementad el algoritmo voraz que obtiene una solución aproximada al problema 
 **Fecha de comienzo: 10 de Noviembre.** 
 **Fecha máxima de entrega: 24 de Noviembre.**
 #
-  <sup>1</sup>: Yo voy a desarrollar la **Opción A**.
+  <sup>1</sup>Se va a desarrollar la **Opción A**.
 
 
 
