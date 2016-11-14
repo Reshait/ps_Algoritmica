@@ -15,6 +15,7 @@ class Moneda{
 	private:
 		string tipo_;
 		int valor_;
+		int cantidad_;
 
 	public:
 		//Moneda();
@@ -22,9 +23,13 @@ class Moneda{
 
 		int getValor();
 		string getTipo();
+		int getCantidad();
 
 		void setValor(const int &valor);
 		void setTipo(const string &tipo);
+		void setCantidad(const int &cantidad);
+		void incrementaCantidad();
+		void decrementaCantidad();
 
 		friend ostream &operator<< (ostream &salida, const Moneda &M);
 		friend istream & operator>>(istream &stream, Moneda &M);

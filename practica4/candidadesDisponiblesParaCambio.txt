@@ -1,12 +1,12 @@
-billete 5000
-billete 2000
-billete 1000
-billete 500
-moneda 200
-moneda 100
-moneda 50
-moneda 20
-moneda 10
-moneda 5
-moneda 2
-moneda 1
+billete 5000 50
+billete 2000 50
+billete 1000 50
+billete 500 50
+moneda 200 50
+moneda 100 50
+moneda 50 50
+moneda 20 50
+moneda 10 50
+moneda 5 50
+moneda 2 50
+moneda 1 50
