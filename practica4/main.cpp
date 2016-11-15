@@ -7,10 +7,12 @@ using namespace std;
 int main(){
 	int opcion, euros, centimos;
 	cabecera(4);
-	//Moneda M("hola", 5);
-	vector<Moneda> vMonetario;
+	vector<Moneda> vMonetario, vSolucion;
 
 	do{
+		vMonetario.clear();
+		vSolucion.clear();
+
 		opcion = menu();
 
 		switch(opcion){
@@ -26,15 +28,22 @@ int main(){
 
 				deEurosAcentimos(euros, centimos);
 
-				leerDelFichero(vMonetario, "cantidadesDisponiblesParaCambio.txt");
+				leerDelFichero(vMonetario, "candidadesDisponiblesParaCambio.txt");
+				
+				std::sort(vMonetario.begin(), vMonetario.end(), comparador()); 	// Ordena vector monetario en orden descendente con respecto el valor de los billetes/monedas.
 
-				std::sort(vMonetario.begin(), vMonetario.end(), comparador()); 	// Ordena vector monetario en orden descendente(valor).
+//				cout << "Los billetes y monedas disponibles para realizar el cambio son..: " << endl;
+//				imprimeVector(vMonetario);
+				
+				cambio(centimos, vMonetario, vSolucion); 
 
-				//cambio(centimos, vMonetario, vSolucion); a Moneda tengo que añadirle otro valor que sea cantidad.
-
-
+				cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+				cout << "Su cambio es..:" << endl;
+				imprimeVector(vSolucion);
+				cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;				
 
 				introParaContinuar();
+
 			break;
 
 

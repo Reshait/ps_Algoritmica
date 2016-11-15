@@ -18,12 +18,18 @@ void introduzcaCantidadAcambiar(int &euros);
 
 void deEurosAcentimos(const int &euros, int &centimos);
 
+void deCentimosAeuro(const int &centimos, int &euros);
+
 void leerDelFichero(vector<Moneda> &vMonetario, string fichero);
 
-void cambio(int cantidadEnCentimos, vector<Moneda> &vMonetario, vector<int> &solucion);
+bool encuentraValor(int valor, vector<Moneda> &vMonedas);
+
+void cambio(int cantidadEnCentimos, vector<Moneda> &vMonetario, vector<Moneda> &solucion);
 
 struct comparador{ 					// de http://www.cplusplus.com/reference/algorithm/sort/?kw=sort
 	bool operator()(Moneda &M1, Moneda &M2){ return M1.getValor() > M2.getValor(); }
 };
+
+void imprimeVector(vector<Moneda> &vMonetario);
 
 #endif

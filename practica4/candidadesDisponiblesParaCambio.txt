@@ -1,5 +1,5 @@
-billete 5000 50
 billete 2000 50
+billete 5000 50
 billete 1000 50
 billete 500 50
 moneda 200 50
