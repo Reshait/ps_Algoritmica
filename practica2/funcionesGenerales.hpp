@@ -345,6 +345,6 @@ void imprimeEcuacionAjuste(int apartado, vector<T> &vAs){
 	cout << endl;
 }
 
-void imprimeVector(const std::vector<Moneda> &vMonetario);
+//void imprimeVector(const std::vector<Moneda> &vMonetario);
 
 #endif
