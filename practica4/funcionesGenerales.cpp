@@ -1,7 +1,7 @@
 #include "funcionesGenerales.hpp"
 
 void introduzcaCantidadAcambiar(int &euros){
-	cout << "Introduzca la cantidad de euros de su cambio ..:" << endl;
+	cout << "Introduzca la cantidad en céntimos (ej 1€ = 100, 20€ = 2000) de su cambio ..:" << endl;
 	cin >> euros;
 }
 
@@ -41,7 +41,7 @@ void leerDelFichero(vector<Moneda> &vMonetario, string fichero){
 bool encuentraValor(int valor, vector<Moneda> &vMonedas){
 	bool encontrado = false;
 
-	for(int i = 0; i < vMonedas.size(); i++)
+	for(unsigned int i = 0; i < vMonedas.size(); i++)
 		if(valor == vMonedas[i].getValor())
 			encontrado = true;
 
@@ -57,7 +57,7 @@ void cambio(int cantidadEnCentimos, vector<Moneda> &vMonetario, vector<Moneda> &
 
 			if(encuentraValor(vMonetario[i].getValor(), vSolucion)){			// Si el billete/moneda ya estaba en la solución, incrementa su cantidad de billetes/monedas
 
-				for(int j = 0; j < vSolucion.size(); j++){ 						//revisar esto.
+				for(unsigned int j = 0; j < vSolucion.size(); j++){ 			//revisar esto.
 					if(vSolucion[j].getValor() == vMonetario[i].getValor())
 						vSolucion[j].incrementaCantidad();
 				}				

@@ -5,7 +5,8 @@
 using namespace std;
 
 int main(){
-	int opcion, euros, centimos;
+	int opcion, centimos;
+	//int euros;
 	cabecera(4);
 	vector<Moneda> vMonetario, vSolucion;
 
@@ -24,17 +25,12 @@ int main(){
 				cout << "\t┃ Cambio de Monedas ┃" << endl;
 				cout << "\t┗━━━━━━━━━━━━━━━━━━━┛" << endl;	
 
-				introduzcaCantidadAcambiar(euros);
-
-				deEurosAcentimos(euros, centimos);
+				introduzcaCantidadAcambiar(centimos);
 
 				leerDelFichero(vMonetario, "candidadesDisponiblesParaCambio.txt");
 				
 				std::sort(vMonetario.begin(), vMonetario.end(), comparador()); 	// Ordena vector monetario en orden descendente con respecto el valor de los billetes/monedas.
-
-//				cout << "Los billetes y monedas disponibles para realizar el cambio son..: " << endl;
-//				imprimeVector(vMonetario);
-				
+		
 				cambio(centimos, vMonetario, vSolucion); 
 
 				cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;

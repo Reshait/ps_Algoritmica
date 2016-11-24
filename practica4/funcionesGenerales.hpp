@@ -5,7 +5,7 @@
 #include <vector>
 #include <cstring>
 #include <fstream>
-#include <algorithm>    // std::sort
+#include <algorithm>    			// std::sort
 #include "moneda.hpp"
 
 using std::cout;
