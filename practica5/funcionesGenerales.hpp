@@ -1,5 +1,6 @@
 #ifndef __FUNCIONES_GENERALES__
 #define __FUNCIONES_GENERALES__
+#define INFINITO std::numeric_limits<int>::max();
 
 #include <iostream>
 #include <vector>
@@ -7,6 +8,7 @@
 #include <fstream>
 #include <algorithm>    			// std::sort
 #include "moneda.hpp"
+#include "matriz.hpp"
 
 using std::cout;
 using std::cin;
@@ -31,5 +33,10 @@ struct comparador{ 					// de http://www.cplusplus.com/reference/algorithm/sort/
 };
 
 void imprimeVector(vector<Moneda> &vMonetario);
+
+int minimo(const int a, const int b);
+
+void realizarCambio();
+
 
 #endif

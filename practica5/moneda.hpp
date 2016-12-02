@@ -15,7 +15,6 @@ class Moneda{
 	private:
 		string tipo_;
 		int valor_;
-		int cantidad_;
 
 	public:
 		//Moneda();

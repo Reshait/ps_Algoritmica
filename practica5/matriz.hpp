@@ -10,11 +10,14 @@ class Matriz{
 		vector<vector<int> > m_;
 
 	public:
-		Matriz() {};
+		Matriz(const int &nFil, const int &nCol);
 
 		inline int getColumnas() const;
 		inline int getFilas() const;
-		inline vector<int> & operator[](const int indice);
+//		inline vector<int> & operator[](const int indice);
+		int& operator()(int posicionI, int posicionJ){
+			    return m_[posicionI][posicionJ];
+		}
 
 };
 

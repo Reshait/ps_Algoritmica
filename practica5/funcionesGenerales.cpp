@@ -47,33 +47,67 @@ bool encuentraValor(int valor, vector<Moneda> &vMonedas){
 	return encontrado;
 }
 
-/*
-void cambio(int cantidadEnCentimos, vector<Moneda> &vMonetario, vector<Moneda> &vSolucion){
-	int sumaParcial = 0, i = 0;
-	Moneda mAux("",0);
 
-	while( sumaParcial != cantidadEnCentimos){
-		if(vMonetario[i].getValor() + sumaParcial <= cantidadEnCentimos){
+void cambio(const int cantidad, vector<Moneda> &vMonetario, vector<vector<int> > &matriz){
+	int min;
 
-			if(encuentraValor(vMonetario[i].getValor(), vSolucion)){			// Si el billete/moneda ya estaba en la solución, incrementa su cantidad de billetes/monedas
-
-				for(unsigned int j = 0; j < vSolucion.size(); j++){ 			//revisar esto.
-					if(vSolucion[j].getValor() == vMonetario[i].getValor())
-						vSolucion[j].incrementaCantidad();
-				}				
-			}
-			else{																// Si no, añade el nuevo tipo de billete/moneda con cantidad 1.
-				mAux = vMonetario[i];
-				mAux.setCantidad(1);
-				vSolucion.push_back(mAux);
+	for(unsigned int i = 0; i <= vMonetario.size(); i++){
+		for(int j = 0; j <= cantidad; j++){
+			if(i == 0 && j < vMonetario[i].getValor()){
+				matriz[i][j] = INFINITO;
 			}
 
-			sumaParcial += vMonetario[i].getValor();
+			else{
+				if(i == 0){
+					matriz[i][j] = 1 + matriz[i][j - vMonetario[0].getValor()];
+				}
+				else{
+					if( j < vMonetario[i].getValor())
+						matriz[i][j] = matriz[i-1][j];
 
+					else{
+						min = minimo(matriz[i-1][j], 1 + matriz[i][j - vMonetario[i].getValor()]);
+						matriz[i][j] = min;
+					}					
+				}
+			}
 		}
-		else
-			i++;
 	}
+}
+
+
+int minimo(const int a, const int b){
+    if(a < b)
+        return a;
+    else
+        return b;
+};
+
+
+void realizarCambio(){
+	vector<Moneda> vMonetario;
+
+	int centimos;
+	introduzcaCantidadAcambiar(centimos);
+
+	leerDelFichero(vMonetario, "candidadesDisponiblesParaCambio.txt");
+				
+	std::sort(vMonetario.begin(), vMonetario.end(), comparador()); 	// Ordena vector monetario en orden descendente con respecto el valor de los billetes/monedas.
+		
+//				cambio(centimos, vMonetario, vSolucion); 
+
+	vector <int> vSolucion (vMonetario.size(), 0);
+	vector<vector<int> > Matriz(vMonetario.size(), vector<int>(centimos+1));
+
+//	Matriz Mat(vMonetario.size(), centimos+1);
+
+	cambio(centimos+1, vMonetario, Matriz);
+
+//	solucion(centimos+1, vSolucion, Mat, vMonetario);
+
+	cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
+	cout << "Su cambio es..:" << endl;
+//	imprimeVector(vSolucion);
+	cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;		
 
 }
-*/
