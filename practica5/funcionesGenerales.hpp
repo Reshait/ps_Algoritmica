@@ -2,6 +2,7 @@
 #define __FUNCIONES_GENERALES__
 #define INFINITO std::numeric_limits<int>::max();
 
+#include <limits>
 #include <iostream>
 #include <vector>
 #include <cstring>
