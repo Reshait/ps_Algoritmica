@@ -48,18 +48,18 @@ bool encuentraValor(int valor, vector<Moneda> &vMonedas){
 }
 
 
-void cambio(const int cantidad, vector<Moneda> &vMonetario, vector<vector<int> > &matriz){
+void cambio(vector<Moneda> &vMonetario, const int cantidad, vector<vector<int> > &matriz){
 	int min;
 
-	for(unsigned int i = 0; i <= vMonetario.size(); i++){
-		for(int j = 0; j <= cantidad; j++){
+	for(unsigned int i = 0; i < vMonetario.size(); i++){
+		for(int j = 0; j < cantidad; j++){
 			if(i == 0 && j < vMonetario[i].getValor()){
 				matriz[i][j] = INFINITO;
 			}
 
 			else{
 				if(i == 0){
-					matriz[i][j] = 1 + matriz[i][j - vMonetario[0].getValor()];
+					matriz[i][j] = 1 + matriz[i][j - vMonetario[i].getValor()];
 				}
 				else{
 					if( j < vMonetario[i].getValor())
@@ -99,9 +99,7 @@ void realizarCambio(){
 	vector <int> vSolucion (vMonetario.size(), 0);
 	vector<vector<int> > Matriz(vMonetario.size(), vector<int>(centimos+1));
 
-//	Matriz Mat(vMonetario.size(), centimos+1);
-
-	cambio(centimos+1, vMonetario, Matriz);
+	cambio(vMonetario, centimos+1, Matriz);
 
 //	solucion(centimos+1, vSolucion, Mat, vMonetario);
 
