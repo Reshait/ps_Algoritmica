@@ -97,7 +97,7 @@ void solucion(vector<Moneda> &vMonetario, const int cantidad, vector<vector<unsi
 				vSolucion[i-1] = matriz[i][j];
 				i--;
 			}
-			else if( matriz[i][j] < matriz[i-1][j] )
+			else if( i > 0 && matriz[i][j] < matriz[i-1][j] )
 			{
 				vSolucion[i-1]++;
 				j = j - vMonetario[i-1].getValor();
