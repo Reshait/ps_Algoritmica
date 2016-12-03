@@ -1,6 +1,6 @@
 #ifndef __FUNCIONES_GENERALES__
 #define __FUNCIONES_GENERALES__
-#define INFINITO std::numeric_limits<int>::max()
+#define INFINITO std::numeric_limits<unsigned int>::max()
 
 #include <limits>
 #include <iostream>
@@ -43,5 +43,11 @@ int minimo(const int a, const int b);
 
 void realizarCambio();
 
+void imprimeVectorMonedas(vector<Moneda> Vec);
+
+template <typename T>
+void imprimeVector(vector<T> Vec);
+
+void muestraCambio(vector<int> vSolucion, vector<Moneda> vMonetario);
 
 #endif

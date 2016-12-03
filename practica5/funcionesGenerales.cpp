@@ -48,49 +48,48 @@ bool encuentraValor(int valor, vector<Moneda> &vMonedas){
 }
 
 
+// sacado de http://www.aprenderaprogramar.com/foros/index.php?topic=2069.0
 void cambio(vector<Moneda> &vMonetario, const int cantidad, vector<vector<unsigned int> > &matriz){
+ 
+ 	for (int i = 0; i < (int)vMonetario.size(); i++)
+        matriz[i][0] = 0;
 
-	for(unsigned int i = 0; i < vMonetario.size(); i++){
-			matriz[i][0] = 0;
-	}
+    for (int j = 1; j <= cantidad; j++)
+        matriz[0][j] = j;
 
-	for(unsigned int i = 1; i < vMonetario.size(); i++){
-		for(int j = 1; j <= cantidad; j++){
-			if ( j < vMonetario[i].getValor() ) 
-				if( i == 1)
-					matriz[i][j] = INFINITO;
-				else
-					matriz[i][j] = matriz[i-1][j]; 
-            else
-            	matriz[i][j] = min(matriz[i-1][j], 1 + matriz[i][j - vMonetario[i].getValor()]);
-		}
-	}
-//cout << matriz[vMonetario.size()-1][cantidad-1] << endl;
+    for (int i = 1; i <= (int)vMonetario.size(); i++){
+        for (int j = 1; j <= cantidad; j++) {
+
+            if (j < vMonetario[i - 1].getValor()) 
+                matriz[i][j] = matriz[i - 1][j];
+
+            else 
+                matriz[i][j] = min(matriz[i - 1][j] , matriz[i][j- vMonetario[i - 1].getValor()] + 1);;
+    	}
+    }
 }
 
 
-
+// sacado de http://www.aprenderaprogramar.com/foros/index.php?topic=2069.0
 void solucion(vector<Moneda> &vMonetario, const int cantidad, vector<vector<unsigned int> > &matriz, vector<int> &vSolucion){
+    int i= (int)vMonetario.size();         
+    int j= cantidad;         
 
-	for(int i = (int)vMonetario.size()-1, j = cantidad-1; i >= 1; i--){
-		if(j >= 0){
-			if(i == 1)
-				vSolucion[i-1] = matriz[i][j];
-
-			else if(matriz[i][j] < matriz[i-1][j]){
-				vSolucion[i-1]++;
-				j -= vMonetario[i].getValor();
-			}			
-		}
-
-	}
-
+    while(j > 0){
+        if(i > 1 && matriz[i][j] == matriz[i-1][j]){
+            i--;
+        }
+        else{
+            vSolucion[i-1]++;
+            j = j - vMonetario[i-1].getValor();
+        }
+    }
 	
 }
 
 
 void imprimeMatriz(const vector<vector<unsigned int> > &matriz){
-	for(unsigned int i = 0; i < matriz.size(); i ++){
+	for(unsigned int i = 0; i < matriz.size(); i ++){ 
 		for(unsigned int j = 0; j < matriz[i].size(); j++){
 			if( matriz[i][j] == INFINITO)
 				cout << "∞" << " ";
@@ -112,40 +111,45 @@ void realizarCambio(){
 				
 	std::sort(vMonetario.begin(), vMonetario.end(), comparador()); 	// Ordena vector monetario en orden descendente con respecto el valor de los billetes/monedas.
 		
-	vector<vector<unsigned int> > Matriz(vMonetario.size(), vector<unsigned int>(centimos + 1));
+	vector<vector<unsigned int> > Matriz(vMonetario.size()+1, vector<unsigned int>(centimos+1));
 
 	cambio(vMonetario, centimos, Matriz);
 
 	vector <int> vSolucion (vMonetario.size(), 0);
 
-	cout << "Imprimiendo vSolucion:" << endl;
-	for(unsigned int i = 0; i < vSolucion.size(); i++)
-		cout << vSolucion[i] << " " ;
-	cout << endl;
-
 	solucion(vMonetario, centimos, Matriz, vSolucion);
-
-	cout << "Imprimiendo vSolucion:" << endl;
-	for(unsigned int i = 0; i < vSolucion.size(); i++)
-		cout << vSolucion[i] << " " ;
-	cout << endl;
 
 	imprimeMatriz(Matriz);
 
 	cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 	cout << "Su cambio es..:" << endl;
-//	imprimeVector(vSolucion);
-	for(unsigned int i = 0; i<vSolucion.size(); i++)	
-	{
-
-		cout << vSolucion[i] <<" "<< vMonetario[i].getTipo() << " de ";
-
-		if(vMonetario[i].getValor() > 50)
-			cout << vMonetario[i].getValor()/100 << " €"<< endl;
-		else
-			cout << vMonetario[i].getValor() << " cts"<<endl;
-
-	}
+	muestraCambio(vSolucion, vMonetario);
 	cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;		
 
+}
+
+
+void imprimeVectorMonedas(vector<Moneda> Vec){
+	for(unsigned int i = 0; i < Vec.size(); i++)
+		cout << Vec[i] << " " ;
+	cout << endl;	
+}
+
+template <typename T>
+void imprimeVector(vector<T> Vec){
+	for(unsigned int i = 0; i < Vec.size(); i++)
+		cout << Vec[i] << " " ;
+	cout << endl;		
+}
+
+void muestraCambio(vector<int> vSolucion, vector<Moneda> vMonetario){
+	for(int i = 0; i < (int)vSolucion.size(); i++){
+		cout << vSolucion[i] << " " << vMonetario[i].getTipo() << " de ";
+
+		if(vMonetario[i].getValor() > 50)
+			cout << vMonetario[i].getValor()/100 << " €" << endl;
+
+		else
+			cout << vMonetario[i].getValor() << " cts" << endl;
+	}
 }
