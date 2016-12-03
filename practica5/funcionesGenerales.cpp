@@ -72,16 +72,42 @@ void cambio(vector<Moneda> &vMonetario, const int cantidad, vector<vector<unsign
 
 void solucion(vector<Moneda> &vMonetario, const int cantidad, vector<vector<unsigned int> > &matriz, vector<int> &vSolucion){
 /*
-	for(unsigned int i = 1, j = 1; i <= vMonetario.size() && j <= cantidad; i++){
-		if(i == 1)
-			vSolucion[i-1] = matriz[i][j];
+	for(int i = 1, j = 0; i < (int)vMonetario.size(); i++){
+		if(j <= cantidad){
+			if(i == 1)
+				vSolucion[i-1] = matriz[i][j];
 
-		else if(matriz[i][j] < matriz[i-1][j]){
-			vSolucion[i-1]++;
-			j += vMonetario[i].getValor();
+			else if(matriz[i][j] < matriz[i-1][j]){
+				vSolucion[i-1]++;
+				j += vMonetario[i].getValor();
+			}			
 		}
+
 	}
 */
+
+		unsigned int i = vMonetario.size();
+		unsigned int j = cantidad +1;
+		
+		
+		while(i>=1 && j>=1)
+		{
+			if(i==1)
+			{
+				vSolucion[i-1] = matriz[i][j];
+				i--;
+			}
+			else if( matriz[i][j] < matriz[i-1][j] )
+			{
+				vSolucion[i-1]++;
+				j = j - vMonetario[i-1].getValor();
+
+			}
+			else if(matriz[i][j] == matriz[i-1][j])
+			{
+				i--;
+			}		
+		}	
 }
 
 
@@ -108,10 +134,11 @@ void realizarCambio(){
 				
 	std::sort(vMonetario.begin(), vMonetario.end(), comparador()); 	// Ordena vector monetario en orden descendente con respecto el valor de los billetes/monedas.
 		
-	vector <int> vSolucion (vMonetario.size(), 0);
 	vector<vector<unsigned int> > Matriz(vMonetario.size(), vector<unsigned int>(centimos + 1));
 
 	cambio(vMonetario, centimos, Matriz);
+
+	vector <int> vSolucion (vMonetario.size(), 0);
 
 	solucion(vMonetario, centimos, Matriz, vSolucion);
 

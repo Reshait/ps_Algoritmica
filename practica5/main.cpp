@@ -6,11 +6,9 @@ using namespace std;
 
 int main(){
 	int opcion;
-	cabecera(4);
+	cabecera(5);
 
 	do{
-//		vMonetario.clear();
-//		vSolucion.clear();
 
 		opcion = menu();
 
@@ -31,13 +29,13 @@ int main(){
 
 
 			case 0:
-				cabecera(4);
+				cabecera(5);
 				cout << "Saliendo ..." << endl;
 			break;	
 
 
 			default:
-				cabecera(4);
+				cabecera(5);
 				cout << "Opción introducida incorrecta." << endl;
 				introParaContinuar();
 			break;	
