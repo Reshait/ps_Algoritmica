@@ -72,8 +72,8 @@ void cambio(vector<Moneda> &vMonetario, const int cantidad, vector<vector<unsign
 
 void solucion(vector<Moneda> &vMonetario, const int cantidad, vector<vector<unsigned int> > &matriz, vector<int> &vSolucion){
 
-	for(int i = (int)vMonetario.size(), j = cantidad; i >= 1; i--){
-		if(j >= 1){
+	for(int i = (int)vMonetario.size()-1, j = cantidad-1; i >= 1; i--){
+		if(j >= 0){
 			if(i == 1)
 				vSolucion[i-1] = matriz[i][j];
 
@@ -121,12 +121,14 @@ void realizarCambio(){
 	cout << "Imprimiendo vSolucion:" << endl;
 	for(unsigned int i = 0; i < vSolucion.size(); i++)
 		cout << vSolucion[i] << " " ;
+	cout << endl;
 
 	solucion(vMonetario, centimos, Matriz, vSolucion);
 
 	cout << "Imprimiendo vSolucion:" << endl;
 	for(unsigned int i = 0; i < vSolucion.size(); i++)
 		cout << vSolucion[i] << " " ;
+	cout << endl;
 
 	imprimeMatriz(Matriz);
 
