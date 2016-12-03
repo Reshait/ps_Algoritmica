@@ -64,7 +64,7 @@ void cambio(vector<Moneda> &vMonetario, const int cantidad, vector<vector<unsign
                 matriz[i][j] = matriz[i - 1][j];
 
             else 
-                matriz[i][j] = min(matriz[i - 1][j] , matriz[i][j- vMonetario[i - 1].getValor()] + 1);;
+                matriz[i][j] = min(matriz[i - 1][j] , matriz[i][j- vMonetario[i - 1].getValor()] + 1);
     	}
     }
 }
@@ -76,7 +76,7 @@ void solucion(vector<Moneda> &vMonetario, const int cantidad, vector<vector<unsi
     int j= cantidad;         
 
     while(j > 0){
-        if(i > 1 && matriz[i][j] == matriz[i-1][j]){
+        if(i >= 1 && matriz[i][j] == matriz[i-1][j]){ //si lo cambio por i = 1 &&.... en 500 me suma uno :S
             i--;
         }
         else{
