@@ -71,43 +71,21 @@ void cambio(vector<Moneda> &vMonetario, const int cantidad, vector<vector<unsign
 
 
 void solucion(vector<Moneda> &vMonetario, const int cantidad, vector<vector<unsigned int> > &matriz, vector<int> &vSolucion){
-/*
-	for(int i = 1, j = 0; i < (int)vMonetario.size(); i++){
-		if(j <= cantidad){
+
+	for(int i = vMonetario.size(), j = cantidad+1; i >= 1; i--){
+		if(j >= 1){
 			if(i == 1)
 				vSolucion[i-1] = matriz[i][j];
 
 			else if(matriz[i][j] < matriz[i-1][j]){
 				vSolucion[i-1]++;
-				j += vMonetario[i].getValor();
+				j -= vMonetario[i].getValor();
 			}			
 		}
 
 	}
-*/
 
-		unsigned int i = vMonetario.size();
-		unsigned int j = cantidad +1;
-		
-		
-		while(i>=1 && j>=1)
-		{
-			if(i==1)
-			{
-				vSolucion[i-1] = matriz[i][j];
-				i--;
-			}
-			else if( i > 0 && matriz[i][j] < matriz[i-1][j] )
-			{
-				vSolucion[i-1]++;
-				j = j - vMonetario[i-1].getValor();
-
-			}
-			else if(matriz[i][j] == matriz[i-1][j])
-			{
-				i--;
-			}		
-		}	
+	
 }
 
 
@@ -140,7 +118,15 @@ void realizarCambio(){
 
 	vector <int> vSolucion (vMonetario.size(), 0);
 
+	cout << "Imprimiendo vSolucion:" << endl;
+	for(unsigned int i = 0; i < vSolucion.size(); i++)
+		cout << vSolucion[i] << " " ;
+
 	solucion(vMonetario, centimos, Matriz, vSolucion);
+
+	cout << "Imprimiendo vSolucion:" << endl;
+	for(unsigned int i = 0; i < vSolucion.size(); i++)
+		cout << vSolucion[i] << " " ;
 
 	imprimeMatriz(Matriz);
 
