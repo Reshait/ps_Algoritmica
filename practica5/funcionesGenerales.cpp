@@ -72,7 +72,7 @@ void cambio(vector<Moneda> &vMonetario, const int cantidad, vector<vector<unsign
 
 void solucion(vector<Moneda> &vMonetario, const int cantidad, vector<vector<unsigned int> > &matriz, vector<int> &vSolucion){
 
-	for(int i = vMonetario.size(), j = cantidad+1; i >= 1; i--){
+	for(int i = (int)vMonetario.size(), j = cantidad; i >= 1; i--){
 		if(j >= 1){
 			if(i == 1)
 				vSolucion[i-1] = matriz[i][j];
