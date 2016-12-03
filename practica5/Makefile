@@ -1,4 +1,4 @@
-OBJECTS = main.o cabecera.o funcionesGenerales.o moneda.o matriz.o
+OBJECTS = main.o cabecera.o funcionesGenerales.o moneda.o 
 CPPFLAGS = -c -g -ansi -Wall
 
 all: principal clean
@@ -17,9 +17,6 @@ funcionesGenerales.o: funcionesGenerales.cpp funcionesGenerales.hpp moneda.hpp
 
 moneda.o: moneda.cpp moneda.hpp
 	g++ $(CPPFLAGS) moneda.cpp 
-
-matriz.o: matriz.cpp matriz.hpp
-	g++ $(CPPFLAGS) matriz.cpp 
 
 clean:
 	rm -f *.o
