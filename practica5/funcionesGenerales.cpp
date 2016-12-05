@@ -48,23 +48,35 @@ bool encuentraValor(int valor, vector<Moneda> &vMonedas){
 }
 
 
-// sacado de http://www.aprenderaprogramar.com/foros/index.php?topic=2069.0
 void cambio(vector<Moneda> &vMonetario, const int cantidad, vector<vector<unsigned int> > &matriz){
- 
- 	for (int i = 0; i < (int)vMonetario.size(); i++)
-        matriz[i][0] = 0;
+	int n = (int)vMonetario.size();
+	int N = cantidad+2;
 
-    for (int j = 1; j <= cantidad; j++)
-        matriz[0][j] = j;
+    for (int i = 0; i < n; i++)
+        matriz[i][0] = 0;	
 
-    for (int i = 1; i <= (int)vMonetario.size(); i++){
-        for (int j = 1; j <= cantidad; j++) {
+  	for(int i = 0; i < n; i++){
+  		for(int j = 0; j < N; j++){
 
-            if (j < vMonetario[i - 1].getValor()) 
-                matriz[i][j] = matriz[i - 1][j];
+			if( i == 0 && j < vMonetario[i].getValor() ) 
+				matriz[i][j] = INFINITO;				
 
-            else 
-                matriz[i][j] = min(matriz[i - 1][j] , matriz[i][j- vMonetario[i - 1].getValor()] + 1);
+			else{
+				if( i == 0)
+					matriz[i][j] = 1 + matriz[i][j - vMonetario[i].getValor()];
+
+				else{
+					if( j > vMonetario[i].getValor()){
+						int x = matriz[i-1][j];
+						int y = 1 + matriz[i][j - vMonetario[i].getValor()];
+						matriz[i][j] = min(x,y);						
+					}
+					else {
+							matriz[i][j] = matriz[i-1][j];
+					}
+				}
+			}
+
     	}
     }
 }
@@ -72,19 +84,20 @@ void cambio(vector<Moneda> &vMonetario, const int cantidad, vector<vector<unsign
 
 // sacado de http://www.aprenderaprogramar.com/foros/index.php?topic=2069.0
 void solucion(vector<Moneda> &vMonetario, const int cantidad, vector<vector<unsigned int> > &matriz, vector<int> &vSolucion){
-    int i= (int)vMonetario.size();         
-    int j= cantidad;         
 
-    while(j > 0){
-        if(i >= 1 && matriz[i][j] == matriz[i-1][j]){ //si lo cambio por i = 1 &&.... en 500 me suma uno :S
-            i--;
+        int i = (int)matriz.size()-1;       
+        int j = (int)matriz[0].size()-1;        
+
+        while(j>1){										//porque mi primera columna es inservible (todo infinito)
+            if(i>1 && matriz[i][j]==matriz[i-1][j]){
+                i--;
+            }
+            else{
+                vSolucion[i]++;
+                j = j - vMonetario[i].getValor();
+            }
         }
-        else{
-            vSolucion[i-1]++;
-            j = j - vMonetario[i-1].getValor();
-        }
-    }
-	
+
 }
 
 
@@ -110,8 +123,10 @@ void realizarCambio(){
 	leerDelFichero(vMonetario, "candidadesDisponiblesParaCambio.txt");
 				
 	std::sort(vMonetario.begin(), vMonetario.end(), comparador()); 	// Ordena vector monetario en orden descendente con respecto el valor de los billetes/monedas.
-		
-	vector<vector<unsigned int> > Matriz(vMonetario.size()+1, vector<unsigned int>(centimos+1));
+cout << "vmonetario size = " << vMonetario.size() << endl;
+	vector<vector<unsigned int> > Matriz(vMonetario.size(), vector<unsigned int>(centimos+2));
+cout << "matriz filas = " << Matriz.size() << endl;
+cout << "matriz columnas = " << Matriz[0].size() << endl;
 
 	cambio(vMonetario, centimos, Matriz);
 
@@ -125,7 +140,7 @@ void realizarCambio(){
 	cout << "Su cambio es..:" << endl;
 	muestraCambio(vSolucion, vMonetario);
 	cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;		
-
+imprimeVector(vSolucion);
 }
 
 

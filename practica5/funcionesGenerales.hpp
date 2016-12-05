@@ -32,7 +32,7 @@ void cambio(vector<Moneda> &vMonetario, const int cantidad, vector<vector<unsign
 void solucion(vector<Moneda> &vMonetario, const int cantidad, vector<vector<unsigned int> > &matriz, vector<int> &vSolucion);
 
 struct comparador{ 					// de http://www.cplusplus.com/reference/algorithm/sort/?kw=sort
-	bool operator()(Moneda &M1, Moneda &M2){ return M1.getValor() > M2.getValor(); }
+	bool operator()(Moneda &M1, Moneda &M2){ return M1.getValor() < M2.getValor(); }
 };
 
 void imprimeVector(vector<Moneda> &vMonetario);
