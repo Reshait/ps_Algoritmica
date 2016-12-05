@@ -49,8 +49,8 @@ bool encuentraValor(int valor, vector<Moneda> &vMonedas){
 
 
 void cambio(vector<Moneda> &vMonetario, const int cantidad, vector<vector<unsigned int> > &matriz){
-	int n = (int)vMonetario.size();
-	int N = cantidad+2;
+	int n = (int)matriz.size();
+	int N = (int)matriz[0].size();
 
     for (int i = 0; i < n; i++)
         matriz[i][0] = 0;	
@@ -122,11 +122,9 @@ void realizarCambio(){
 
 	leerDelFichero(vMonetario, "candidadesDisponiblesParaCambio.txt");
 				
-	std::sort(vMonetario.begin(), vMonetario.end(), comparador()); 	// Ordena vector monetario en orden descendente con respecto el valor de los billetes/monedas.
-cout << "vmonetario size = " << vMonetario.size() << endl;
-	vector<vector<unsigned int> > Matriz(vMonetario.size(), vector<unsigned int>(centimos+2));
-cout << "matriz filas = " << Matriz.size() << endl;
-cout << "matriz columnas = " << Matriz[0].size() << endl;
+	std::sort(vMonetario.begin(), vMonetario.end(), comparador()); 								// Ordena vector monetario en orden ascendente con respecto el valor de los billetes/monedas.
+
+	vector<vector<unsigned int> > Matriz(vMonetario.size(), vector<unsigned int>(centimos+2));	// Normalmente sería +1 para tener la columna 0, pero como no puedo eliminar que me meta en la primera columna el infinito, por eso es +2
 
 	cambio(vMonetario, centimos, Matriz);
 
@@ -134,13 +132,13 @@ cout << "matriz columnas = " << Matriz[0].size() << endl;
 
 	solucion(vMonetario, centimos, Matriz, vSolucion);
 
+	cout << "La tabla de ilustración del procedimiento del cambio queda:" << endl;
 	imprimeMatriz(Matriz);
 
 	cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;
 	cout << "Su cambio es..:" << endl;
 	muestraCambio(vSolucion, vMonetario);
 	cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << endl;		
-imprimeVector(vSolucion);
 }
 
 
