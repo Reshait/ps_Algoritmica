@@ -11,7 +11,7 @@ void pideNumeroDeReinas(unsigned int &nReinas){
 		cabecera(6);		
 		imprimeEnunciado();
 
-		cout << "Introduzca un número entero de reinas..:\t";
+		cout << "Introduzca un número entero de reinas..:  ";
 		cin >> nReinas;	
 
 		if(nReinas > 8 || nReinas < 1){
