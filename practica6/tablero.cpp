@@ -31,7 +31,7 @@ void Tablero::imprimeTablero(){
 		cout << "\t"; 
 		for(int j = 0; j < (int)_tab.size(); j++){
 			if(_tab[i][j] == true)	//Para Imprimir los 1s en color
-			cout << " " << "\x1b[" << _tab[i][j] << " ";
+				GREEN;					
 
 			cout << " " << _tab[i][j] << " ";
 			
