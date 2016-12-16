@@ -1,4 +1,5 @@
 #include "funcionesGenerales.hpp"
+#include "tablero.hpp"
 
 void imprimeError(string const &comparacion, unsigned int const &nReinas){
     system("tput setaf 1");
@@ -33,8 +34,21 @@ void pideNumeroDeReinas(unsigned int &nReinas){
 
 }
 
-void realizarXreinas(){
+bool realizarXreinas(){
 	unsigned int nReinas;
 
 	pideNumeroDeReinas(nReinas);
+
+	Tablero Tablero((int)nReinas);
+
+	if( Tablero.resolverNreinas(0) == false){
+	    system("tput setaf 1");
+		cout << "La solución a este tablero no existe" << endl;
+	    system("tput sgr0");
+		return false;
+	}
+
+	cout << "La solución a su tablero es la siguiente:" << endl;
+	Tablero.imprimeTablero();
+	return true;
 }

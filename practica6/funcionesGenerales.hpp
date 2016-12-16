@@ -20,6 +20,6 @@ void imprimeError(string comparacion);
 
 void pideNumeroDeReinas(int &nReinas);
 
-void realizarXreinas();
+bool realizarXreinas();
 
 #endif

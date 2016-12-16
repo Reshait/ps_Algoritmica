@@ -20,7 +20,6 @@ int main(){
 
 				realizarXreinas();
 
-				cout << "Finalizado el sistema de realización de las X Reinas" << endl;
 				introParaContinuar();
 
 			break;

@@ -1,5 +1,4 @@
-#OBJECTS = main.o cabecera.o funcionesGenerales.o moneda.o 
-OBJECTS = main.o cabecera.o funcionesGenerales.o
+OBJECTS = main.o cabecera.o funcionesGenerales.o tablero.o
 CPPFLAGS = -c -g -ansi -Wall
 
 #all: principal clean
@@ -17,8 +16,8 @@ cabecera.o: cabecera.cpp cabecera.hpp
 funcionesGenerales.o: funcionesGenerales.cpp funcionesGenerales.hpp
 	g++ $(CPPFLAGS) funcionesGenerales.cpp 
 
-#moneda.o: moneda.cpp moneda.hpp
-#	g++ $(CPPFLAGS) moneda.cpp 
+tablero.o: tablero.cpp tablero.hpp
+	g++ $(CPPFLAGS) tablero.cpp 
 
 #clean:
 #	rm -f *.o
