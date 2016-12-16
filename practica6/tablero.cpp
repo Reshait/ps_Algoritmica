@@ -1,6 +1,4 @@
 #include "tablero.hpp"
-#define GREEN "\e[32m"   //!< GREEN
-#define WHITE "\e[37m"   //!< WHITE
 
 
 Tablero::Tablero(const int &tamanio){
@@ -30,13 +28,13 @@ void Tablero::imprimeTablero(){
 	for(int i = 0; i < (int)_tab.size(); i++){
 		cout << "\t"; 
 		for(int j = 0; j < (int)_tab.size(); j++){
-			if(_tab[i][j] == true)	//Para Imprimir los 1s en color
-				GREEN;					
+			if(_tab[i][j] == true)	//Para Imprimir los 1s en color rojo
+				system("tput setaf 1");
 
 			cout << " " << _tab[i][j] << " ";
 			
-			if(_tab[i][j] == 1)	//Para Imprimir los 1s en color	
-			    WHITE;			
+			if(_tab[i][j] == 1)	//Parar el color rojo para la siguiente comprobación
+	    		system("tput sgr0");
 		}
 
 		cout << endl;
