@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstring>
 #include <vector>
+#include <cstdlib>
 
 using std::istream;
 using std::ostream;
