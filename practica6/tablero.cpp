@@ -28,13 +28,10 @@ void Tablero::imprimeTablero(){
 	for(int i = 0; i < (int)_tab.size(); i++){
 		cout << "\t"; 
 		for(int j = 0; j < (int)_tab.size(); j++){
-			if(_tab[i][j] == true)	//Para Imprimir los 1s en color rojo
-				system("tput setaf 1");
-
-			cout << " " << _tab[i][j] << " ";
-			
-			if(_tab[i][j] == 1)	//Parar el color rojo para la siguiente comprobación
-	    		system("tput sgr0");
+			if(_tab[i][j] == 1)
+			    cout << "\033[1;32m 1\033[0m" << " ";
+			else if(_tab[i][j] == 0)
+				cout << " " << _tab[i][j] << " ";
 		}
 
 		cout << endl;
