@@ -66,7 +66,6 @@ int menu(){
 
 
     return opcion;
-
 }
 
 void imprimeEnunciado(){
