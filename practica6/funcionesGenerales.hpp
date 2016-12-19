@@ -16,15 +16,18 @@ using std::vector;
 using std::string;
 using std::abs;
 
+bool Lugar (int fila, vector<int> vReinas);
 
-void imprimeError(string const &comparacion, unsigned int const &nReinas);
+void imprimirTablero (vector<int> vReinas, int nReinas);
+
+void realizarXreinas ();
+
+void imprimeError(string const &comparacion, int const &nReinas);
 
 void pideNumeroDeReinas(int &nReinas);
 
-bool Lugar(int fil, vector<int> vReinas);
+bool pideDibujarTableros();
 
-void imprimeTablero(vector <int> vReinas, int nReinas);
-
-void realizarXreinas();
+void imprimeInfoSoluciones(vector < vector<int> > const &vSolucion, int nReinas);
 
 #endif

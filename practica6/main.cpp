@@ -1,5 +1,5 @@
-#include "cabecera.hpp"
 #include "funcionesGenerales.hpp"
+#include "cabecera.hpp"
 
 using namespace std;
 
@@ -41,3 +41,40 @@ int main(){
 	}while(opcion != 0);
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
