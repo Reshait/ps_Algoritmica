@@ -1,7 +1,6 @@
 #include "funcionesGenerales.hpp"
 
-bool Lugar (int fila, vector<int> vReinas)
-{
+bool Lugar (int fila, vector<int> vReinas){
 	for(int i=0; i < fila; i++)
 	{
 		if(vReinas[i]==vReinas[fila] || abs(vReinas[i]-vReinas[fila]) == abs(i - fila))
@@ -13,8 +12,7 @@ bool Lugar (int fila, vector<int> vReinas)
 	return true;
 }
 
-void imprimirTablero (vector<int> vReinas, int nReinas)
-{
+void imprimirTablero (vector<int> vReinas, int nReinas){
 	for(int i = 0; i < nReinas; i++){
 		cout << "\t"; 
 		for(int j = 0; j < nReinas; j++){
@@ -32,8 +30,7 @@ void imprimirTablero (vector<int> vReinas, int nReinas)
     cout << endl;
 }
 
-void realizarXreinas ()
-{
+void realizarXreinas (){
 	int nReinas;
 	pideNumeroDeReinas(nReinas);
 	bool dibujarTableros = pideDibujarTableros();
@@ -46,34 +43,26 @@ void realizarXreinas ()
 	vector < vector<int> > vSolucion; 	//Estructura de datos para guardar todas las soluciones
 		
 	
-	while( k >= 0)
-	{
+	while( k >= 0){
 		vReinas[k]++;
 
 		while( (vReinas[k] <= nReinas) && (Lugar(k,vReinas)==false))
-		{
 			vReinas[k]++;
-		}
 		
-		if(vReinas[k] <= nReinas)
-		{
-			if(k == nReinas-1)
-			{
+		if(vReinas[k] <= nReinas){
+			if(k == nReinas-1){
 				if(dibujarTableros)
 					imprimirTablero(vReinas, nReinas);
 				vSolucion.push_back(vReinas);		
 				nSolucion++;		
 			}
-			else
-			{
+			else{
 				k++;
 				vReinas[k] = 0;
 			}
 		}
 		else
-		{
 			k--;
-		}
 	}
 
 	imprimeInfoSoluciones(vSolucion, nReinas);
@@ -123,13 +112,11 @@ bool pideDibujarTableros(){
 }
 
 void imprimeInfoSoluciones(vector < vector<int> > const &vSolucion, int nReinas){
-	for(unsigned int i=0; i<vSolucion.size(); i++)
-	{
+	for(unsigned int i=0; i<vSolucion.size(); i++){
 		cout << "Solucion " << i << " -> [ ";
 		for(int j = 0; j < nReinas; j++)
-		{
 			cout << vSolucion[i][j] << " " ;
-		}
+		
 		cout << "]"<<endl;
 	}
 
