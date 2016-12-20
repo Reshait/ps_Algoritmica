@@ -4,8 +4,7 @@ bool Lugar (int fila, vector<int> vReinas)
 {
 	for(int i=0; i < fila; i++)
 	{
-		if(vReinas[i]==vReinas[fila] 
-			|| abs(vReinas[i]-vReinas[fila]) == abs(i - fila))
+		if(vReinas[i]==vReinas[fila] || abs(vReinas[i]-vReinas[fila]) == abs(i - fila))
 		{
 			return false;
 		}
